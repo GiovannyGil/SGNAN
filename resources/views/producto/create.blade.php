@@ -13,23 +13,24 @@
         <h1 class="title">Añadir producto</h1>
         <form action="/productos" method="POST" class="contact-form row" novalidate>
             @csrf
-
-            <div class="form-field col-lg-4 ">
-                {{-- tomar automaticamente el user logeado en el sistema --}}
-                <select id="id_user" class="input-text js-input" type="text" required autocomplete="off" name="id_user"
+            {{-- <div class="form-field col-lg-4 "> --}}
+                {{-- @foreach ($users as $user)
+                <input type="text" class="input-text js-input" id="id_user" required value="{{$user->name}}"  autocomplete="off" name="id_user" readonly>
+                @endforeach --}}
+                {{-- <select id="id_user" class="input-text js-input" type="text" required autocomplete="off" name="id_user"
                 class="input-text js-input   @error('id_user') is-invalid @enderror">
                     <option value="{{old('id_user')}}"></option>
                     @foreach ($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                     @endforeach
                 </select>
-                <label class="label" for="id_empleado">Usuario*</label>
+                <label class="label" for="id_empleado">Usuario*</label> --}}
                 {{-- @error('id_user')
                   <span class="error text-danger" role="alert">
                           <strong>{{$message}}</strong>
                       </span>
                   @enderror --}}
-             </div>
+             {{-- </div> --}}
 
                 <div class="form-field col-lg-4 ">
                     <label for="" class="input-text js-input">Nombre Producto: </label>
@@ -142,50 +143,6 @@
     @endsection
     
     @section('js')
-    {{-- <script>
-        $(document).ready(function(){
-            $('#agregar').click(function(){
-                agregar();
-            });
-        });
-
-        var cont=1;
-        total=0;
-        $("#guardar").hide();
-        // boton agregar insumos a la lista de un producto
-        function agregar(){
-            id_insumos=$("#id_insumos").val();
-            insumos = $("#id_insumos option:selected").text();
-            Cantidad = $("#Cantidad").val();
-            if(id_insumos != "" && parseInt(Cantidad) != "" && parseInt(Cantidad) > 0){
-                // lista de insumos agregados en el array del productos y guardados en productos_insusmos
-                var fila = '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm btn-remove" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="id_insumos[]" value="'+id_insumos+'">'+insumos+'</td><td><input type="number" name="Cantidad[]" value="'+Cantidad+'"></td></tr>';
-                cont++;
-                limpiar();
-                evaluar();
-                $('#detalles').append(fila);
-            }else{
-                alert("Error al ingresar el detalle de la venta, revise los datos del insumo");
-            }
-        }
-        function limpiar(){
-            $("#Cantidad").val("");
-            $("#id_insumos").val("");
-        }
-        function evaluar(){
-            if(cont > 0){
-                $("#guardar").show();
-            }else{
-                $("#guardar").hide();
-            }
-        }
-        // boton eliminar insumos de la lista de un productos
-        function eliminar(index){
-            $("#fila" + index).remove();
-            evaluar();
-        }
-    </script> --}}
-
     <script>
         $(document).ready(function(){
             $('#agregar').click(function(){

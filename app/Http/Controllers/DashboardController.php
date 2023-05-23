@@ -30,12 +30,17 @@ class DashboardController extends Controller
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->get();
 
+
+        // traer la comparacion de cantidad de ventas y compras por mes
+
         $totalSales = DB::table('ventas')->count();
         $SumaVentas = DB::table('ventas')->sum('total');
         $totalPurchases = DB::table('compras')->count();
         $suppliesCount = DB::table('insumos')->count();
         $productsCount = DB::table('productos')->count();
         $employeesCount = DB::table('empleados')->count();
+        $provideersCount = DB::table('proveedors')->count();
+        $categoryCount = DB::table('categorias')->count();
 
         // Puedes realizar más operaciones para obtener datos adicionales o estadísticas
         
@@ -48,7 +53,9 @@ class DashboardController extends Controller
         'productsCount',
         'employeesCount',
         'purchasesByMonth',
-        'SumaVentas'
+        'SumaVentas',
+        'provideersCount',
+        'categoryCount'
     ));
     
     } 

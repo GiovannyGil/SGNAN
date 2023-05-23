@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Productos;
-use App\Models\detalleProducto;
-use App\Models\insumo;
+use App\Models\categoria;
+use App\Models\Insumo;
 use App\Models\User;
-use App\Http\Requests\productoCreateRequest;
-use App\Http\Requests\ProductoEditRequest;
+use App\Models\DetalleProducto;
+use App\Http\Requests\productos\StoreRequest;
 
 
 class ProductoController extends Controller
@@ -18,7 +17,7 @@ class ProductoController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function index()
     {
         $insumos = Insumo::all();
@@ -39,6 +38,7 @@ class ProductoController extends Controller
         return view('producto.index', compact('productos','insumos','detalleProducto'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,10 +46,11 @@ class ProductoController extends Controller
      */
     public function create()
     {
-       
+        // llamar insumos
         $insumos = Insumo::all();
         $users = User::all();
         return view('producto.create', compact('insumos', 'users'));
+
 
     }
 
@@ -59,23 +60,25 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( productoCreateRequest $request )
+    public function store(StoreRequest $request)
     {
+        $productos = Productos::create($request->all());
+        // $productos->NombreProducto = $request->get('NombreProducto');
+        // $productos->DescripcionProducto = $request->get('DescripcionProducto');
+        // $productos->PrecioP = $request->get('PrecioP');
+        // $productos->save();
 
-        $productos = Productos::create($request->all()+[ 
-            // 'user_id' => auth()->user()->id,
-        ]);
-       
+        // crear nuevo detalle compra recorriendo un foreach de detalles
+        // $productos = new Productos();
         $results = [];
-        foreach ($request->id_insumos as $key => $insumos)
-         {
-            $results[$insumos] = 
-            [
-                'id_insumos' => $request->id_insumos[$key], 
+        foreach ($request->id_insumos as $key => $insumos) {
+            $results[$insumos] = [
+                'id_insumos' => $request->id_insumos[$key], // 'id_insumo' => $request->id_insumo[$key], // 'id_insumo' => $request->id_insumo[$key],
                 'Cantidad' => $request->Cantidad[$key]
+                // 'Precio' => $request->Precio[$key],
             ];
         }
-                // foreach ($request->id_insumo as $key => $insumos) {
+        // foreach ($request->id_insumo as $key => $insumos) {
         //     $results[] = [
         //         'id_insumo' => $request->id_insumo[$key],
         //         'Cantidad' => $request->Cantidad[$key]
@@ -91,22 +94,10 @@ class ProductoController extends Controller
 
         // guardar registros de insumos en detalleProductos
         $productos->detalles()->createMany($results);
-       
-        if 
-            ($imagen = $request->file('imagen')){
-            $ruta = $imagen->store('imagen/');
-            $ImagenProducto= date('ymdHis'). "." . $imagen->getClientOriginalExtension();
-            $imagen->move($ruta, $ImagenProducto);
-            // $productos['imagen'] = "$ImagenProducto";
-
-            $productos->imagen = $ruta;
-        }
-
-        
-        $productos->save();
+        // retornar vista
         return redirect('/productos')->with('mensaje', 'El producto se creo con exito');
-    
     }
+
 
     /**
      * Display the specified resource.
@@ -116,19 +107,8 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        
         $productos = Productos::find($id);
-        $detalleProducto= detalleProducto::all();
-        $insumos = Insumo::all();
-     
-        if ($productos != null) {
-            // Accede a la propiedad 'insumo' del objeto
-            $insumo = $productos->insumo;
-        }
-       
-        $detalleProducto = $productos->detalles;
-
-        return view('producto.show', compact('productos','insumos','detalleProducto' ));
+        return view('insumo.show', compact('productos'));
     }
 
     /**
@@ -137,11 +117,10 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( $request, $id)
+    public function edit( $id)
     {
         $productos= Productos::find($id);
-        $insumos = insumo::all();
-
+        $insumos = Insumo::all();
 
         return view('producto.edit', compact('insumos', 'productos'));
     }
@@ -153,17 +132,16 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductoEditRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $productos= Productos::find($id);
 
-        $productos->NombreProducto = $request->get('nombrePro');
+        $productos->NombreProducto = $request->get('NombreProducto');
         $productos->DescripcionProducto = $request->get('Descripcion');
         $productos->Imagen = $request->Imagen ? $request->Imagen->storeAs('public', $request->Imagen->getClientOriginalName()) : $productos->Imagen;
         $productos->PrecioP = $request->get('PrecioP');
         $productos ->save();
         $productos->insumos()->sync($request->get('id_insumos'));
-        // $productos ->Estado = $request->get('Estado');
         return redirect('/productos') ;
     }
 
@@ -175,24 +153,8 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        $productos = Productos::findOrFail($id);
-       
-        $productos->save();
-        return redirect('/productos')->with('success', 'Producto desactivado correctamente');
+        $producto = Productos::find($id);
+        $producto->delete();
+        return redirect('/productos');
     }
-
-    public function change_status( Productos $producto)
-    {
-        if($producto->Estado == 'Activo'){
-            $producto->update(['Estado' => 'Inhactivo']);
-            return redirect()->back();
-        }else{
-            $producto->update(['Estado' => 'Activo']);
-            return redirect()->back();
-        }
-        // $productos->save();
-        // return redirect('/productos')->with('success','Proceso terminado');
-
-    }
-
 }

@@ -53,11 +53,11 @@
                 <div class="col-lg-2">
                     <div class="small-box bg-danger" title="Compras">
                         <div class="inner">
-                            <h4 id="totalGanancias">{{ $totalPurchases }}</h4>
-                            <p>Cantidad Compras</p>
+                            <h4 id="totalGanancias">{{ $provideersCount }}</h4>
+                            <p>Cantidad Proveedores</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="ion ion-person"></i>
                         </div>
                         <a href="/compras/" class="small-box-footer" title="Más informacion de las Compras">más Información  <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -79,11 +79,11 @@
                 <div class="col-lg-2">
                     <div class="small-box bg-dark" title="Total de las Ventas de Hoy">
                         <div class="inner">
-                            <h4 id="totalVentasHoy">{{ $totalSales }}</h4>
-                            <p>Cantidad Ventas</p>
+                            <h4 id="totalVentasHoy">{{ $categoryCount }}</h4>
+                            <p>Cantidad Categorías</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-cash"></i>
+                            <i class="ion ion-clipboard"></i>
                             {{-- <i class="ion ion-clipboard"></i> --}}
                         </div>
                         <a href="/ventas/" class="small-box-footer" title="Más informacion de las Ventas">más Información  <i class="fas fa-arrow-circle-right"></i></a>
@@ -109,14 +109,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12">
+        {{-- <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <h3>Ventas/Compras</h3>
                     <canvas id="grafico"></canvas>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 
@@ -169,12 +169,14 @@
         purchaseCounts.push(item.count);
     });
 
+    // compras y ventas por mes juntas
+    
+
     var ctx = document.getElementById('salesChart').getContext('2d');
     var salesChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: months,
-            // labels: ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
             datasets: [{
                 label: 'Ventas',
                 data: salesCounts,
@@ -218,74 +220,12 @@
 
         var ctx = document.getElementById('grafico').getContext('2d');
 
-// Crea el gráfico de barras
-var grafico = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        // labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'], // Cambia las etiquetas según tus datos
-        labels: months,
-        datasets: [
-            {
-                label: 'Ventas',
-                data: ventas,
-                backgroundColor: 'rgba(54, 162, 235, 0.5)' // Cambia el color de fondo según tus preferencias
-            },
-            {
-                label: 'Compras',
-                data: compras,
-                backgroundColor: 'rgba(255, 99, 132, 0.5)' // Cambia el color de fondo según tus preferencias
-            }
-        ]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true // Asegura que el eje y comience en cero
-            }
-        }
-    }
-});
+
 
     });
    
 </script>
-{{-- <script>
-    // Obtén los datos de ventas y compras desde tu backend
-    var ventas = [{{ $totalSales }}];
-    var compras = [{{ $totalPurchases }}];
-    // var salesByMonth = {!! json_encode($salesByMonth) !!};
-    // var purchasesByMonth = {!! json_encode($purchasesByMonth) !!};
 
-    // Crea el contexto del gráfico
-    var ctx = document.getElementById('grafico').getContext('2d');
-
-    // Crea el gráfico de barras
-    var grafico = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'], // Cambia las etiquetas según tus datos
-            datasets: [
-                {
-                    label: 'Ventas',
-                    data: ventas,
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)' // Cambia el color de fondo según tus preferencias
-                },
-                {
-                    label: 'Compras',
-                    data: compras,
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)' // Cambia el color de fondo según tus preferencias
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true // Asegura que el eje y comience en cero
-                }
-            }
-        }
-    });
-</script> --}}
 
     @stop
 @endsection

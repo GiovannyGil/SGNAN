@@ -109,6 +109,9 @@ class ProductoController extends Controller
     {
         $productos = Productos::find($id);
         return view('insumo.show', compact('productos'));
+        $detalleProducto = $productos->detalles;
+        $insumos = Insumo::all();
+        return view('producto.show', compact('productos', 'detalleProducto', 'insumos'));
     }
 
     /**
@@ -120,6 +123,7 @@ class ProductoController extends Controller
     public function edit( $id)
     {
         $productos= Productos::find($id);
+        $productos= Productos::findOrFail($id);
         $insumos = Insumo::all();
 
         return view('producto.edit', compact('insumos', 'productos'));
@@ -139,9 +143,12 @@ class ProductoController extends Controller
         $productos->NombreProducto = $request->get('NombreProducto');
         $productos->DescripcionProducto = $request->get('Descripcion');
         $productos->Imagen = $request->Imagen ? $request->Imagen->storeAs('public', $request->Imagen->getClientOriginalName()) : $productos->Imagen;
+        // $productos->Imagen = $request->Imagen ? $request->Imagen->storeAs('public', $request->Imagen->getClientOriginalName()) : $productos->Imagen;
         $productos->PrecioP = $request->get('PrecioP');
         $productos ->save();
         $productos->insumos()->sync($request->get('id_insumos'));
+        // $productos->insumos()->sync($request->get('id_insumos'));
+
         return redirect('/productos') ;
     }
 
@@ -157,4 +164,18 @@ class ProductoController extends Controller
         $producto->delete();
         return redirect('/productos');
     }
+    public function change_status( Productos $producto)
+    {
+        if($producto->Estado == 'Activo'){
+            $producto->update(['Estado' => 'Inhactivo']);
+            return redirect()->back();
+        }else{
+            $producto->update(['Estado' => 'Activo']);
+            return redirect()->back();
+        }
+        // $productos->save();
+        // return redirect('/productos')->with('success','Proceso terminado');
+
+    }
+    
 }

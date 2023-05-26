@@ -13,24 +13,6 @@
         <h1 class="title">Añadir producto</h1>
         <form action="/productos" method="POST" class="contact-form row" novalidate>
             @csrf
-            {{-- <div class="form-field col-lg-4 "> --}}
-                {{-- @foreach ($users as $user)
-                <input type="text" class="input-text js-input" id="id_user" required value="{{$user->name}}"  autocomplete="off" name="id_user" readonly>
-                @endforeach --}}
-                {{-- <select id="id_user" class="input-text js-input" type="text" required autocomplete="off" name="id_user"
-                class="input-text js-input   @error('id_user') is-invalid @enderror">
-                    <option value="{{old('id_user')}}"></option>
-                    @foreach ($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
-                    @endforeach
-                </select>
-                <label class="label" for="id_empleado">Usuario*</label> --}}
-                {{-- @error('id_user')
-                  <span class="error text-danger" role="alert">
-                          <strong>{{$message}}</strong>
-                      </span>
-                  @enderror --}}
-             {{-- </div> --}}
 
                 <div class="form-field col-lg-4 ">
                     <label for="" class="input-text js-input">Nombre Producto: </label>

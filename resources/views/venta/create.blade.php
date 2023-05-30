@@ -150,7 +150,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     @endsection
     @section('js')
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function(){
             $('#agregar').click(function(){
@@ -175,8 +175,9 @@
             producto = $("#id_producto option:selected").text();
             cantidad = $("#Cantidad").val();
             precio = $("#Precio").val();
+            empleado = $("#id_empleado").val();
     
-            if (id_producto != "" && parseInt(cantidad) != "" && parseInt(cantidad) > 0 && parseFloat(precio) != ""){
+            if (id_producto != "" && parseInt(cantidad) != "" && parseInt(cantidad) > 0 && parseFloat(precio) != "" && empleado != ""){
                 subtotal = parseInt(cantidad) * parseFloat(precio);
     
                 // Verificar si el producto ya ha sido seleccionado
@@ -203,7 +204,13 @@
                 totales();
                 evaluar();
             } else {
-                alert("Error al ingresar el detalle de la venta, revise los datos del producto");
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'error',
+                    title: 'Error al ingresar el detalle de la venta, revise los datos del producto',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             }
         }
     

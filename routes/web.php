@@ -98,7 +98,8 @@ Route::get('Cambiar_Proceso/ventas/{venta}', 'App\Http\Controllers\VentaControll
 Route::resource('productos', 'App\Http\Controllers\ProductoController');
 Route::post('productos/', 'App\Http\Controllers\ProductoController@store');
 // Route::get('/productos/create', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.create');
-
+Route::get('/productos/{id}/edit', [App\Http\Controllers\ProductoController::class, 'edit'])->name('productos.edit');
+Route::put('/productos/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('productos.update');
 
 //ROLES
 Route::middleware([

@@ -20,21 +20,19 @@
         @csrf
         <h2>Reporte de Ventas por Rango de Fecha</h2>
         <div class="row">
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-3"  title="Fecha Inicio">
                 <span>Fecha Inicial: <b></b></span>
                 <div class="form-group">
-                    {{-- <input type="date" class="form-control" value="{{old('fecha_ini')}}" name="fecha_ini" id="fecha_ini"> --}}
                     <input type="date" class="form-control" name="fechaInicio" id="fechaInicio">
                 </div>
             </div>
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-3"  title="Fecha Final">
                 <span>Fecha Final: <b></b></span>
                 <div class="form-group">
-                    {{-- <input type="date" class="form-control" value="{{old('fecha_fin')}}" name="fecha_fin" id="fecha_fin"> --}}
                     <input type="date" class="form-control" name="fechaFin" id="fechaFin">
                 </div>
             </div>
-            <div class="col-12 col-md-3 text-center mt-4">
+            <div class="col-12 col-md-3 text-center mt-4"  title="Colsultar Ventas">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Consultar</button>
                 </div>
@@ -67,16 +65,16 @@
                             <tr>
                                 <td scope="row">{{$venta->id}}</td>
                                 {{-- llamar la fecha de la venta --}}
-                                <td>{{$venta->created_at}}</td>
-                                <td>{{$venta->total}}</td>
+                                <td title="Fecha de creacion de la Venta">{{$venta->created_at}}</td>
+                                <td title="Valor de la Venta">{{$venta->total}}</td>
                                 @if ($venta->Estado == 'Pendiente')
-                                    <td>
-                                        <a class="jsgrid-button btn btn-danger" href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Editar">
+                                    <td  title="Estado de la Venta">
+                                        <a class="jsgrid-button btn btn-danger" href="{{route('Cambiar.Estado.ventas', $venta)}}">
                                             Pendiente <i class="fas fa-times"></i></a>
                                     </td>
                                 @else
-                                    <td>
-                                        <button type="button" disabled class="jsgrid-button btn btn-success" href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Editar">
+                                    <td  title="Estado de la Venta">
+                                        <button type="button" disabled class="jsgrid-button btn btn-success" href="{{route('Cambiar.Estado.ventas', $venta)}}">
                                         pagado <i class="fas fa-check"></i></button>
 
                                     </td>
@@ -85,11 +83,6 @@
                                     <div class="form-check form-switch">
                                         <form action="">
                                          @csrf
-                                             @if($venta->Proceso == 'Activo')
-                                                 <a title="Activo" href="{{ route('Cambiar.Proceso.ventas',$venta) }}" class="jsgrid-button btn btn-success"><i class="fas fa-check"></i></a>
-                                             @else
-                                                 <button title="Inactivo" type="button"  href="#" class="jsgrid-button btn btn-danger"><i class="fas fa-times"></i></button>
-                                             @endif
                                              <a href="{{ route('ventas.show',$venta) }}" class="btn btn-outline-info"
                                              title="Ver detalles"><i class="far fa-eye"></i></a>
                                              <a href="{{ route('ventas.pdf',$venta) }}" title="Ver PDF" class="jsgrid-button jsgrid-edit-button">
@@ -123,19 +116,6 @@
             });
         });
     </script>
-    {{-- <script>
-        window.onload = function(){
-            var fecha = new Date(); //fecha actual
-            var mes = fecha.getMonth()+1; //obteniendo mes
-            var dia = fecha.getDate(); //obteniendo dia
-            var anho = fecha.getFullYear(); //obteniendo año
-            if(dia<10)
-                dia='0'+dia; //agrega cero si el menor de 10
-            if(mes<10)
-                mes='0'+mes //agrega cero si el menor de 10
-            document.getElementById('fecha_fin').value=anho+"-"+mes+"-"+dia;
-        }
-    </script> --}}
     <script>
         const form = document.querySelector('form');
         const button = form.querySelector('button');

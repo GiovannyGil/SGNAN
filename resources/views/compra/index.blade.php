@@ -13,7 +13,10 @@
     <div class="container"><br>
     <center><h2>Añadir Compras</h2></center>
     <div class="d-grid gap-2 d-md-block">
-    <a href="{{ route('compras.create') }}" class="btn btn-sm btn-primary text-left">Añadir Compra</a> <br></div><br>
+    <a href="{{ route('compras.create') }}" class="btn btn-sm btn-primary text-left">Añadir Compra</a>
+    <a href="{{ route('compras.pdfAll') }}" title="Reporte"  class="btn btn-sm btn-warning">Ver Reporte <i class="far fa-file-pdf"></i></a>
+
+    </div><br>
 <div class="table-reponsive">
     <table id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%"> 
         <thead class="bg-primary  text-primary">

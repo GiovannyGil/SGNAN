@@ -25,22 +25,25 @@
         <tr>
             <td>{{ $role->id }}</td>
             <td>{{ $role->name }}</td>
-            @if ($role->status == 'ACTIVE')
+            @if ($role->name === 'Administrador')
+            <td>
+
+            </td>
+            @elseif ($role->status == 'ACTIVE')
                 <td>
                     <a class="jsgrid-button btn btn-success btn-xs" href="{{ route('roles.change_status', $role) }}" title="Desactivar rol">
                     Activo<i class="fas fa-fw fa-check"></i>
                 </a>
                 </td>
-                
             @else
                 <td>
                     <a class="jsgrid-button btn btn-danger btn-xs" href="{{ route('roles.change_status', $role) }}" title="Activar rol" >
-                    Desacti<i class="fas fa-fw fa-times"></i>
+                    Desactivado<i class="fas fa-fw fa-times"></i>
                 </a>
                 </td>
             @endif
 
-            @if($role->status == 'ACTIVE')
+            @if($role->status == 'ACTIVE' and $role->name <> 'Administrador')
                     <td class=" td-actions text-right">
                             <a href="{{ route('roles.edit', $role) }}" class="btn btn-warning  btn-sm"><i class="fas fa-fw fa-pen" title="Editar rol"></i></a>
                             
@@ -71,6 +74,32 @@
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+    @if (session('Active') == 'Se desactivar el rol')
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Rol desactivado correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+
+    @if (session('inhabilitar') == 'Se activara el rol')
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Rol activado correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
 
     @if (session('Crear') == 'El rol se creo con correctamente')
         <script>

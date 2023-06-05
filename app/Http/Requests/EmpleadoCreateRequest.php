@@ -29,7 +29,7 @@ class EmpleadoCreateRequest extends FormRequest
             'Nombre'           => 'required|min:3|max:20',
             'Apellidos'        => 'required|min:3|max:20',
             'Email'            => 'required|email|unique:empleados',
-            'Documento'        => 'required|unique:empleados|min:10|max:10',
+            'Documento'        => 'required|unique:empleados|min:10|max:10|regex:/^[a-zA-Z0-9\s]+$/',
             'Genero'           => 'required',
             'Fecha_Nacimiento' => [
                                 'required',
@@ -57,6 +57,9 @@ class EmpleadoCreateRequest extends FormRequest
             'Apellidos.required' => 'El campo apellidos es requerido.',
             'Email.required' => 'El campo email es requerido.',
             'Documento.required' => 'El campo documento es requerido.',
+            'Documento.numeric' => 'El campo debe ser numérico.',
+            'Documento.min'     => 'El número debe ser mayor o igual a cero.',
+            'Documento.regex' => 'El campo no puede contener caracteres especiales.',
             'Genero.required' => 'El campo genero es requerido.',
             'Fecha_Nacimiento' => 'El empleado debe ser mayor de edad.',
             'Celular.required' => 'El campo celular es requerido.',

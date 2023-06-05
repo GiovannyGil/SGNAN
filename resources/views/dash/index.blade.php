@@ -25,7 +25,7 @@
                 </div>
                 {{-- VENTAS --}}
                 <div class="col-lg-2">
-                    <div class="small-box bg-warning" title="Productos Ventas">
+                    <div class="small-box bg-warning" title="Total Ventas">
                         <div class="inner">
                             <h4 id="totalVentas">{{$SumaVentas}}</h4>
                             <p>Total Ventas</p>
@@ -51,7 +51,7 @@
                 </div>
                 {{-- TOTAL GANACIAS --}}
                 <div class="col-lg-2">
-                    <div class="small-box bg-danger" title="Compras">
+                    <div class="small-box bg-danger" title="Cantidad Proveedores">
                         <div class="inner">
                             <h4 id="totalGanancias">{{ $provideersCount }}</h4>
                             <p>Cantidad Proveedores</p>
@@ -64,7 +64,7 @@
                 </div>
                 {{-- PRODUCTOS CON POCO STOCK --}}
                 <div class="col-lg-2">
-                    <div class="small-box bg-primary" title="Productos con Poco Stock">
+                    <div class="small-box bg-primary" title="Insumos">
                         <div class="inner">
                             <h4 id="totalProductosMinSstock">{{ $suppliesCount }}</h4>
                             <p>Cantidad Insumos</p>
@@ -93,7 +93,7 @@
         </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6" title="Gráfico de Barras de las ventas por cada mes">
             <div class="card">
                 <div class="card-body">
                     <h3>Ventas por Mes</h3>
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" title="Gráfico de Barras de las Compras por cada mes">
             <div class="card">
                 <div class="card-body">
                     <h3>Compras por Mes</h3>

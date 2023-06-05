@@ -41,6 +41,8 @@ Route::post('/compras', [App\Http\Controllers\CompraController::class, 'store'])
 Route::get('/compras/create', [App\Http\Controllers\CompraController::class, 'create']);
 Route::post('/compras', [App\Http\Controllers\CompraController::class, 'store']);
 
+Route::get('compras/pdf/{compra}', 'App\Http\Controllers\CompraController@pdf')->name('compras.pdf');
+Route::get('compras/pdfAll/', 'App\Http\Controllers\CompraController@pdfAll')->name('compras.pdfAll');
 
 Route::get('/', function () {
     return view('auth.login');

@@ -25,7 +25,7 @@ class UserEditRequest extends FormRequest
     {
         $user = $this->route('user');
         return [
-            'name' => 'required|min:3|max:11|unique:users',
+            'name' => 'min:3|max:11|',
             'email' => 'unique:users,email,' . $this->user.'|required',
             'password' => 'sometimes'
         ];

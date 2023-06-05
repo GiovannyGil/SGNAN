@@ -85,6 +85,31 @@
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
 
+    @if (session('Active') == 'Se desactivar el empleado')
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Empleado desactivado correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+
+    @if (session('inhabilitar') == 'Se activara el empleado')
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Empleado activado correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+
+
     @if (session('Crear') == 'Empleado registrado exitosamente')
         <script>
             Swal.fire({

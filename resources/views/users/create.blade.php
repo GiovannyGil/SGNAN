@@ -10,36 +10,36 @@
             @csrf
 
             <div class="form-field col-lg-6">
-            <input autocomplete="off" type="text" id="name"  name="name"  tabindex="1" class="input-text js-input" value="{{ old('name') }}">
-                <label for="name" class="label">Nombre<FONT COLOR="red"> *</FONT></label>
+            <label for="name" class="">Nombre<FONT COLOR="red"> *</FONT></label>
+            <input placeholder="Ingrese el nombre" autocomplete="off" type="text" id="name"  name="name"  tabindex="1" class="input-text js-input" value="{{ old('name') }}">
                 @if ($errors->has('name'))
                     <span class="error text-danger" for="input-name">{{$errors->first('name') }}</span>
                 @endif
             </div> 
             
             <div class="form-field col-lg-6">
-            <input autocomplete="off" type="email" id="email"  name="email" tabindex="2" class="input-text js-input" value="{{ old('email') }}">
-                <label for="email" class="label">Email<FONT COLOR="red"> *</FONT></label>
+            <label for="email" class="">Email<FONT COLOR="red"> *</FONT></label>
+            <input  placeholder="Ingrese el correo electronico" autocomplete="off" type="email" id="email"  name="email" tabindex="2" class="input-text js-input" value="{{ old('email') }}">
                 @if ($errors->has('email'))
                     <span class="error text-danger" for="input-email">{{$errors->first('email') }}</span>
                 @endif
             </div>
             <div class="form-field col-lg-6">
-            <input type="password" id="password" class="input-text js-input" name="password" tabindex="3" autocomplete="new-password" >
-                <label for="password" class="label">Contraseña<FONT COLOR="red"> *</FONT></label>
+            <label for="password" class="">Contraseña<FONT COLOR="red"> *</FONT></label>
+            <input placeholder="Ingrese la contraseña" type="password" id="password" class="input-text js-input" name="password" tabindex="3" autocomplete="new-password" >
                 @if ($errors->has('password'))
                     <span class="error text-danger" for="input-password">{{$errors->first('password') }}</span>
                 @endif
             </div>
             <div class="form-field col-lg-6">
-            <input type="password" id="password_confirmation" class="input-text js-input"  name="password_confirmation" tabindex="4" autocomplete="new-password"  >
-                <label for="password_confirmation" class="label">Confirmar Contraseña<FONT COLOR="red"> *</FONT></label>
+            <label for="password_confirmation" class="">Confirmar Contraseña<FONT COLOR="red"> *</FONT></label>
+            <input placeholder="Confirme la contraseña" type="password" id="password_confirmation" class="input-text js-input"  name="password_confirmation" tabindex="4" autocomplete="new-password"  >
                 @if ($errors->has('password_confirmation'))
                     <span class="error text-danger" for="input-password_confirmation">{{$errors->first('password_confirmation') }}</span>
                 @endif
             </div>
                 <div class="form-field col-lg-4">
-                    <label for="" class="label">Roles<FONT COLOR="red"> *</FONT></label>
+                    <label for="" class="">Roles<FONT COLOR="red"> *</FONT></label>
                         {!! Form::select('roles[]', $roles,[], array('class' => 'input-text js-input')) !!}
                 </div>
             <div class="form-field col-lg-9">
@@ -47,7 +47,8 @@
                 <a href="/users" class="btn btn-secondary btn-sm submit-btn2" tabindex="6" title="Volver atras">Cancelar</a>
             </div>
         </form>
-    </section>
+    </section>  
+
 </div>
 @stop
 

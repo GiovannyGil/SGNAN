@@ -34,16 +34,20 @@
                                 @endforeach --}}
                             </p>
                         </div>
+
                         <div class="col-md-4">
+                            <img width="200" height="200" src="/imagen/{{$productos->imagen}}" alt="producto" class="avatar" style="border-radius:1%">
+                        </div>
+                        {{-- <div class="col-md-4">
                             <img width="195" height="459" src="imagen/{{$productos->Imagen}}" alt="producto" class="avatar" style="border-radius:1%">
-                            </div>
-                        <div class="col-md-6 text-center">
+                            </div> --}}
+                        {{-- <div class="col-md-6 text-center">
                             <label for="" class="form-control-label">Numero del producto
                                 
                                 <p>{{$productos->id}}</p>
                             </label>
 
-                        </div>
+                        </div> --}}
                 </div>
 
                 <br><br>

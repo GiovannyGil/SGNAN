@@ -15,7 +15,7 @@ class Productos extends Model
         'id_user',
         'NombreProducto',
         'DescripcionProducto',
-        'Imagen',
+        'imagen',
         'PrecioP',
         'Estado'
         

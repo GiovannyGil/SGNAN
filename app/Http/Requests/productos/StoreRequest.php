@@ -24,7 +24,22 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'NombreProducto'          => 'required',
+            // 'NombreProducto' => 'unique',
+            'DescripcionProducto'        => 'required',
+            'PrecioP'            => 'required',
+      
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            // mensajes de validaciones para el formulario de crear venta
+            'NombreProducto.required' => 'El campo producto es requerido',
+            // 'NombreProducto.unique' => 'El campo producto debe ser unico',
+            'PrecioP.required' => 'El campo precio es requerido',
+           
         ];
     }
 }

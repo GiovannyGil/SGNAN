@@ -47,6 +47,18 @@
                     @enderror
                 </div>
 
+                <div class="form-field col-lg-6">
+                    <label class="form-label" class="label">Subir Imagen</label>
+                    <input class="input-text js-input" type="file" id="imagen" name="imagen" tabindex="10" value="{{ old('imagen', $productos->imagen)}}">
+                    @if ($errors->has('imagen'))
+                        <span class="error text-danger" for="input-imagen">{{$errors->first('imagen') }}</span>
+                    @endif
+                </div>
+                <div class="form-field col-lg-6">
+                    <img src="/imagen/{{$productos->imagen}}" id="imagenSeleccionada" style="max-height: 150px;">
+                    
+                </div>
+
                 <div class="form-field col-lg-4">
                     <select id="id_insumos" tabindex="4" class="input-text js-input" type="text" required autocomplete="off" name="nuevos_detalles[0][id_insumos]" class="input-text js-input @error('id_insumos') is-invalid @enderror">
                         <option value="">Seleccione un insumo</option>
@@ -152,3 +164,4 @@
 </script>
 @endsection
 @endsection
+

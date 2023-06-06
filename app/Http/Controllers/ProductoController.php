@@ -9,8 +9,9 @@ use App\Models\Insumo;
 use App\Models\User;
 use App\Models\DetalleProducto;
 use App\Http\Requests\productos\StoreRequest;
-// use App\Http\Requests\ProductoCreateRequest;
+use App\Http\Requests\ProductoCreateRequest;
 
+use App\Http\Controllers\DB;
 
 
 class ProductoController extends Controller
@@ -214,6 +215,15 @@ class ProductoController extends Controller
             return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
         }
     
+
+
+
+    return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
+}
+
+
+
+
 
     /**
      * Remove the specified resource from storage.

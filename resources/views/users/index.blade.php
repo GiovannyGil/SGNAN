@@ -47,7 +47,7 @@
             @else
             <td>
                     <a class="jsgrid-button btn btn-danger btn-xs" href="{{ route('users.change_status', $user) }}" title="Activar usuario" >
-                    Desacti<i class="fas fa-fw fa-times"></i>
+                    Desactivado<i class="fas fa-fw fa-times"></i>
                 </a>
                 </td>     
             @endif
@@ -82,6 +82,30 @@
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('Active') == 'Se desactivar el usuario')
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Usuario desactivado correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+
+    @if (session('inhabilitar') == 'Se activara el usuario')
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Usuario activado correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
 
     @if (session('Crear') == 'Usuario registrado exitosamente')
         <script>

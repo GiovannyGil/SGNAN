@@ -73,8 +73,6 @@
                     <input type="number" id="Cantidad" tabindex="5" name="nuevos_detalles[0][Cantidad]" class="form-control @error('Cantidad') is-invalid @enderror" value="">
                 </div>
 
-               
-
                 <div class="form-field col-lg-4">
                     <button type="button" id="agregar" tabindex="6" name="agregar" class="submit-btn">Agregar</button>
                 </div>
@@ -166,3 +164,4 @@
 </script>
 @endsection
 @endsection
+

@@ -14,7 +14,7 @@
         <form action="/ventas" method="POST" class="contact-form row" novalidate>
             @csrf
          <div class="form-field col-lg-4 " title="Elegir Empleado">
-
+            <abel class="label" for="id_empleado">Empleado*</abel>
             <select id="id_empleado" class="input-text js-input" type="text" required autocomplete="off" name="id_empleado"
             class="input-text js-input   @error('id_empleado') is-invalid @enderror">
                 <option value="{{old('id_empleado')}}"></option>
@@ -22,7 +22,7 @@
                 <option value="{{$empleado->id}}">{{$empleado->Nombre}}</option>
                 @endforeach
             </select>
-            <label class="label" for="id_empleado">Empleado*</label>
+            
             {{-- @error('id_empleado')
               <span class="error text-danger" role="alert">
                       <strong>{{$message}}</strong>
@@ -51,6 +51,8 @@
 
 
          <div class="form-field col-lg-4 " title="Producto a vender">
+            <label class="" for="id_producto">Producto*</label>
+
             <select id="id_producto" class="input-text js-input" type="text" required autocomplete="off" name="id_producto"
             class="input-text js-input   @error('id_producto') is-invalid @enderror">
                 <option value="" disabled selected>Selecione un Producto</option>
@@ -59,7 +61,6 @@
                 <option value="{{$producto->id}}_{{$producto->Cantidad}}_{{$producto->PrecioP}}">{{$producto->NombreProducto}}</option>
                 @endforeach
             </select>
-            <label class="label" for="id_producto">Producto*</label>
             {{-- @error('id_producto')
               <span class="error text-danger" role="alert">
                       <strong>{{$message}}</strong>
@@ -69,9 +70,10 @@
 
          
          <div class="form-field col-lg-4 " title="Ingrese la Cantidad">
+            <label class="" for="Cantidad">Cantidad*</label>
+
             <input id="Cantidad" type="number" required autocomplete="off" name="Cantidad"
             class="input-text js-input @error('Cantidad') is-invalid @enderror" value="{{old('Cantidad')}}">
-            <label class="label" for="Cantidad">Cantidad*</label>
 
 
             {{-- @error('Cantidad')
@@ -90,9 +92,9 @@
 
 
          <div class="form-field col-lg-4 " title="Precio del Producto">
+            <label class="" for="Precio">Precio de Venta</label>
             <input id="Precio" type="number" required autocomplete="off" name="Precio" disabled
             class="input-text js-input">
-            <label class="label" for="Precio">Precio de Venta</label>
 
             <p id="cantidaduu" name="cantidaduu"></p>
 

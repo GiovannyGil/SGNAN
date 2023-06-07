@@ -175,11 +175,6 @@ public function update(Request $request, $id)
         }
     }
 
-    return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
-}
-
-
-
 
 
     /**

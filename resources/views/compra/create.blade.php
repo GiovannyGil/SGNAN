@@ -15,24 +15,24 @@
             @csrf
 
             <div class="form-field col-lg-4">
-
+                <label for="" class=" is-required">Referencia compra:*</label>
                 <input type="text" id="Referencia_compra" name="Referencia_compra" class="input-text js-input" tabindex="1">
-                <label for="" class="label is-required">Referencia compra:</label>
                 @if ($errors->has('Referencia_compra'))
                 <span class="error text-danger" for="input-Referencia_compra">{{$errors->first('Referencia_compra') }}</span>
                 @endif
             </div>
 
             <div class="form-field col-lg-4">
+                <label for="" class=" is-required">Descripción compra:</label>
                 <input type="text" id="Descripcion_compra" name="Descripcion_compra" class="input-text js-input tabindex=3">
-                <label for="" class="label">Descripción compra:</label>
+            
                 @if ($errors->has('Descripcion_compra'))
                 <span class="error text-danger" for="input-Descripcion_compra">{{$errors->first('Descripcion_compra') }}</span>
                 @endif
             </div>
 
             <div class="form-field col-lg-4">
-                <label for="" class="label is-required" tabindex="8">Proveedor:</label>
+                <label for="" class=" is-required" tabindex="8">Proveedor:*</label>
                 <select name="id_proveedores" class="input-text js-input" type="text" required autocomplete="off" name="Estado">
                     <option value=""> </option>
                     @foreach($Proveedor as $tpro)
@@ -44,15 +44,18 @@
                 @endif
             </div>
             <div class="form-field col-lg-4 ">
+                <label class="" for="id_empleado">Usuario*</label>
                 {{-- tomar automaticamente el user logeado en el sistema --}}
-                <select id="id_user" class="input-text js-input" type="text" required autocomplete="off" name="id_user"
-                class="input-text js-input   @error('id_user') is-invalid @enderror">
+                <select id="id_user" class="input-text js-input " type="text" required autocomplete="off" name="id_user"
+                
+                class="input-text js-input   @error('id_user') is-invalid @enderror">}
                     <option value="{{old('id_user')}}"></option>
                     @foreach ($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                     @endforeach
                 </select>
-                <label class="label" for="id_empleado">Usuario*</label>
+                
+                
                 {{-- @error('id_user')
                   <span class="error text-danger" role="alert">
                           <strong>{{$message}}</strong>
@@ -61,7 +64,8 @@
              </div>
 
             <div class="form-field col-lg-4">
-                <select id="id_insumos" class="input-text js-input" type="text"  required autocomplete="off" name="id_insumos"
+                <label class="" for="id_insumos">Insumos*</label>
+                <select id="id_insumos" class="input-text js-input is-required" type="text"  required autocomplete="off" name="id_insumos"
                 class="input-text js-input @error('id_insumos' )is-invalid @enderror">
                 <option value="" disabled selected> Seleccione un insumo</option>
                 <option value="{{old('id_insumos')}}"></option>
@@ -69,12 +73,13 @@
                 <option value="{{$insu->id}}">{{$insu->Nombre_Insumo}}</option>
                     @endforeach
                 </select>
-                <label class="label" for="id_insumos">Insumos</label>
+               
             </div>
 
             <div class="form-field col-lg-4">
+                <label for="" class=" is-required">Cantidad:*</label>
                 <input type="number" id="Cantidad" name="Cantidad" class="input-text js-input tabindex=5">
-                <label for="" class="label is-required">Cantidad:</label>
+               
                 @if ($errors->has('Cantidad'))
 
                 <span class="error text-danger" for="input-Cantidad">{{$errors->first('Cantidad') }}</span>
@@ -82,8 +87,9 @@
             </div>
 
             <div class="form-field col-lg-4">
+                <label for="" class=" is-required">Precio:*</label>
                 <input type="number" id="Precio" name="Precio" class="input-text js-input tabindex=6">
-                <label for="" class="label is-required">Precio:</label>
+                
                 @if ($errors->has('Precio'))
                 <span class="error text-danger" for="input-Precio">{{$errors->first('Precio') }}</span>
                 @endif
@@ -160,67 +166,6 @@
 
 @section('js')
 
-{{-- <script>
-    $(document).ready(function() {
-        $("#agregar").click(function() {
-            agregar();
-        });
-
-    });
-    var cont = 0;
-    total = 0;
-    subtotal = [];
-    $("#guardar").hide();
-
-    function agregar(){
-        id_insumos = $("#id_insumos").val();
-        Insumos = $("#id_insumos option:selected").text();
-        cantidad = $("#Cantidad").val();
-        precio = $("#Precio").val();
-
-        if (id_insumos != "" && parseInt(cantidad) != "" && parseInt(cantidad) > 0 && parseFloat(precio) != "") {
-            subtotal[cont] = (parseInt(cantidad) * parseFloat(precio));
-            total = total + subtotal[cont];
-            var fila = '<tr class="selected" id="fila' + cont + '"><td><button type="button" class="btn btn-warning" onclick="eliminar(' + cont + ');">X</button></td><td><input type="hidden" name="id_insumos[]" value="' + id_insumos + '">' + Insumos + '</td><td><input type="number" id="Precio[]" name="Precio[]" value="' + precio + '" readonly></td><td><input type="number" name="Cantidad[]" value="' + cantidad + '" readonly></td><td>'+subtotal[cont]+'</td></tr>';
-            cont++;
-            limpiar();
-            totales();
-            evaluar();
-            $('#detalles').append(fila);
-        } else {
-            alert("Error al ingresar el detalle de la compra, revise los datos del insumo");
-        }
-    }
-    function limpiar(){
-        $("#Cantidad").val("");
-        $("#Precio").val("");
-        $("#id_insumos").val("");
-        
-    }
-    function totales(){
-        $("#total").html("PEN " + total.toFixed(2));
-        total_pagar = total;
-        $("#total_pagar_html").html("PEN " + total_pagar.toFixed(2));
-        $("#total_pagar").val(total_pagar.toFixed(2));
-    }
-    function evaluar(){
-        if (total > 0) {
-            $("#guardar").show();
-        }else{
-            $("#guardar").hide();
-        }
-    }
-    function eliminar(index){
-        total = total - subtotal[index];
-        total_pagar_html = total;
-        $("#total").html("PEN " + total);
-        $("#total_pagar_html").html("PEN " + total_pagar_html);
-        $("#total_pagar").val(total_pagar_html.toFixed(2));
-        $("#fila" + index).remove();
-        evaluar();
-    }
-</script> --}}
-
 <script>
     $(document).ready(function() {
         $("#agregar").click(function() {
@@ -260,7 +205,7 @@
                 insumosSeleccionados[id_insumos] = {
                     fila: nuevaFila,
                     cantidad: parseInt(cantidad),
-                    subtotal: subtotal[cont]
+                    subtotal: subtotal[cont] 
                 };
                 $('#detalles').append(nuevaFila);
                 cont++;
@@ -270,8 +215,14 @@
             totales();
             evaluar();
         } else {
-            alert("Error al ingresar el detalle de la compra, revise los datos del insumo");
-        }
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'error',
+                    title: 'Error al ingresar el detalle de la compra, revise los datos del Insumo',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
     }
 
     function limpiar(){
@@ -306,6 +257,15 @@
             totales();
             evaluar();
         }
+     
+</script>
+<script>
+       .is-required:after {
+    content: '*';
+    margin-left: 3px;
+    color: red;
+    font-weight: bold;
+  }
 </script>
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

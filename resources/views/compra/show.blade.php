@@ -70,7 +70,7 @@
     </div>
 
     <div class="card-footer text-muted">
-        <a href="/compra" class="btn btn-primary float-right">Cancelar</a>
+        <a href="/compras" class="btn btn-primary float-right">Cancelar</a>
     </div>
 </div>
 </div>

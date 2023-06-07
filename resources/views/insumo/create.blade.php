@@ -10,8 +10,8 @@
 
    
       <div class="form-field col-lg-4">
+        <label for="" class=" is-required" >Nombre del Insumo:* </label>
             <input type="text" id="Nombre_Insumo" name="Nombre_Insumo"  class="input-text js-input"  tabindex="1" value="{{ old('Nombre_Insumo') }}" >
-            <label for="" class="label is-required" >Nombre del Insumo: </label>
             @if ($errors->has('Nombre_Insumo'))
                     <span class="error text-danger" for="input-Nombre_Insumo">{{$errors->first('Nombre_Insumo') }}</span>
                 @endif
@@ -19,16 +19,16 @@
       </div>
       <div class="form-field col-lg-4">
       
+           
+            <label for="" class="is-required">Precio:*</label>  
             <input type="number" id="Precio" name="Precio"  class="input-text js-input"  tabindex="2" value="{{ old('Precio') }}" >
-            <label for="" class="label is-required">Precio:</label>  
-          @if ($errors->has('Precio'))
+          @if ($errors->has('Precio')) 
                     <span class="error text-danger" for="input-Precio">{{$errors->first('Precio') }}</span>
                 @endif
       </div>
       <div class="form-field col-lg-4">
-         
+        <label for=""class=" is-required">Cantidad:*</label> 
         <input type="number" id="cantidad" name="cantidad"  class="input-text js-input"  tabindex="3" value="{{ old('cantidad') }}" >
-        <label for=""class="label is-required">Cantidad</label> 
            @if ($errors->has('cantidad'))
                     <span class="error text-danger" for="input-cantidad">{{$errors->first('cantidad') }}</span>
                 @endif
@@ -58,6 +58,13 @@
 @endsection
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script> 
+    .is-required:after {
+    content: '*';
+    margin-left: 3px;
+    color: red;
+    font-weight: bold;
+  }
+    console.log('Hi!'); </script>
 
 @stop

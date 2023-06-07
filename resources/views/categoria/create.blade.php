@@ -15,8 +15,9 @@
         @csrf
     
       <div class="form-field col-lg-12">
+        <label for="" class=" is-required">Nombre:*</label>
       <input type="text" id="Nombre" name="Nombre" class="input-text js-input tabindex=6" tabindex="5">
-      <label for="" class="label is-required">Nombre:</label>
+      
             @if ($errors->has('Nombre'))
                     <span class="error text-danger" for="input-Nombre">{{$errors->first('Nombre') }}</span>
                 @endif
@@ -39,6 +40,14 @@
 @endsection
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script> Console.log('Hi!'); </script>
+<script>
+  .is-required:after {
+  content: '*';
+  margin-left: 3px;
+  color: red;
+  font-weight: bold;
+}
+</script>
 
 @stop

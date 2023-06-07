@@ -26,7 +26,7 @@ class VentaController extends Controller
     public function index()
     { // ir o ver la vista del formulario
         $ventas = Venta::all();
-        $productos = Productos::all();
+        $productos = Productos::where('Estado', 'Activo')->get();
 
         return view('venta.index', compact('ventas','productos'));
     }
@@ -40,7 +40,7 @@ class VentaController extends Controller
     {  // ir a la vista del formulario crear un registro
         // $productos = producto::all();
         $empleados = Empleado::all();
-        $productos = Productos::all();
+        $productos = Productos::where('Estado', 'Activo')->get();
         $users = User::all();
         return view('venta.create', compact('empleados', 'productos', 'users'));
 

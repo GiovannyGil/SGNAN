@@ -15,9 +15,9 @@
     <div>
         <h2>Ventas</h2>
             <div class="d-grid gap-2 d-md-flex justify-content-md-first">
-                <a href="{{ route('ventas.create') }}" title="Nueva Orden" class="btn btn-sm btn-primary">Añadir Venta\Orden</a> <br>
+                <a href="{{ route('ventas.create') }}" title="Nueva Venta" class="btn btn-sm btn-primary">Añadir Venta</a> <br>
                 <a href="{{ route('ventas.reports_day') }}" title="Ventas Hoy" class="btn btn-sm btn-success">Ver Reporte por dia</i></a>
-                <a href="{{ route('ventas.reports_date') }}" title="Ventas por Fechas"  class="btn btn-sm btn-success">Ver Reporte por Rango</i></a>
+                <a href="{{ route('ventas.reports_date') }}" title="Ventas por Rango de Fechas"  class="btn btn-sm btn-success">Ver Reporte por Rango</i></a>
                 <a href="{{ route('ventas.pdfAll') }}" title="Reporte"  class="btn btn-sm btn-warning">Ver Reporte <i class="far fa-file-pdf"></i></a>
             </div><br>
             <div class="table-reponsive">
@@ -25,10 +25,10 @@
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Fecha_Venta</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Estado</th>
-                            <th>Tiempo transcurrido</th>
+                            <th scope="col" title="Fecha de registro de la venta">Fecha_Venta</th>
+                            <th scope="col" title="Total de la Venta">Total</th>
+                            <th scope="col" title="Estado de la Venta">Estado</th>
+                            <th scope="col" title="Tiempo que demoró la venta">Tiempo transcurrido</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -37,8 +37,8 @@
                             <tr>
                                 <td scope="row">{{$venta->id}}</td>
                                 {{-- llamar la fecha de la venta --}}
-                                <td>{{$venta->created_at}}</td>
-                                <td>{{$venta->total}}</td>
+                                <td title="Fecha de registro de la venta">{{$venta->created_at}}</td>
+                                <td title="Total de la Venta">{{$venta->total}}</td>
                                 @if ($venta->Estado == 'Pendiente')
                                     <td>
                                         <a class="jsgrid-button btn btn-danger" href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Pendiente">
@@ -52,7 +52,7 @@
                                     </td>
                                 @endif
 
-                                <td>{{ $venta->created_at->diffForHumans($venta->updated_at) }}</td> <!-- Tiempo transcurrido -->
+                                <td title="Tiempo que demoró la venta">{{ $venta->created_at->diffForHumans($venta->updated_at) }}</td> <!-- Tiempo transcurrido -->
                                 <td>
                                         <div class="form-check form-switch">
                                                 <a href="{{ route('ventas.show',$venta) }}" class="btn btn-outline-info"
@@ -60,9 +60,6 @@
                                                 <a href="{{ route('ventas.pdf',$venta) }}" title="Ver PDF" class="jsgrid-button jsgrid-edit-button">
                                                 <i class="far fa-file-pdf"></i></a>
                                         </div>
-
-
-
                                 </td>
                             </tr>
                         @endforeach

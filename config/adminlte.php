@@ -319,8 +319,6 @@ return [
             'text'        => 'Empleados',
             'url'         => 'empleados',
             'icon'        => 'far fa-fw fas fa-users',
-            'label'       => 1, ///Para mostrar un mensaje al lado
-            'label_color' => 'danger', ///Para escoger el color
             'can'         => 'empleados.index',
         ],
 

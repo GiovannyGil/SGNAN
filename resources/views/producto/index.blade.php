@@ -23,9 +23,10 @@
        
         <thead class="bg-primary text-while">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripcion</th>
+             
+                <th scope="col">NombreProducto</th>
+                <th scope="col">Observacionesss</th>
+
                 <th scope="col">Insumos</th>
                 <th scope="col">Imagen</th>
                 <th scope="col">Precio</th>
@@ -36,7 +37,7 @@
         <tbody>
             @foreach ($productos as $producto)
                 <tr>
-                    <td>{{$producto->id}}</td>
+                    
                     <td>{{$producto->NombreProducto}}</td>
                     <td>{{$producto->DescripcionProducto}}</td>
                     <td>
@@ -45,7 +46,7 @@
 
                         @foreach ($detalleProducto as $detalle)
                             @if($producto->id == $detalle->productos_id)
-                             {{$detalle->Cantidad}},
+                             {{$detalle->Cantidad}}
                                 @foreach ($insumos as $insu)
                                     @if($detalle->id_insumos == $insu->id)
                                         {{$insu->Nombre_Insumo}},
@@ -56,11 +57,10 @@
                     </td>
                    
                     <td>  
-                        
                         <div class="col-md-4">
-                        <img src="{{asset($producto->Imagen)}}" alt="Imagen" width="100">
-                        {{-- <img width="300" height="300" src="/imagen/{{$productos->imagen}}" alt="productos" class="avatar" style="border-radius:1%"> --}}
+                            <img width="90" height="70" src="/imagen/{{$producto->imagen}}" alt="producto" class="avatar" style="border-radius:1%">
                         </div>
+                     
                     </td>
                   
                     {{-- <td><img src="{{Storage::url($producto->Imagen)}}" alt="" width="100"></td> --}}
@@ -90,46 +90,22 @@
                                 <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-info" title="Ver detalles"><i class="far fa-eye"> </i></a>
                              </td>
                         @endif
+                      
+                        @foreach ($productos as $producto)
 
+                            @if ($producto->Estado == 'Activo')
+                                <!-- Mostrar el producto activo -->
+                                <p>{{ $producto->nombre }}</p>
+                            @endif
+                        @endforeach
 
+                        @foreach ($productos as $producto)
+                            @if ($producto->Estado == 'Inhactivo')
+                                <!-- Mostrar el producto desactivado -->
+                                <p>{{ $producto->nombre }}</p>
+                            @endif
+                        @endforeach
 
-
-
-                  
-                          
-                        
-                        {{-- <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display: inline-block;" class="formulario-eliminar">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" type="submit">
-                            <i class="fas fa-fw fa-xmark"><h7>X</h7></i>
-                            </button> 
-                        </form> --}}
-                    </td>
-
-
-                        {{-- @if($producto->deleted_at)
-                        <form action="{{ route('productos.recover') }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" value="{{$producto->id}}" name="id">
-                            <button class="btn btn-success  btn-xs" type="submit">
-                                <i class="fas fa-regular fa-arrow-rotate-right"></i>
-                            </button> 
-                        </form>
-                        @else
-                        <form action="{{ route ('productos.destroy', $producto->id)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            
-                            <a href="{{ route('productos.edit', $producto) }}" class="btn btn-warning  btn-xs"><i class="fas fa-fw fa-pen"></i></a>
-                        
-                            <button class="btn btn-danger  btn-xs" type="submit">
-                                    <i class="fas fa-fw fa-xmark"><h7>X</h7></i>
-                            </button> 
-                          
-                        </form>
-                        @endif --}}
                     </td>
                 </tr>
             @endforeach
@@ -137,14 +113,25 @@
     </table>
 
 
-
     @section('js')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script></script>
-   
-   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 
+    @if (session('crear') == 'Producto registrado exitosamente')
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Producto registrado exitosamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+
+@endsection
 
     <script>
         $(document).ready(function ()
@@ -166,7 +153,5 @@
 
         });
     </script>
-
-    @endsection
 
 @endsection

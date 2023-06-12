@@ -28,7 +28,7 @@ class ProductoCreateRequest extends FormRequest
             'Descripcion'        => 'required',
             'PrecioP'            => 'required',
             'id_insumos'             => 'required',
-            'Imagen'             => 'required',
+            
             
             
         ];

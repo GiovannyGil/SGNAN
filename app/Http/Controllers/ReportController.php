@@ -20,8 +20,19 @@ class ReportController extends Controller
         $fechaInicio = $request->input('fechaInicio');
         $fechaFin = $request->input('fechaFin');
         
-        $ventas = Venta::whereBetween('created_at', [$fechaInicio, $fechaFin])->get();
+        // Sumar un día a la fecha de fin
+        $fechaFin = date('Y-m-d', strtotime($fechaFin . ' + 1 day'));
+
+        // $ventas = Venta::whereBetween('created_at', [$fechaInicio, $fechaFin])->get();
         
-        return view('venta.reports_date', ['ventas' => $ventas]);
+        // Realizar la consulta usando el rango de fechas actualizado
+        $ventas = Venta::whereBetween('created_at', [$fechaInicio, $fechaFin])->get();
+
+        // Restar un día a la fecha de fin para mostrarla correctamente en la vista
+        $fechaFin = date('Y-m-d', strtotime($fechaFin . ' - 1 day'));
+
+
+        // return view('venta.reports_date', ['ventas' => $ventas]);
+        return view('venta.reports_date', compact('ventas', 'fechaInicio', 'fechaFin'));
     }
 }

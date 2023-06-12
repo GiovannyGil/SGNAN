@@ -31,10 +31,36 @@ class DashboardController extends Controller
             ->get();
 
 
+        // grafico para total de ventas por mes
+        $ventasPorMes = Venta::selectRaw('SUM(total) as total, MONTH(created_at) as mes')
+            ->groupBy('mes')
+            ->get();
+
+        $totalesPorMes = $ventasPorMes->pluck('total');
+        $meses = $ventasPorMes->pluck('mes')->map(function ($mes) {
+            return Carbon::create()->month($mes)->locale('es')->monthName;
+        });
+
+        // grafico de total compras por mes
+        $comprasPorMes = Compra::selectRaw('SUM(total) as total, MONTH(created_at) as mes')
+            ->groupBy('mes')
+            ->get();
+
+        $totalesPorMesCompras = $comprasPorMes->pluck('total');
+        $mesesCompras = $comprasPorMes->pluck('mes')->map(function ($mes) {
+            return Carbon::create()->month($mes)->locale('es')->monthName;
+        });
+
+       
         // traer la comparacion de cantidad de ventas y compras por mes
 
         $totalSales = DB::table('ventas')->count();
-        $SumaVentas = DB::table('ventas')->sum('total');
+        // $SumaVentas = DB::table('ventas')->sum('total');
+        $SumaVentas = DB::table('ventas')
+            ->select(DB::raw('MONTH(created_at) AS mes, SUM(total) AS total_mes'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('total_mes')
+            ->first();
         $totalPurchases = DB::table('compras')->count();
         $suppliesCount = DB::table('insumos')->count();
         $productsCount = DB::table('productos')->count();
@@ -55,7 +81,13 @@ class DashboardController extends Controller
         'purchasesByMonth',
         'SumaVentas',
         'provideersCount',
-        'categoryCount'
+        'categoryCount',
+        'ventasPorMes',
+        'totalesPorMes',
+        'meses',
+        'comprasPorMes',
+        'totalesPorMesCompras',
+        'mesesCompras',
     ));
     
     } 

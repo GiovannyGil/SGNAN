@@ -214,8 +214,6 @@ class ProductoController extends Controller
         
             return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
         }
-    
-
 
 
 

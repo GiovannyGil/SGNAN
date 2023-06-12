@@ -91,10 +91,7 @@ Route::middleware([
     Route::resource('ventas', 'App\Http\Controllers\VentaController');
 });
 
-// Route::get('ventas/{ventas}/pdf', 'App\Http\Controllers\VentaController@pdf')->name('ventas.pdf');
 Route::get('Cambiar_Estado/ventas/{venta}', 'App\Http\Controllers\VentaController@Cambiar_Estado')->name('Cambiar.Estado.ventas');
-Route::get('Cambiar_Proceso/ventas/{venta}', 'App\Http\Controllers\VentaController@Cambiar_Proceso')->name('Cambiar.Proceso.ventas');
-// Route::put('ventas/{id}/estado', 'App\Http\Controllers\VentaController@actualizarEstado')->name('ventas.estado');
 
 //Productos
 Route::resource('productos', 'App\Http\Controllers\ProductoController');

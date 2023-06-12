@@ -174,6 +174,8 @@ public function update(Request $request, $id)
             $detalle->save();
         }
     }
+    return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
+}
 
 
 

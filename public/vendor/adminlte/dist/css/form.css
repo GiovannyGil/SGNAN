@@ -1,10 +1,11 @@
     .background{
         background-color: #C0C0C1;
+        /* max-width: 500px; */
     }
 
     .get-in-touch {
         max-width: 800px;
-        margin: 50px auto;
+        margin: 10px;
         position: relative;
         
     }
@@ -35,7 +36,7 @@
         border-radius: 15px;
         background-color: #C0C0C1;
         padding: 20px;
-        box-shadow: 5px 10px 15px #0066ff;
+        box-shadow: 5px 10px 15px #000000;
     }
 
     .contact-form .input-text {

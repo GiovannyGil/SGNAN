@@ -9,7 +9,7 @@
 
 <div class="content-wrapper">
     <div class="page-header">
-        <h3 class="page-title">Detalles de Venta</h3>
+        {{-- <h3 class="page-title">Detalles de Venta</h3> --}}
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dash" title="Ir al Dashboard">DASHBOARD</a></li>
@@ -46,7 +46,7 @@
                 <br><br>
                 <div class="form-group">
                     <h4 class="card-title">Detalles de Venta</h4>
-                    <div class="table-responsive col-md-12">
+                    <div class="table-responsive col-md-12 scrollable-table">
                         <table class="table" id="detalleVenta">
                             <thead>
                                 <tr>
@@ -87,11 +87,19 @@
                 </div>
 
                 <div class="card-footer text-muted" title="Volver a las Ventas">
-                    <a href="/ventas" class="btn btn-primary float-right">Cancelar</a>
+                    <a href="/ventas" class="btn btn-primary float-right">Volver</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@endsection
+@section('css')
+<style>
+    .scrollable-table {
+    max-height: 300px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+}
+</style>
 @endsection

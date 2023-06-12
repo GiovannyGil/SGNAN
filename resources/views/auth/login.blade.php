@@ -42,26 +42,24 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                       <!-- Email input -->
-                      <div class="form mb-4">
-                        <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 88.8px;"></div><div class="form-notch-trailing">
+                        <div class="form mb-4">
+                            <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 88.8px;"></div><div class="form-notch-trailing">
 
-                            <input title="Campo de Correo" type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
+                                <input title="Campo de Correo" type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
 
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
-                            </div>
                             </div>
                         </div>
-
-
-
+                        </div>
                       <!-- Password input -->
-                      <div class="form mb-3">
+                      <div class="form mb-4">
+                        <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 88.8px;"></div><div class="form-notch-trailing">
                         <input  title="Campo de Contraseña" type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                         placeholder="{{ __('adminlte::adminlte.password') }}">
                         @error('password')
@@ -69,11 +67,6 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-
-
-
-                      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 64.8px;"></div><div class="form-notch-trailing"></div></div></div>
-
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button  title="Iniciar Sessión" type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                                 <span class="fas fa-sign-in-alt"></span>

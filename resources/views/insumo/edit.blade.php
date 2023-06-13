@@ -18,6 +18,10 @@
 
    
       <div class="form-field col-lg-4">
+      
+             <label for="" class=" is-required">Nombre del Insumo: <FONT COLOR="red"> *</FONT></label>
+            <input type="text" id="Nombre_Insumo" name="Nombre_Insumo"  class="input-text js-input tabindex=6" tabindex="1" value="{{$insumo-> Nombre_Insumo}}" >
+
              <label for="" class=" is-required">Nombre del Insumo: </label>
             <input type="text" id="Nombre_Insumo" name="Nombre_Insumo"  class="input-text js-input tabindex=6" tabindex="1" value="{{$insumo-> Nombre_Insumo}}" >
             @if ($errors->has('Nombre_Insumo'))
@@ -26,6 +30,9 @@
                 
       </div>
       <div class="form-field col-lg-4">
+            <label for="" class=" is-required">Precio unitario:<FONT COLOR="red"> *</FONT></label>
+            <input type="number" id="Precio" name="Precio"  class="input-text js-input tabindex=6" tabindex="2" value="{{$insumo-> Precio}}" >
+            
             <label for="" class=" is-required">Precio:</label>
             <input type="number" id="Precio" name="Precio"  class="input-text js-input tabindex=6" tabindex="2" value="{{$insumo-> Precio}}" >
             @if ($errors->has('Precio'))
@@ -33,12 +40,23 @@
                 @endif
       </div>
       <div class="form-field col-lg-4">
+         
+            <label for="" class=" is-required">Cantidad:<FONT COLOR="red"> *</FONT></label>
+            <input type="number" id="cantidad" name="cantidad"  class="input-text js-input tabindex=6" tabindex="3" value="{{$insumo-> cantidad}}" >
+        
             <label for="" class=" is-required">Cantidad</label>
             <input type="number" id="cantidad" name="cantidad"  class="input-text js-input tabindex=6" tabindex="3" value="{{$insumo-> cantidad}}" >
             @if ($errors->has('cantidad'))
                     <span class="error text-danger" for="input-cantidad">{{$errors->first('cantidad') }}</span>
                 @endif
       </div>
+      <div class="form-field col-lg-4">
+        <label for="" class="">Stock mínimo:<FONT COLOR="red"> *</FONT></label>
+        <input type="number" id="Stock" name="Stock"  class="input-text js-input tabindex=6" tabindex="7" value="{{$insumo-> Stock}}" >
+        @if ($errors->has('cantidad'))
+                <span class="error text-danger" for="input-cantidad">{{$errors->first('cantidad') }}</span>
+            @endif
+        </div> 
        <div class="form-field col-lg-4">
        <label for="categoria" class="label is-required" tabindex="4">Tipo Categoría</label>
             <select class="input-text js-input tabindex=6" name="id_categorias">

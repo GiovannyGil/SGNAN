@@ -14,6 +14,10 @@
         @csrf
     @method('PUT')
       <div class="form-field col-lg-12">
+
+        <label for="" class=" is-required">Nombre:<FONT COLOR="red"> *</FONT></label>
+      <input type="text" id="Nombre" name="Nombre" class="input-text js-input tabindex=6" tabindex="5" tabindex="1" value="{{$categoria->Nombre}}">
+
         <label for="" class=" is-required">Nombre:*</label>
       <input type="text" id="Nombre" name="Nombre" class="input-text js-input tabindex=6" tabindex="5" tabindex="1" value="{{$categoria->Nombre}}">
       

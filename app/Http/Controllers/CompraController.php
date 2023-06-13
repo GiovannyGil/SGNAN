@@ -160,15 +160,23 @@ class CompraController extends Controller
     public function change_status( Compra $compra)
     {
         if ($compra->status == 'ACTIVE') {
-            $compra->update(['status' => 'DEACTIVATED']);
-            return redirect()->back();
+            $compra->status = 'DEACTIVATED';
+
+            $compra->save();
+            $detalleCompra = $compra->detalleCompras()->first();
+            $Cantidad = $detalleCompra->Cantidad;
+
+            $insumos = Insumo::find($detalleCompra->id_insumos);
+            $insumos->Cantidad -= $Cantidad;
+            $insumos->save();
+
+            return redirect()->back()->with('success', 'El estado de la compra ha sido cambiada exitosamente.');
         } 
-        else {
-            $compra->update(['status' => 'ACTIVE']);
-            return redirect()->back();
-        }
 
     }
+
+
+}
 
     // pdf de todalas las ventas
     function pdfAll(){
@@ -185,3 +193,4 @@ class CompraController extends Controller
     }
 
 }
+

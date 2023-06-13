@@ -25,7 +25,7 @@
                 </div>
                 {{-- VENTAS --}}
                 <div class="col-lg-2">
-                    <div class="small-box bg-warning" title="Productos Ventas">
+                    <div class="small-box bg-warning" title="Total Ventas">
                         <div class="inner">
                             <h4 id="totalVentas">{{$SumaVentas}}</h4>
                             <p>Total Ventas</p>
@@ -51,7 +51,7 @@
                 </div>
                 {{-- TOTAL GANACIAS --}}
                 <div class="col-lg-2">
-                    <div class="small-box bg-danger" title="Compras">
+                    <div class="small-box bg-danger" title="Cantidad Proveedores">
                         <div class="inner">
                             <h4 id="totalGanancias">{{ $provideersCount }}</h4>
                             <p>Cantidad Proveedores</p>
@@ -64,7 +64,7 @@
                 </div>
                 {{-- PRODUCTOS CON POCO STOCK --}}
                 <div class="col-lg-2">
-                    <div class="small-box bg-primary" title="Productos con Poco Stock">
+                    <div class="small-box bg-primary" title="Insumos">
                         <div class="inner">
                             <h4 id="totalProductosMinSstock">{{ $suppliesCount }}</h4>
                             <p>Cantidad Insumos</p>
@@ -93,7 +93,7 @@
         </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6" title="Gráfico de Barras de las ventas por cada mes">
             <div class="card">
                 <div class="card-body">
                     <h3>Ventas por Mes</h3>
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" title="Gráfico de Barras de las Compras por cada mes">
             <div class="card">
                 <div class="card-body">
                     <h3>Compras por Mes</h3>
@@ -109,14 +109,23 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-lg-4">
+        <div class="col-lg-6" title="Gráfico de Barras del total por cada mes">
             <div class="card">
                 <div class="card-body">
-                    <h3>Ventas/Compras</h3>
-                    <canvas id="grafico"></canvas>
+                    <h3>Total Ventas por Mes</h3>
+                    <canvas id="graficoVentasPorMes" width="400" height="200"></canvas>
                 </div>
             </div>
-        </div> --}}
+        </div>
+        <div class="col-lg-6" title="Gráfico de Barras del total por cada mes">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Total Ventas por Mes</h3>
+                    <canvas id="graficoComprasPorMes" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        
     </div>
 
 
@@ -131,81 +140,60 @@
 
     @section('js')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+    <script>
 
-        function meses(id){
-            let nombreSeleccion;
-            let mesesNombre = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-            for(let i = 0; i < mesesNombre.length; i++) {
-                if(id == i){
-                    nombreSeleccion = mesesNombre[i-1];
+            function meses(id){
+                let nombreSeleccion;
+                let mesesNombre = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                for(let i = 0; i < mesesNombre.length; i++) {
+                    if(id == i){
+                        nombreSeleccion = mesesNombre[i-1];
+                    }
                 }
+
+                return nombreSeleccion;
             }
 
-            return nombreSeleccion;
-        }
 
+        document.addEventListener('DOMContentLoaded', function () {
+        var salesByMonth = {!! json_encode($salesByMonth) !!};
+        var purchasesByMonth = {!! json_encode($purchasesByMonth) !!};
+        var ventas = [{{ $totalSales }}];
+        var compras = [{{ $totalPurchases }}];
+        var total = [{{$SumaVentas}}]
 
-    document.addEventListener('DOMContentLoaded', function () {
-    var salesByMonth = {!! json_encode($salesByMonth) !!};
-    var purchasesByMonth = {!! json_encode($purchasesByMonth) !!};
-    var ventas = [{{ $totalSales }}];
-    var compras = [{{ $totalPurchases }}];
-
-    var months = [];
-    var monthsOtra = [];
-    var salesCounts = [];
-    var purchaseCounts = [];
+        var months = [];
+        var monthsOtra = [];
+        var salesCounts = [];
+        var purchaseCounts = [];
 
 
 
-    salesByMonth.forEach(function (item) {
-        months.push(meses(item.month));
-        salesCounts.push(item.count);
-    });
+        salesByMonth.forEach(function (item) {
+            months.push(meses(item.month));
+            salesCounts.push(item.count);
+        });
 
-    purchasesByMonth.forEach(function (item) {
-        monthsOtra.push(meses(item.month));
-        purchaseCounts.push(item.count);
-    });
+        purchasesByMonth.forEach(function (item) {
+            monthsOtra.push(meses(item.month));
+            purchaseCounts.push(item.count);
+        });
 
-    // compras y ventas por mes juntas
-    
+        // compras y ventas por mes juntas
+        
 
-    var ctx = document.getElementById('salesChart').getContext('2d');
-    var salesChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: months,
-            datasets: [{
-                label: 'Ventas',
-                data: salesCounts,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    precision: 0
-                }
-            }
-        }
-    });
-
-        var ctx2 = document.getElementById('purchasesChart').getContext('2d');
-        var purchasesChart = new Chart(ctx2, {
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var salesChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: monthsOtra,
+                labels: months,
                 datasets: [{
-                    label: 'Compras',
-                    data: purchaseCounts,
-                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
+                    label: 'Ventas',
+                    data: salesCounts,
+                    // data: total,
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2
                 }]
             },
             options: {
@@ -218,12 +206,111 @@
             }
         });
 
-        var ctx = document.getElementById('grafico').getContext('2d');
+            var ctx2 = document.getElementById('purchasesChart').getContext('2d');
+            var purchasesChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: monthsOtra,
+                    datasets: [{
+                        label: 'Compras',
+                        data: purchaseCounts,
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            precision: 0
+                        }
+                    }
+                }
+            });
+
+            var ctx = document.getElementById('grafico').getContext('2d');
 
 
 
+        });
+    
+    </script>
+    <script>
+        var ctx = document.getElementById('graficoVentasPorMes').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($meses) !!},
+                datasets: [{
+                    label: 'Total por mes',
+                    data: {!! json_encode($totalesPorMes) !!},
+                    backgroundColor: [
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(153, 102, 255)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+    var ctx = document.getElementById('graficoComprasPorMes').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($mesesCompras) !!},
+            datasets: [{
+                label: 'Total de compras por mes',
+                data: {!! json_encode($totalesPorMesCompras) !!},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
     });
-   
 </script>
 
 

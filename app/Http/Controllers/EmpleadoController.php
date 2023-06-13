@@ -117,11 +117,11 @@ class EmpleadoController extends Controller
     {
         if ($empleado->status == 'ACTIVE') {
             $empleado->update(['status' => 'DEACTIVATED']);
-            return redirect()->back();
+            return redirect('/empleados')->with('Active', 'Se desactivar el empleado');
         } 
         else {
             $empleado->update(['status' => 'ACTIVE']);
-            return redirect()->back();
+            return redirect('/empleados')->with('inhabilitar', 'Se activara el empleado');
         } 
     }
 }

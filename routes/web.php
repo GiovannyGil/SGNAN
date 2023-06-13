@@ -41,6 +41,8 @@ Route::post('/compras', [App\Http\Controllers\CompraController::class, 'store'])
 Route::get('/compras/create', [App\Http\Controllers\CompraController::class, 'create']);
 Route::post('/compras', [App\Http\Controllers\CompraController::class, 'store']);
 
+Route::get('compras/pdf/{compra}', 'App\Http\Controllers\CompraController@pdf')->name('compras.pdf');
+Route::get('compras/pdfAll/', 'App\Http\Controllers\CompraController@pdfAll')->name('compras.pdfAll');
 
 Route::get('/', function () {
     return view('auth.login');
@@ -89,16 +91,14 @@ Route::middleware([
     Route::resource('ventas', 'App\Http\Controllers\VentaController');
 });
 
-// Route::get('ventas/{ventas}/pdf', 'App\Http\Controllers\VentaController@pdf')->name('ventas.pdf');
 Route::get('Cambiar_Estado/ventas/{venta}', 'App\Http\Controllers\VentaController@Cambiar_Estado')->name('Cambiar.Estado.ventas');
-Route::get('Cambiar_Proceso/ventas/{venta}', 'App\Http\Controllers\VentaController@Cambiar_Proceso')->name('Cambiar.Proceso.ventas');
-// Route::put('ventas/{id}/estado', 'App\Http\Controllers\VentaController@actualizarEstado')->name('ventas.estado');
 
 //Productos
 Route::resource('productos', 'App\Http\Controllers\ProductoController');
 Route::post('productos/', 'App\Http\Controllers\ProductoController@store');
 // Route::get('/productos/create', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.create');
-
+Route::get('/productos/{id}/edit', [App\Http\Controllers\ProductoController::class, 'edit'])->name('productos.edit');
+Route::put('/productos/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('productos.update');
 
 //ROLES
 Route::middleware([

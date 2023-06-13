@@ -17,19 +17,19 @@
 <div>
     <h2>Reporte de Ventas</h2>
     <div class="row">
-        <div class="col-12 col-md-4 text-center">
+        <div class="col-12 col-md-4 text-center" title="Fecha Actual">
             <span>Fecha Consulta: <b></b></span>
             <div class="form-group">
                 <strong>{{\Carbon\Carbon::now()->format('d/m/Y')}}</strong>
             </div>
         </div>
-        <div class="col-12 col-md-4 text-center">
+        <div class="col-12 col-md-4 text-center" title="Cantidad de Ventas">
             <span>Cantidad de Registros: <b></b></span>
             <div class="form-group">
                 <strong>{{$ventas->count()}}</strong>
             </div>
         </div>
-        <div class="col-12 col-md-4 text-center">
+        <div class="col-12 col-md-4 text-center" title="Valor total Ventas">
             <span>Total Ingresos: <b></b></span>
             <div class="form-group">
                 <strong>{{$total}}</strong>
@@ -42,9 +42,9 @@
                 <thead class="bg-primary text-white">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Fecha_Venta</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Estado</th>
+                        <th scope="col" title="Fecha de la Venta">Fecha_Venta</th>
+                        <th scope="col" title="Valor de la Venta">Total</th>
+                        <th scope="col" title="Estado de la Venta">Estado</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -53,16 +53,16 @@
                         <tr>
                             <td scope="row">{{$venta->id}}</td>
                             {{-- llamar la fecha de la venta --}}
-                            <td>{{$venta->created_at}}</td>
-                            <td>{{$venta->total}}</td>
+                            <td title="Fecha de la Venta">{{$venta->created_at}}</td>
+                            <td title="Valor de la Venta">{{$venta->total}}</td>
                             @if ($venta->Estado == 'Pendiente')
                                 <td>
-                                    <a class="jsgrid-button btn btn-danger" href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Editar">
-                                        Pendiente <i class="fas fa-times"></i></a>
+                                    <a class="jsgrid-button btn btn-danger"   href="{{route('Cambiar.Estado.ventas', $venta)}}">
+                                        Pendiente <i class="fas fa-times" title="Estado de la Venta"></i></a>
                                 </td>
                             @else
-                                <td>
-                                    <button type="button" disabled class="jsgrid-button btn btn-success" href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Editar">
+                                <td  title="Estado de la Venta">
+                                    <button type="button" disabled class="jsgrid-button btn btn-success" href="{{route('Cambiar.Estado.ventas', $venta)}}"  title="Estado de la Venta">
                                     pagado <i class="fas fa-check"></i></button>
 
                                 </td>
@@ -71,11 +71,6 @@
                                 <div class="form-check form-switch">
                                     <form action="">
                                      @csrf
-                                         @if($venta->Proceso == 'Activo')
-                                             <a title="Activo" href="{{ route('Cambiar.Proceso.ventas',$venta) }}" class="jsgrid-button btn btn-success"><i class="fas fa-check"></i></a>
-                                         @else
-                                             <button title="Inactivo" type="button"  href="#" class="jsgrid-button btn btn-danger"><i class="fas fa-times"></i></button>
-                                         @endif
                                          <a href="{{ route('ventas.show',$venta) }}" class="btn btn-outline-info"
                                          title="Ver detalles"><i class="far fa-eye"></i></a>
                                          <a href="{{ route('ventas.pdf',$venta) }}" title="Ver PDF" class="jsgrid-button jsgrid-edit-button">

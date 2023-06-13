@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Venta;
+use App\Models\Insumos;
 use App\Models\Productos;
 use App\Models\Empleado;
 use App\Models\User;
@@ -25,8 +26,10 @@ class VentaController extends Controller
     }
     public function index()
     { // ir o ver la vista del formulario
-        $ventas = Venta::all();
-        $productos = Productos::all();
+        $ventas =  Venta::orderBy('Estado', 'asc')->get();
+
+        $productos = Productos::where('Estado', 'Activo')->get();
+        
 
         return view('venta.index', compact('ventas','productos'));
     }
@@ -40,7 +43,7 @@ class VentaController extends Controller
     {  // ir a la vista del formulario crear un registro
         // $productos = producto::all();
         $empleados = Empleado::all();
-        $productos = Productos::all();
+        $productos = Productos::where('Estado', 'Activo')->get();
         $users = User::all();
         return view('venta.create', compact('empleados', 'productos', 'users'));
 
@@ -54,10 +57,13 @@ class VentaController extends Controller
      */
     public function store(StoreRequest $request)
     { // guardar un registro
+
+        // $insumo = Insumos::all($id);
+
         $venta = Venta::create($request->all()+[ 
-            'user_id' => auth()->user()->id,
+            'id_user' => auth()->user()->id,
         ]);
-        
+        $venta->total = $request->get('total');
 
         foreach ($request->id_producto as $key => $productos){
             // dd($request->id_producto[$key]);
@@ -108,23 +114,7 @@ class VentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    { // actualizar un registro
-        // $venta =  Venta::find($id);
-
-        // $venta->NombreCliente = $request->get('NombreCliente');
-        // $venta->Observaciones = $request->get('Observaciones');
-        // $venta->Cantidad = $request->get('Cantidad');
-        // $venta->Estado = $request->get('Estado');
-        // $venta->ProcesoCompra = $request->get('ProcesoCompra');
-        // $venta->Empleado_ID = $request->get('Empleado_ID');
-        // $venta->PrecioUnitario = $request->get('PrecioUnitario');
-        // $venta->ValorTotal =  $request->get('Cantidad') * $request->get('PrecioUnitario');
-
-        // $venta->save();
-
-        // return redirect('/ventas');
-    }
+    public function update(Request $request, $id){}
 
     /**
      * Remove the specified resource from storage.
@@ -132,13 +122,7 @@ class VentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    { //eliminar un registro
-        // $venta =  Venta::find($id);
-
-        // $venta->delete();
-        // return redirect('/ventas')->with("mensaje", "Venta Eliminada");
-    }
+    public function destroy($id){ }
 
     function pdf(Venta $venta){
         // $ventas = Venta::all();
@@ -174,38 +158,11 @@ class VentaController extends Controller
             $venta->update(['Estado' => 'Pagado']);
             return redirect()->back();
         }else{
-            $venta->update(['Estado' => 'Peniente']);
+            $venta->update(['Estado' => '']);
             return redirect()->back();
         }
         $venta->save();
         return redirect('/ventas')->with('success', '!Proceso terminado¡');
-    }
-
-    // funcion cambiar proceso de compra, activo o inactivo
-    // public function Cambiar_Proceso(Venta $venta){
-    //     if($venta->Proceso == 'Activo'){
-    //         $venta->update(['Proceso' => 'Inactivo']);
-    //         return redirect()->back();
-    //     }else{
-    //         $venta->update(['Proceso' => 'Activo']);
-    //         return redirect()->back();
-    //     }
-    //     $venta->save();
-    //     return redirect('/ventas')->with('success', '!Se cambio el estado correctamente¡');
-    // }
-
-
-
-    public function actualizarVenta($id)
-    {
-        $venta = Venta::find($id);
-        $venta->Estado = 'pago';
-        $venta->updated_at = Carbon::now();
-        $venta->save();
-
-        $diferenciaTiempo = $venta->created_at->diffForHumans($venta->updated_at);
-
-        return $diferenciaTiempo; // Devuelve la diferencia de tiempo en formato legible
     }
 
 

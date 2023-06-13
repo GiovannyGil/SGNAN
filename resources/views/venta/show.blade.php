@@ -9,11 +9,11 @@
 
 <div class="content-wrapper">
     <div class="page-header">
-        <h3 class="page-title">Detalles de Venta</h3>
+        {{-- <h3 class="page-title">Detalles de Venta</h3> --}}
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/dash">DASHBOARD</a></li>
-                <li class="breadcrumb-item"><a href="/ventas">Ventas</a></li>
+                <li class="breadcrumb-item"><a href="/dash" title="Ir al Dashboard">DASHBOARD</a></li>
+                <li class="breadcrumb-item"><a href="/ventas" tabindex="Ir a Ventas">Ventas</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Detalles de Venta</li>
             </ol>
         </nav>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group row">
-                        <div class="col-md-6 text-center">
+                        <div class="col-md-6 text-center"  title="Nombre del empleado">
                             <label for="" class="form-control-label">Empleado</label>
                             {{-- llamar el nombre del empleado asignado a la venta --}}
                             <p>
@@ -34,7 +34,7 @@
                                 @endforeach
                             </p>
                         </div>
-                        <div class="col-md-6 text-center">
+                        <div class="col-md-6 text-center"  title="Identificador de la Venta">
                             <label for="" class="form-control-label">Numero de venta
                                 {{-- numero de la venta --}}
                                 <p>{{$venta->id}}</p>
@@ -46,7 +46,7 @@
                 <br><br>
                 <div class="form-group">
                     <h4 class="card-title">Detalles de Venta</h4>
-                    <div class="table-responsive col-md-12">
+                    <div class="table-responsive col-md-12 scrollable-table">
                         <table class="table" id="detalleVenta">
                             <thead>
                                 <tr>
@@ -58,7 +58,7 @@
                                 </tr>
                             </thead>
                             <tfoot>
-                                <tr>
+                                <tr title="Precio total de la Venta">
                                     <th colspan="4"><p aria-label="right">TOTAL</p></th>
                                     <th colspan="4"><p aria-label="right">s/{{number_format($venta->total,2)}}</p></th>
                                 </tr>
@@ -68,7 +68,7 @@
                                     <tr>
                                         <td>{{$detalle->id}}</td>
                                         {{-- llamar el nombre del producto  --}}
-                                        <td>
+                                        <td title="Nombre del Producto">
                                             @foreach ($productos as $producto)
                                                 @if($producto->id == $detalle->id_producto)
                                                     {{$producto->NombreProducto}}
@@ -76,9 +76,9 @@
                                             @endforeach
                                         </td>
                                         {{-- <td>{{$detalle->producto}}</td> --}}
-                                        <td>s/{{number_format($detalle->Precio,2)}}</td>
-                                        <td>{{$detalle->Cantidad}}</td>
-                                        <td>s/{{number_format($detalle->Cantidad*$detalle->Precio,2)}}</td>
+                                        <td title="Precio del Producto">s/{{number_format($detalle->Precio,2)}}</td>
+                                        <td title="Cantidad de Productos">{{$detalle->Cantidad}}</td>
+                                        <td title="Precio de la Venta">s/{{number_format($detalle->Cantidad*$detalle->Precio,2)}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -86,12 +86,20 @@
                     </div>
                 </div>
 
-                <div class="card-footer text-muted">
-                    <a href="/ventas" class="btn btn-primary float-right">Cancelar</a>
+                <div class="card-footer text-muted" title="Volver a las Ventas">
+                    <a href="/ventas" class="btn btn-primary float-right">Volver</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@endsection
+@section('css')
+<style>
+    .scrollable-table {
+    max-height: 300px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+}
+</style>
 @endsection

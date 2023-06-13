@@ -15,6 +15,8 @@
             <label for="" class="" >Nombre del Insumo:<FONT COLOR="red"> *</FONT> </label>
             <input type="text" id="Nombre_Insumo" name="Nombre_Insumo" title="Seleccion Insumo" class="input-text js-input"  tabindex="1" value="{{ old('Nombre_Insumo') }}" >
             
+        <label for="" class=" is-required" >Nombre del Insumo:* </label>
+            <input type="text" id="Nombre_Insumo" name="Nombre_Insumo"  class="input-text js-input"  tabindex="1" value="{{ old('Nombre_Insumo') }}" >
             @if ($errors->has('Nombre_Insumo'))
                     <span class="error text-danger" for="input-Nombre_Insumo">{{$errors->first('Nombre_Insumo') }}</span>
                 @endif
@@ -25,6 +27,11 @@
             <input type="number" id="Precio" name="Precio"  class="input-text js-input"  tabindex="2" value="{{ old('Precio') }}" >
             
           @if ($errors->has('Precio'))
+      
+           
+            <label for="" class="is-required">Precio:*</label>  
+            <input type="number" id="Precio" name="Precio"  class="input-text js-input"  tabindex="2" value="{{ old('Precio') }}" >
+          @if ($errors->has('Precio')) 
                     <span class="error text-danger" for="input-Precio">{{$errors->first('Precio') }}</span>
                 @endif
       </div>
@@ -41,6 +48,8 @@
          <label for=""class="">Cantidad:<FONT COLOR="red"> *</FONT></label> 
         <input type="number" id="cantidad" name="cantidad"  class="input-text js-input"  tabindex="4" value="{{ old('cantidad') }}" >
         
+        <label for=""class=" is-required">Cantidad:*</label> 
+        <input type="number" id="cantidad" name="cantidad"  class="input-text js-input"  tabindex="3" value="{{ old('cantidad') }}" >
            @if ($errors->has('cantidad'))
                     <span class="error text-danger" for="input-cantidad">{{$errors->first('cantidad') }}</span>
                 @endif
@@ -79,4 +88,12 @@
 @section('js')
     <script> console.log('Hi!'); </script>
 @stop
+    <script> 
+    .is-required:after {
+    content: '*';
+    margin-left: 3px;
+    color: red;
+    font-weight: bold;
+  }
+    console.log('Hi!'); </script>
 

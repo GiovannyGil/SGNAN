@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('Nombre_Insumo')->unique();
             $table->double('Precio');
             $table->integer('Cantidad');
+            $table->integer('Stock');
             $table->enum('status', ['ACTIVE', 'DEACTIVATED'])->default('ACTIVE');
             $table->timestamps();
 

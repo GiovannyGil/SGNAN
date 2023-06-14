@@ -9,6 +9,8 @@ use App\Models\Insumo;
 use App\Models\User;
 use App\Models\DetalleProducto;
 use App\Http\Requests\productos\StoreRequest;
+use App\Http\Requests\ProductoCreateRequest;
+
 use App\Http\Controllers\DB;
 
 
@@ -22,10 +24,10 @@ class ProductoController extends Controller
     public function index()
     {
         $insumos = Insumo::all();
-        $productos = Productos::all();
+        $productos = Productos::orderBy('Estado', 'asc')->get();
         $detalleProducto = detalleProducto::all();
 
-        
+     
 
         foreach ($productos as $producto) {
             $insumo = $producto->insumo;
@@ -36,6 +38,13 @@ class ProductoController extends Controller
             $detalles = $producto->detalles;
         }
      
+        // foreach ($productos as $producto) {
+        //     // Acceder a la propiedad "imagen" de cada producto
+        //     $imagen = $producto->imagen;
+        //     // Resto del código para mostrar la imagen en la vista
+        // }
+        
+        
         return view('producto.index', compact('productos','insumos','detalleProducto'));
     }
 
@@ -61,7 +70,7 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request )
     {
         $productos = Productos::create($request->all());
         // $productos->NombreProducto = $request->get('NombreProducto');
@@ -95,8 +104,25 @@ class ProductoController extends Controller
 
         // guardar registros de insumos en detalleProductos
         $productos->detalles()->createMany($results);
+
+        // if ($request->hasFile('Imagen')) {
+        //     $path = $request->file('Imagen')->store('public/imagen');
+        //     $productos->Imagen = str_replace('public', 'storage', $path);
+        // }
+
+        
+        if ($imagen = $request->file('imagen')) {
+            $rutaGuardarImg = 'imagen/';
+            $ImagenEmpleado = date('ymdHis'). "." . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImg, $ImagenEmpleado);
+            $productos['imagen'] = "$ImagenEmpleado";
+        }
+      
+
+        $productos->save();
+
         // retornar vista
-        return redirect('/productos')->with('mensaje', 'El producto se creo con exito');
+        return redirect('/productos')->with('crear', 'Producto registrado exitosamente');
     }
 
 
@@ -109,6 +135,7 @@ class ProductoController extends Controller
     public function show($id)
     {
         $productos = Productos::find($id);
+       
         $detalleProducto = $productos->detalles;
         $insumos = Insumo::all();
         return view('producto.show', compact('productos', 'detalleProducto', 'insumos'));
@@ -118,7 +145,7 @@ class ProductoController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response    
      */
     public function edit( $id)
     {
@@ -129,7 +156,6 @@ class ProductoController extends Controller
 
         return view('producto.edit', compact('insumos', 'productos', 'detalleProductos'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -137,45 +163,58 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-public function update(Request $request, $id)
-{
-    $productos = Productos::findOrFail($id);
-    $productos->NombreProducto = $request->input('NombreProducto');
-    $productos->DescripcionProducto = $request->input('Descripcion');
-    $productos->PrecioP = $request->input('PrecioP');
-    $productos->save();
-
-    // Obtener los detalles actuales del producto
-    $detallesActuales = DetalleProducto::where('productos_id', $id)->get();
-
-    // Actualizar o eliminar los detalles existentes
-    foreach ($detallesActuales as $index => $detalle) {
-        // Verificar si el detalle existe en la solicitud
-        $detalleId = $detalle->id;
-        if (in_array($detalleId, $request->input('detalle_ids', []))) {
-            // Actualizar la cantidad del detalle existente
-            $detalle->Cantidad = $request->input('cantidad')[$index];
-            $detalle->save();
-        } else {
-            // Eliminar el detalle si no se incluye en la solicitud
-            $detalle->delete();
+   
+        public function update(Request $request, $id)
+        {
+            $productos = Productos::findOrFail($id);
+            $productos->NombreProducto = $request->input('NombreProducto');
+            $productos->DescripcionProducto = $request->input('Descripcion');
+            $productos->PrecioP = $request->input('PrecioP');
+            $productos->save();
+            if ($imagen = $request->file('imagen')) {
+                $rutaGuardarImg = 'imagen/';
+                $ImagenEmpleado = date('ymdHis'). "." . $imagen->getClientOriginalExtension();
+                $imagen->move($rutaGuardarImg, $ImagenEmpleado);
+                $productos['imagen'] = "$ImagenEmpleado";
+            }
+            else{
+                unset($productos['imagen']);
+            }
+            
+           
+        
+            // Obtener los detalles actuales del producto
+            $detallesActuales = DetalleProducto::where('productos_id', $id)->get();
+        
+            // Actualizar o eliminar los detalles existentes
+            foreach ($detallesActuales as $index => $detalle) {
+                // Verificar si el detalle existe en la solicitud
+                $detalleId = $detalle->id;
+                if (in_array($detalleId, $request->input('detalle_ids', []))) {
+                    // Actualizar la cantidad del detalle existente
+                    $detalle->Cantidad = $request->input('cantidad')[$index];
+                    $detalle->save();
+                } else {
+                    // Eliminar el detalle si no se incluye en la solicitud
+                    $detalle->delete();
+                }
+            }
+        
+            // Agregar nuevos detalles
+            $nuevosDetalles = $request->input('nuevos_detalles', []);
+            foreach ($nuevosDetalles as $nuevoDetalle) {
+                if (!empty($nuevoDetalle['id_insumos']) && !empty($nuevoDetalle['Cantidad'])) {
+                    $detalle = new DetalleProducto();
+                    $detalle->productos_id = $id;
+                    $detalle->id_insumos = $nuevoDetalle['id_insumos'];
+                    $detalle->Cantidad = $nuevoDetalle['Cantidad'];
+                    $detalle->save();
+                }
+            }
+        
+            return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
         }
-    }
 
-    // Agregar nuevos detalles
-    $nuevosDetalles = $request->input('nuevos_detalles', []);
-    foreach ($nuevosDetalles as $nuevoDetalle) {
-        if (!empty($nuevoDetalle['id_insumos']) && !empty($nuevoDetalle['Cantidad'])) {
-            $detalle = new DetalleProducto();
-            $detalle->productos_id = $id;
-            $detalle->id_insumos = $nuevoDetalle['id_insumos'];
-            $detalle->Cantidad = $nuevoDetalle['Cantidad'];
-            $detalle->save();
-        }
-    }
-    return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
-}
 
 
 

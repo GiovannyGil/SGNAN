@@ -9,6 +9,7 @@
         @csrf
   
       <div class="form-field col-lg-4">
+        <label for="" class=" is-required">Nombre de la empresa:<FONT COLOR="red"> *</FONT></label>
         <label for="" class=" is-required">Nombre:*</label>
             <input type="text" id="Nombre" name="Nombre" class="input-text js-input"  tabindex="1" value="{{ old('Nombre') }}">
             
@@ -17,6 +18,9 @@
                 @endif
       </div>
       <div class="form-field col-lg-4">
+        <label for="" class=" is-required">Nombre del asesor:<FONT COLOR="red"> *</FONT></label>
+            <input type="text" id="asesor" name="asesor" class="input-text js-input"  tabindex="2" value="{{ old('asesor') }}">
+            
         <label for="" class=" is-required">Nombre del asesor:*</label>
             <input type="text" id="asesor" name="asesor" class="input-text js-input"  tabindex="2" value="{{ old('asesor') }}">
            
@@ -25,6 +29,8 @@
                 @endif
       </div>
       <div class="form-field col-lg-4">
+        <label for="" class=" is-required">Correo:<FONT COLOR="red"> *</FONT></label>
+            <input type="email" id="Correo" name="Correo" class="input-text js-input"  tabindex="3" value="{{ old('Correo') }}">
         <label for="" class=" is-required">Correo:*</label>
             <input type="email" id="Correo" name="Correo" class="input-text js-input"  tabindex="3" value="{{ old('Correo') }}">
             
@@ -33,6 +39,7 @@
                 @endif
       </div>
        <div class="form-field col-lg-4">
+        <label for="" class=" is-required">Dirección:<FONT COLOR="red"> *</FONT></label>
         <label for="" class=" is-required">Dirección:*</label>
             <input type="text" id="Direccion" name="Direccion" class="input-text js-input"  tabindex="4" value="{{ old('Direccion') }}">
             
@@ -41,6 +48,8 @@
                 @endif
       </div>
       <div class="form-field col-lg-4">
+        <label for="" class=" is-required">Teléfono:<FONT COLOR="red"> *</FONT></label> 
+            <input type="number" id="Telefono" name="Telefono" class="input-text js-input"  tabindex="5" value="{{ old('Telefono') }}">
         <label for="" class=" is-required">Teléfono:*</label> 
             <input type="number" id="Telefono" name="Telefono" class="input-text js-input"  tabindex="5" value="{{ old('Telefono') }}">
              

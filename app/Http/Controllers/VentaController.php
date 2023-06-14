@@ -57,16 +57,12 @@ class VentaController extends Controller
      */
     public function store(StoreRequest $request)
     { // guardar un registro
-
-        // $insumo = Insumos::all($id);
-
-        $venta = Venta::create($request->all()+[ 
+        $venta = Venta::create($request->all()+[
             'id_user' => auth()->user()->id,
         ]);
         $venta->total = $request->get('total');
 
         foreach ($request->id_producto as $key => $productos){
-            // dd($request->id_producto[$key]);
             $resultado[] = array(
             "id_producto"=>$request->id_producto[$key],
             "Cantidad"=>$request->Cantidad[$key],
@@ -125,7 +121,6 @@ class VentaController extends Controller
     public function destroy($id){ }
 
     function pdf(Venta $venta){
-        // $ventas = Venta::all();
         $productos = Productos::all();
         $empleados = Empleado::all();
         $subtotal = 0; // variable para almacenar el subtotal

@@ -56,7 +56,6 @@ Route::middleware([
     Route::get('/dash', function () {
         
         return view('dash.index');
-        // Route::resource('dash', 'App\Http\Controllers\DashboardController');
     })->name('dash');
 });
 
@@ -91,12 +90,12 @@ Route::middleware([
     Route::resource('ventas', 'App\Http\Controllers\VentaController');
 });
 
-Route::get('Cambiar_Estado/ventas/{venta}', 'App\Http\Controllers\VentaController@Cambiar_Estado')->name('Cambiar.Estado.ventas');
+Route::get('Cambiar_Estado/ventas/{venta}','App\Http\Controllers\VentaController@Cambiar_Estado')->
+name('Cambiar.Estado.ventas');
 
 //Productos
 Route::resource('productos', 'App\Http\Controllers\ProductoController');
 Route::post('productos/', 'App\Http\Controllers\ProductoController@store');
-// Route::get('/productos/create', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.create');
 Route::get('/productos/{id}/edit', [App\Http\Controllers\ProductoController::class, 'edit'])->name('productos.edit');
 Route::put('/productos/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('productos.update');
 

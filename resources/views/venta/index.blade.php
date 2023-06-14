@@ -15,13 +15,18 @@
     <div>
         <h2>Ventas</h2>
         <div class="d-grid gap-2 d-md-flex justify-content-md-first">
-            <a href="{{ route('ventas.create') }}" title="Nueva Venta" class="btn btn-sm btn-primary">Añadir Venta</a> <br>
-            <a href="{{ route('ventas.reports_day') }}" title="Ventas Hoy" class="btn btn-sm btn-success">Ver Reporte por día</a>
-            <a href="{{ route('ventas.reports_date') }}" title="Ventas por Rango de Fechas" class="btn btn-sm btn-success">Ver Reporte por Rango</a>
-            <a href="{{ route('ventas.pdfAll') }}" title="Reporte" class="btn btn-sm btn-warning">Ver Reporte <i class="far fa-file-pdf"></i></a>
+            <a href="{{ route('ventas.create') }}" title="Nueva Venta"
+            class="btn btn-sm btn-primary">Añadir Venta</a> <br>
+            <a href="{{ route('ventas.reports_day') }}" title="Ventas Hoy"
+            class="btn btn-sm btn-success">Ver Reporte por día</a>
+            <a href="{{ route('ventas.reports_date') }}" title="Ventas por Rango de Fechas"
+            class="btn btn-sm btn-success">Ver Reporte por Rango</a>
+            <a href="{{ route('ventas.pdfAll') }}" title="Reporte"
+            class="btn btn-sm btn-warning">Ver Reporte <i class="far fa-file-pdf"></i></a>
         </div><br>
         <div class="table-responsive">
-            <table id="ventas" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+            <table name="ventas" id="ventas" 
+            class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
                 <thead class="bg-primary text-white">
                     <tr>
                         <th scope="col">ID</th>
@@ -35,34 +40,40 @@
                 <tbody>
                     @foreach ($ventas as $venta)
                         <tr>
-                            <td scope="row">{{ $venta->id }}</td>
+                            <td>{{ $venta->id }}</td>
                             {{-- llamar la fecha de la venta --}}
                             <td title="Fecha de registro de la venta">{{ $venta->created_at }}</td>
                             <td title="Total de la Venta">{{ $venta->total }}</td>
                             @if ($venta->Estado == 'Pendiente')
                                 <td>
-                                    <a class="jsgrid-button btn btn-danger cambiar-estado-btn" href="{{ route('Cambiar.Estado.ventas', $venta) }}" title="Pendiente" data-estado="Pendiente">
+                                    <a class="jsgrid-button btn btn-danger cambiar-estado-btn" title="Pendiente"
+                                    data-estado="Pendiente" href="{{ route('Cambiar.Estado.ventas', $venta) }}">
                                         Pendiente <i class="fas fa-times"></i>
                                     </a>
                                 </td>
                             @else
                                 <td>
-                                    <a class="jsgrid-button btn btn-success cambiar-estado-btn" href="{{ route('Cambiar.Estado.ventas', $venta) }}" title="Pago" data-estado="Pagado">
+                                    <a class="jsgrid-button btn btn-success cambiar-estado-btn" title="Pago"
+                                    data-estado="Pagado"  href="{{ route('Cambiar.Estado.ventas', $venta) }}">
                                         Pagado <i class="fas fa-check"></i>
                                     </a>
                                 </td>
                             @endif
-                            {{-- <td title="Tiempo que demoró la venta">{{ $venta->created_at->diffForHumans($venta->updated_at) }}</td> --}}
+                            {{-- <td title="Tiempo que demoró la venta">{{ $venta->created_at->
+                                diffForHumans($venta->updated_at) }}</td> --}}
                             <td title="Tiempo que demoró la venta">
                                 {{
-                                    $venta->created_at->diff($venta->updated_at)->format('El tiempo Transcurrido fue: %h horas, %i minutos y %s segundos')
+                                    $venta->created_at->diff($venta->updated_at)->
+                                    format('El tiempo Transcurrido fue: %h horas, %i minutos y %s segundos')
                                 }}
                             </td>
                             
                             <td>
                                 <div class="form-check form-switch">
-                                    <a href="{{ route('ventas.show', $venta) }}" class="btn btn-outline-dark" title="Ver detalles"><i class="fas fa-fw fa-eye"></i></a>
-                                    <a href="{{ route('ventas.pdf', $venta) }}" title="Ver PDF" class="btn btn-outline-dark"><i class="fas fa-fw fa-file-pdf"></i></i></a>
+                                    <a href="{{ route('ventas.show', $venta) }}"class="btn btn-outline-dark"
+                                    title="Ver detalles"><i class="fas fa-fw fa-eye"></i></a>
+                                    <a href="{{ route('ventas.pdf', $venta) }}" title="Ver PDF"
+                                    class="btn btn-outline-dark"><i class="fas fa-fw fa-file-pdf"></i></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -74,7 +85,8 @@
 
     @section('css')
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     @endsection
 
@@ -126,7 +138,7 @@
                                         location.reload(); // Recarga la página para reflejar el cambio de estado
                                     })
                                     .catch((error) => {
-                                        Swal.fire('Error', 'Ocurrió un error al cambiar el estado de la venta', 'error');
+                                        Swal.fire('Error', 'Ocurrió un error', 'error');
                                         console.error(error);
                                     });
                             } else if (result.dismiss === Swal.DismissReason.cancel) {

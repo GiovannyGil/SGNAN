@@ -111,7 +111,7 @@
                     <th>
                         <p id="proveedor">
                             {{-- traer el nombre del empleado que estaba encargado de la venta con un foreach --}}
-                            Nombre: 
+                            Nombre:
                             @foreach ($empleados as $empleado)
                                 @if($empleado->id == $venta->id_empleado)
                                     {{$empleado->Nombre}}
@@ -139,10 +139,10 @@
         <table id="facproducto">
             <thead>
                 <tr id="fa">
-                    <th>PRODUCTO</th>
-                    <th>CANTIDAD</th>
-                    <th>PRECIO VENTA(PEN)</th>
-                    <th>SUBTOTAL(PEN)</th>
+                    <th id="campo">PRODUCTO</th>
+                    <th id="campo">CANTIDAD</th>
+                    <th id="campo">PRECIO VENTA(PEN)</th>
+                    <th id="campo">SUBTOTAL(PEN)</th>
                 </tr>
             </thead>
             <tbody>
@@ -156,7 +156,7 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td>{{$detalle->Cantidad}}</td>                        
+                        <td>{{$detalle->Cantidad}}</td>
                         <td>s/{{$detalle->Precio}}</td>
                         <td>s/{{number_format($detalle->Cantidad*$detalle->Precio)}}</td>
                     </tr>
@@ -164,11 +164,11 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="4">
-                        <p align="right">TOTAL PAGAR:</p>
+                    <th id="campo" colspan="4">
+                        <p>TOTAL PAGAR:</p>
                     </th>
                     <td>
-                        <p align="right">s/ {{number_format($venta->total,2)}}</p>
+                        <p>s/ {{number_format($venta->total,2)}}</p>
                     </td>
                 </tr>
 

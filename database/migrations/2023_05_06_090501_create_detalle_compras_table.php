@@ -31,7 +31,7 @@ return new class extends Migration
             $table->integer('Cantidad');
             $table->decimal('Precio');
             
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 

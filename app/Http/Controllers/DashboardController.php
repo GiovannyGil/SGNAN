@@ -55,12 +55,7 @@ class DashboardController extends Controller
         // traer la comparacion de cantidad de ventas y compras por mes
 
         $totalSales = DB::table('ventas')->count();
-        // $SumaVentas = DB::table('ventas')->sum('total');
-        $SumaVentas = DB::table('ventas')
-            ->select(DB::raw('MONTH(created_at) AS mes, SUM(total) AS total_mes'))
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->pluck('total_mes')
-            ->first();
+        $SumaVentas = DB::table('ventas')->sum('total');
         $totalPurchases = DB::table('compras')->count();
         $suppliesCount = DB::table('insumos')->count();
         $productsCount = DB::table('productos')->count();
@@ -70,7 +65,7 @@ class DashboardController extends Controller
 
         // Puedes realizar más operaciones para obtener datos adicionales o estadísticas
         
-        return view('dash.index', 
+        return view('dash.index',
         compact(
         'salesByMonth',
         'totalSales',
@@ -90,7 +85,7 @@ class DashboardController extends Controller
         'mesesCompras',
     ));
     
-    } 
+    }
     
 
 }

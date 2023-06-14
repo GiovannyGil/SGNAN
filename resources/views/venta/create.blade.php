@@ -80,8 +80,9 @@
                                             <th colspan="4"><p aling="right" title="Valor Total">Total:</p></th>
                                             <th><p aling="right"><span id="total">0.00</span></p></th>
                                         </tr>
-                                        <tr id="totalcompleto">   
-                                            <th colspan="4"><p aling="right" title="Valor Total">Total Pagar</p></th>
+                                        <tr id="totalcompleto">
+                                            <th id="campo" colspan="4"><p aling="right" title="Valor Total">
+                                                Total Pagar</p></th>
                                             <th id="totalcompleto"><p aling="right">
                                                 <span aling="right" id="total_pagar_html">0.00</span>
                                                 <input type="hidden" name="total" id="total_pagar">

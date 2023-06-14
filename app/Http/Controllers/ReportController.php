@@ -10,7 +10,8 @@ class ReportController extends Controller
 {
     public function reports_day(){
         // consulta de ventas
-        $ventas = Venta::whereDate('created_at', Carbon::today())->get(); // traer las venta donde la fecha sea la actual
+        $ventas = Venta::whereDate('created_at', Carbon::today())->get();
+        // traer las venta donde la fecha sea la actual
         $total = $ventas->sum('total');
         return view('venta.reports_day', compact('ventas', 'total'));
     }
@@ -23,7 +24,6 @@ class ReportController extends Controller
         // Sumar un día a la fecha de fin
         $fechaFin = date('Y-m-d', strtotime($fechaFin . ' + 1 day'));
 
-        // $ventas = Venta::whereBetween('created_at', [$fechaInicio, $fechaFin])->get();
         
         // Realizar la consulta usando el rango de fechas actualizado
         $ventas = Venta::whereBetween('created_at', [$fechaInicio, $fechaFin])->get();
@@ -32,7 +32,6 @@ class ReportController extends Controller
         $fechaFin = date('Y-m-d', strtotime($fechaFin . ' - 1 day'));
 
 
-        // return view('venta.reports_date', ['ventas' => $ventas]);
         return view('venta.reports_date', compact('ventas', 'fechaInicio', 'fechaFin'));
     }
 }

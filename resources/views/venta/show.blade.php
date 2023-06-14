@@ -50,17 +50,19 @@
                         <table class="table" id="detalleVenta">
                             <thead>
                                 <tr>
-                                    <th>Numero de Venta</th>
-                                    <th>Producto</th>
-                                    <th>Precio Venta</th>
-                                    <th>Cantidad</th>
-                                    <th>Subtotal</th>
+                                    <th id="campo">Numero de Venta</th>
+                                    <th id="campo">Producto</th>
+                                    <th id="campo">Precio Venta</th>
+                                    <th id="campo">Cantidad</th>
+                                    <th id="campo">Subtotal</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr title="Precio total de la Venta">
-                                    <th colspan="4"><p aria-label="right">TOTAL</p></th>
-                                    <th colspan="4"><p aria-label="right">s/{{number_format($venta->total,2)}}</p></th>
+                                    <th id="campo" colspan="4"><p aria-label="right">TOTAL</p></th>
+                                    <th id="campo" colspan="4">
+                                        <p aria-label="right">s/{{number_format($venta->total,2)}}</p>
+                                    </th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -78,7 +80,9 @@
                                         {{-- <td>{{$detalle->producto}}</td> --}}
                                         <td title="Precio del Producto">s/{{number_format($detalle->Precio,2)}}</td>
                                         <td title="Cantidad de Productos">{{$detalle->Cantidad}}</td>
-                                        <td title="Precio de la Venta">s/{{number_format($detalle->Cantidad*$detalle->Precio,2)}}</td>
+                                        <td title="Precio de la Venta">
+                                            s/{{number_format($detalle->Cantidad*$detalle->Precio,2)}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

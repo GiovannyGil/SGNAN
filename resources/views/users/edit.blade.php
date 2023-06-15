@@ -13,16 +13,16 @@
             @method('PUT')
             
             <div class="form-field col-lg-6">
+            <label for="name" class="">Nombre</label>
                     <input autocomplete="off" type="text" id="name" class="input-text js-input" name="name"  tabindex="1" value="{{ $user->name }}" autofocus autocomplete="name">
-                <label for="name" class="label">Nombre</label>
                 @if ($errors->has('name'))
                     <span class="error text-danger" for="input-name">{{$errors->first('name') }}</span>
                 @endif
             </div>
             
             <div class="form-field col-lg-6">
+            <label for="email" class="">Email</label>
                     <input autocomplete="off" type="email" id="email" class="input-text js-input"  name="email" tabindex="2" value="{{ old('email', $user->email) }}"  autocomplete="username">
-                <label for="email" class="label">Email</label>
                 @if ($errors->has('email'))
                     <span class="error text-danger" for="input-email">{{$errors->first('email') }}</span>
                 @endif
@@ -47,10 +47,10 @@
             <div class="form-group form-field col-lg-10">
             <label class="label">Listado de Roles</label>
             <br>    
-                @foreach ($roles as $role)
-                            {!! Form::checkbox('roles[]', $role->id, null, ['class' => 'mr-1']) !!}
-                            {{$role->name}}
-                @endforeach
+            @foreach($roles as $role)
+                <input type="radio" name="roles[]" value="{{ $role->id }}" {{ $user->roles->contains($role->id) ? 'checked' : '' }}>
+                {{ $role->name }}
+            @endforeach
                 <br/>
             </div>
             

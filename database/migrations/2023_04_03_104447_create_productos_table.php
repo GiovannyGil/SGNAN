@@ -21,14 +21,6 @@ return new class extends Migration
             $table->decimal('PrecioP')->length(20);
             $table->enum('Estado', ['Activo', 'Inhactivo'])->default('Activo');
             $table->timestamps();
-
-            $table->foreignId('id_insumos')
-            ->nullable()
-            ->constrained('insumos')
-            ->cascadeOnUpdate()
-            ->nullOnDelete();
-
-            
         });
     }
 

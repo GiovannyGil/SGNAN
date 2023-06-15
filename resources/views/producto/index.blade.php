@@ -27,6 +27,7 @@
              
                 <th scope="col">NombreProducto</th>
                 <th scope="col">Observacionesss</th>
+
                 <th scope="col">Insumos</th>
                 <th scope="col">Imagen</th>
                 <th scope="col">Precio</th>
@@ -68,7 +69,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('productos.edit', $producto) }}" class="btn btn-warning  btn-xs"><i class="fas fa-fw fa-pen"></i></a>
+                            <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-warning  btn-xs"><i class="fas fa-fw fa-pen"></i></a>
                 
                             <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-info" title="Ver detalles"><i class="far fa-eye"> </i></a>
                     

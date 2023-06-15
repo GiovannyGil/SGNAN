@@ -8,8 +8,12 @@ use App\Models\Insumo;
 use App\Models\User;
 use App\Models\DetalleProducto;
 use App\Http\Requests\productos\StoreRequest;
+use App\Http\Requests\ProductoRequest;
 
 
+
+
+use App\Http\Controllers\DB;
 
 
 class ProductoController extends Controller
@@ -137,7 +141,7 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response    
      */
-    public function edit( $id)
+    public function edit(  $id)
     {
         // $productos= Productos::find($id);
         $productos= Productos::findOrFail($id);
@@ -154,7 +158,7 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-        public function update( Request $request, $id)
+        public function update( ProductoRequest $request, $id)
         {
             $productos = Productos::findOrFail($id);
             $productos->NombreProducto = $request->input('NombreProducto');
@@ -205,6 +209,8 @@ class ProductoController extends Controller
             return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
         }
     
+   
+
 
     /**
      * Remove the specified resource from storage.

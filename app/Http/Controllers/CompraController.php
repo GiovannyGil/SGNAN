@@ -170,4 +170,18 @@ class CompraController extends Controller
 
     }
 
+    // pdf de todalas las ventas
+    function pdfAll(){
+        $compras = Compra::all();
+        $insumos = Insumo::all();
+        // sacar el total de todas las ventas
+        $total = 0;
+        $totalCompra=0;
+        foreach ($compras as $compra) {
+            $totalCompra += $compra->total;
+        }
+        $pdf = \PDF::loadView('compra.pdfAll', compact('compras', 'insumos', 'totalCompra'));
+        return $pdf->download('reporte_de_Compras.pdf');
+    }
+
 }

@@ -98,11 +98,11 @@ class UserController extends Controller
     {
         if ($user->status == 'ACTIVE') {
             $user->update(['status' => 'DEACTIVATED']);
-            return redirect()->back();
+            return redirect('/users')->with('Active', 'Se desactivar el usuario');
         } 
         else {
             $user->update(['status' => 'ACTIVE']);
-            return redirect()->back();
+            return redirect('/users')->with('inhabilitar', 'Se activara el usuario');
         } 
     }
 }

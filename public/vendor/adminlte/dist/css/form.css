@@ -81,10 +81,11 @@
         font-size: 12px;
         padding: 8px 14px;
         border: none;
-        width:84px;
+        width:120px;
         cursor: pointer;
         text-decoration: none;
-        text-align: left;
+        text-align: center;
+        /* text-align: left; */
     }
 
     .form-group{
@@ -106,8 +107,9 @@
         font-size: 12px;
         padding: 8px 14px;
         border: none;
-        width:84px;
+        width:100px;
         cursor: pointer;
         text-decoration: none;
-        text-align:left
+        text-align: center;
+        /* text-align:left */
     }

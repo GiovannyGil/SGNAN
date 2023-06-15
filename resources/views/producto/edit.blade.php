@@ -36,7 +36,7 @@
 
                     <div class="form-field col-md-12 ">
                         <label for="" class="input-text js-input" required>Precio:<FONT COLOR="red"> *</FONT> </label>
-                        <input type="integer" id="PrecioP" name="PrecioP" class="input-text js-input" tabindex="3" value="{{ $productos->PrecioP }}">
+                        <input type="number" id="PrecioP" name="PrecioP" class="input-text js-input" tabindex="3" value="{{ $productos->PrecioP }}">
                     
                         @error('PrecioP')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -186,3 +186,4 @@
 </script>
 @endsection
 @endsection
+

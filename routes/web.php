@@ -41,6 +41,8 @@ Route::post('/compras', [App\Http\Controllers\CompraController::class, 'store'])
 Route::get('/compras/create', [App\Http\Controllers\CompraController::class, 'create']);
 Route::post('/compras', [App\Http\Controllers\CompraController::class, 'store']);
 
+Route::get('compras/pdf/{compra}', 'App\Http\Controllers\CompraController@pdf')->name('compras.pdf');
+Route::get('compras/pdfAll/', 'App\Http\Controllers\CompraController@pdfAll')->name('compras.pdfAll');
 
 Route::get('/', function () {
     return view('auth.login');
@@ -98,7 +100,8 @@ Route::get('Cambiar_Proceso/ventas/{venta}', 'App\Http\Controllers\VentaControll
 Route::resource('productos', 'App\Http\Controllers\ProductoController');
 Route::post('productos/', 'App\Http\Controllers\ProductoController@store');
 // Route::get('/productos/create', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.create');
-
+Route::get('/productos/{id}/edit', [App\Http\Controllers\ProductoController::class, 'edit'])->name('productos.edit');
+Route::put('/productos/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('productos.update');
 
 //ROLES
 Route::middleware([

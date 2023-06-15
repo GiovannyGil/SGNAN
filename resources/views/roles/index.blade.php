@@ -25,22 +25,30 @@
         <tr>
             <td>{{ $role->id }}</td>
             <td>{{ $role->name }}</td>
+            
             @if ($role->name === 'Administrador')
-            <td>
+            <form action="{{ route('roles.change_status', $role) }}" class="desactivar">
+                <td>
 
-            </td>
+                </td>
+            </form>
+
             @elseif ($role->status == 'ACTIVE')
+            <form action="{{ route('roles.change_status', $role) }}" class="desactivar">
                 <td>
-                    <a class="jsgrid-button btn btn-success btn-xs" href="{{ route('roles.change_status', $role) }}" title="Desactivar rol">
+                    <button class="jsgrid-button btn btn-success btn-xs" href="{{ route('roles.change_status', $role) }}" title="Desactivar rol" type="submit">
                     Activo<i class="fas fa-fw fa-check"></i>
-                </a>
+                </button>
                 </td>
+            </form>
             @else
+            <form action="{{ route('roles.change_status', $role) }}" class="activar">
                 <td>
-                    <a class="jsgrid-button btn btn-danger btn-xs" href="{{ route('roles.change_status', $role) }}" title="Activar rol" >
+                    <button class="jsgrid-button btn btn-danger btn-xs" href="{{ route('roles.change_status', $role) }}" title="Activar rol" type="submit">
                     Desactivado<i class="fas fa-fw fa-times"></i>
-                </a>
+                </button>
                 </td>
+            </form>
             @endif
 
             @if($role->status == 'ACTIVE' and $role->name <> 'Administrador')
@@ -75,31 +83,79 @@
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @if (session('Desactivar') == 'Rol desactivado exitosamente')
+            <script>
+                Swal.fire(
+                '¡Desactivado!',
+                'Rol desactivado correctamente.',
+                'success'
+                )
+            </script>
+        @endif
 
+    <script>
+        $('.desactivar').submit(function(e){
+            e.preventDefault();
 
-    @if (session('Active') == 'Se desactivar el rol')
-        <script>
             Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Rol desactivado correctamente',
-                showConfirmButton: false,
-                timer: 2000
+            title: '¿Estas seguro?',
+            text: "Este rol se desactivara definitivamente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, desactivar!',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // Swal.fire(
+                // 'Deleted!',
+                // 'Your file has been deleted.',
+                // 'success'
+                // )
+                this.submit();
+            }
             })
-        </script>
-    @endif
+        });
+        
+    </script>
 
-    @if (session('inhabilitar') == 'Se activara el rol')
-        <script>
+@if (session('activar') == 'Rol activado exitosamente')
+            <script>
+                Swal.fire(
+                '¡Activado!',
+                'Rol activado correctamente.',
+                'success'
+                )
+            </script>
+        @endif
+
+    <script>
+        $('.activar').submit(function(e){
+            e.preventDefault();
+
             Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Rol activado correctamente',
-                showConfirmButton: false,
-                timer: 2000
+            title: '¿Estas seguro?',
+            text: "Este rol se activara definitivamente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, activar!',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // Swal.fire(
+                // 'Deleted!',
+                // 'Your file has been deleted.',
+                // 'success'
+                // )
+                this.submit();
+            }
             })
-        </script>
-    @endif
+        });
+        
+    </script>
 
     @if (session('Crear') == 'El rol se creo con correctamente')
         <script>

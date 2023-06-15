@@ -25,7 +25,7 @@
                 <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                 <div class="col-md-4">
-                <img width="195" height="459" src="/imagen/{{$empleado->imagen}}" alt="Empleado" class="avatar" style="border-radius:1%">
+                <img width="200" height="350" src="/imagen/{{$empleado->imagen}}" alt="Empleado" class="avatar" style="border-radius:1%">
                 </div>
                 <div class="col-md-8">
                 <div class="card-body">

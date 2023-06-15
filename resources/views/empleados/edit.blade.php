@@ -47,14 +47,14 @@
                     <span class="error text-danger" for="input-Email">{{$errors->first('Email') }}</span>
                 @endif
             </div>
-            <div class="form-field col-lg-6">
+            <div class="form-field col-lg-4">
                 <label for="Celular">Celular<FONT COLOR="red"> *</FONT></label>
                 <input type="text" class="input-text js-input" name="Celular" type="number" tabindex="6" value="{{ old('Celular', $empleado->Celular)}}">
                 @if ($errors->has('Celular'))
                     <span class="error text-danger" for="input-Celular">{{$errors->first('Celular') }}</span>
                 @endif
             </div>
-            <div class="form-field col-lg-6">
+            <div class="form-field col-lg-4">
                 <label for="Genero" class="form-label" tabindex="7">Género<FONT COLOR="red"> *</FONT></label>
                 <select class="input-text js-input" name="Genero" value="{{ old('Genero', $empleado->Genero)}}">
                     <option value="Hombre" name="Genero" >Masculino</option>
@@ -64,8 +64,8 @@
                 @if ($errors->has('Genero'))
                     <span class="error text-danger" for="input-Genero">{{$errors->first('Genero') }}</span>
                 @endif
-            </div>
-            <div class="form-field col-lg-6">
+            </div> 
+            <div class="form-field col-lg-4">
                 <label for="Genero" class="form-label" tabindex="8">Tipo empleado<FONT COLOR="red"> *</FONT></label>
                 <select class="input-text js-input" name="id_tipoempleados" >
                 <option value="">Tipos de empleados</option>
@@ -81,22 +81,22 @@
                     <span class="error text-danger" for="input-id_tipoempleados">{{$errors->first('id_tipoempleados') }}</span>
                 @endif
             </div>
-            <div class="form-field col-lg-6">
+            <div class="form-field col-lg-4">
                 <label for="Observaciones">Observación</label>
-                <input type="text" class="input-text js-input"  name="Observaciones" type="text" class="form-control" tabindex="9" value="{{old('Observaciones', $empleado->Observaciones)}}">
+                <textarea name="Observaciones" rows="3" cols="27" value="{{old('Observaciones', $empleado->Observaciones)}}" tabindex="9" class="" placeholder="{{old('Observaciones', $empleado->Observaciones)}}">{{old('Observaciones', $empleado->Observaciones)}}</textarea>
                 @if ($errors->has('Observaciones'))
                     <span class="error text-danger" for="input-Observaciones">{{$errors->first('Observaciones') }}</span>
                 @endif
             </div>
-            <div class="form-field col-lg-6">
+            <div class="form-field col-lg-4">
                 <label class="form-label" class="label">Subir Imagen</label>
                 <input class="input-text js-input" type="file" id="imagen" name="imagen" tabindex="10" value="{{ old('imagen', $empleado->imagen)}}">
                 @if ($errors->has('imagen'))
                     <span class="error text-danger" for="input-imagen">{{$errors->first('imagen') }}</span>
                 @endif
             </div>
-            <div class="form-field col-lg-6">
-                <img src="/imagen/{{$empleado->imagen}}" id="imagenSeleccionada" style="max-height: 200px;">
+            <div class="form-field col-lg-4">
+                <img src="/imagen/{{$empleado->imagen}}" id="imagenSeleccionada" style="max-height: 130px;">
                 
             </div>
             <div class="form-field col-lg-9">

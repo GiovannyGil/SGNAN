@@ -84,11 +84,11 @@ class RoleController extends Controller
     {
         if ($role->status == 'ACTIVE') {
             $role->update(['status' => 'DEACTIVATED']);
-            return redirect('/roles')->with('Active', 'Se desactivar el rol');
+            return redirect('/roles')->with('Desactivar', 'Rol desactivado exitosamente');
         } 
         else {
             $role->update(['status' => 'ACTIVE']);
-            return redirect('/roles')->with('inhabilitar', 'Se activara el rol');
+            return redirect('/roles')->with('activar', 'Rol activado exitosamente');
         } 
     }
 }

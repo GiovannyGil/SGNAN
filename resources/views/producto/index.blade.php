@@ -4,6 +4,8 @@
 
 
     @section('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     @endsection
@@ -11,14 +13,16 @@
     @section('content')
 
 
-    <div class="container">
-        <h1>Productos</h1>
-
  
  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
- 
-    <a href="productos\create" class="btn btn-primary mb-3">Añadir producto</a>
+
+<div class="container">
+        <center> <h2>Productos</h2></center>
+    <div class="d-grid gap-2 d-md-block">
+        <a href="productos\create" class="btn btn-sm btn-primary text-left" title="Añadir un rol">Añadir Producto</a> 
+    </div><br>
+
     <table id="productos" class=" table table-striped table-bordered shadow-lg mt-4" style="width:100%">
        
         <thead class="bg-primary text-while">
@@ -70,19 +74,19 @@
 
                         @if ($producto->Estado == 'Activo')
                         <td>
-                            <a class="jsgrid-button btn btn-success" href="{{route('producto.change_status', $producto)}}" title="Activo">
+                            <a class="jsgrid-button btn btn-success btn-xs" href="{{route('producto.change_status', $producto)}}" title="Activo">
                                 Activo
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-warning  btn-xs"><i class="fas fa-fw fa-pen"></i></a>
+                            <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-warning  btn-xs"><i class="fas fa-fw fa-pen btn-xs"></i></a>
                 
-                            <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-info" title="Ver detalles"><i class="far fa-eye"> </i></a>
+                            <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-info btn-xs" title="Ver detalles"><i class="far fa-eye btn-xs"> </i></a>
                     
                            </td>
                         @else
                             <td>
-                                <a class="jsgrid-button btn btn-danger" href="{{route('producto.change_status', $producto)}}" title="Activo">
+                                <a class="jsgrid-button btn btn-danger btn-xs" href="{{route('producto.change_status', $producto)}}" title="Activo">
                                     Desactivado
                                 </a>
                             </td>

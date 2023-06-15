@@ -58,13 +58,7 @@
 @endsection
 
 @section('js')
-    <script> 
-    .is-required:after {
-    content: '*';
-    margin-left: 3px;
-    color: red;
-    font-weight: bold;
-  }
+
     console.log('Hi!'); </script>
 
 @stop

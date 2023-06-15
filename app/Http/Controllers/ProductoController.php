@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Productos;
-use App\Models\categoria;
 use App\Models\Insumo;
 use App\Models\User;
 use App\Models\DetalleProducto;
 use App\Http\Requests\productos\StoreRequest;
-// use App\Http\Requests\ProductoCreateRequest;
+
 
 
 
@@ -25,25 +24,14 @@ class ProductoController extends Controller
         $insumos = Insumo::all();
         $productos = Productos::orderBy('Estado', 'asc')->get();
         $detalleProducto = detalleProducto::all();
-
      
-
         foreach ($productos as $producto) {
             $insumo = $producto->insumo;
         }
        
-       
         foreach ($detalleProducto as $detalle) {
             $detalles = $producto->detalles;
         }
-     
-        // foreach ($productos as $producto) {
-        //     // Acceder a la propiedad "imagen" de cada producto
-        //     $imagen = $producto->imagen;
-        //     // Resto del código para mostrar la imagen en la vista
-        // }
-        
-        
         return view('producto.index', compact('productos','insumos','detalleProducto'));
     }
 
@@ -72,6 +60,9 @@ class ProductoController extends Controller
     public function store(StoreRequest $request )
     {
         $productos = Productos::create($request->all());
+
+     
+
         // $productos->NombreProducto = $request->get('NombreProducto');
         // $productos->DescripcionProducto = $request->get('DescripcionProducto');
         // $productos->PrecioP = $request->get('PrecioP');
@@ -109,15 +100,15 @@ class ProductoController extends Controller
         //     $productos->Imagen = str_replace('public', 'storage', $path);
         // }
 
-        
         if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
             $ImagenEmpleado = date('ymdHis'). "." . $imagen->getClientOriginalExtension();
             $imagen->move($rutaGuardarImg, $ImagenEmpleado);
             $productos['imagen'] = "$ImagenEmpleado";
         }
-      
-
+        else{
+            unset($productos['imagen']);
+        }
         $productos->save();
 
         // retornar vista
@@ -163,13 +154,13 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-        public function update(Request $request, $id)
+        public function update( Request $request, $id)
         {
             $productos = Productos::findOrFail($id);
             $productos->NombreProducto = $request->input('NombreProducto');
             $productos->DescripcionProducto = $request->input('Descripcion');
             $productos->PrecioP = $request->input('PrecioP');
-            $productos->save();
+            
             if ($imagen = $request->file('imagen')) {
                 $rutaGuardarImg = 'imagen/';
                 $ImagenEmpleado = date('ymdHis'). "." . $imagen->getClientOriginalExtension();
@@ -179,7 +170,7 @@ class ProductoController extends Controller
             else{
                 unset($productos['imagen']);
             }
-            
+            $productos->save();
            
         
             // Obtener los detalles actuales del producto

@@ -24,10 +24,10 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'NombreProducto'          => 'required',
-            // 'NombreProducto' => 'unique',
-            'DescripcionProducto'        => 'required',
-            'PrecioP'            => 'required',
+            'NombreProducto'      => 'required',
+            'NombreProducto'      => 'unique:productos,NombreProducto|min:5|max:10',
+            'PrecioP'             => 'required|min:3|max:10',
+            'imagen'              =>'required',
       
         ];
     }
@@ -35,11 +35,11 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-            // mensajes de validaciones para el formulario de crear venta
+            // mensajes de validaciones para el formulario de crear producto
             'NombreProducto.required' => 'El campo producto es requerido',
-            // 'NombreProducto.unique' => 'El campo producto debe ser unico',
-            'PrecioP.required' => 'El campo precio es requerido',
-           
+            'NombreProducto.unique'   => 'El campo producto debe ser unico',
+            'PrecioP.required'        => 'El campo precio es requerido',
+            'imagen.required'         =>'El campo imagen es requerido',
         ];
     }
 }

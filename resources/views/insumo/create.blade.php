@@ -8,7 +8,7 @@
     <form action="/insumos" method="POST" class="contact-form row" novalidate>
         @csrf
         <div class="form-field col-lg-4">
-          <label for="" class=" is-required" >Nombre del Insumo:* </label>
+          <label for="" class=" is-required" >Nombre del Insumo: <FONT COLOR="red"> *</FONT> </label>
               <input type="text" id="Nombre_Insumo" name="Nombre_Insumo"  class="input-text js-input"  tabindex="1" value="{{ old('Nombre_Insumo') }}" >
               @if ($errors->has('Nombre_Insumo'))
                   <span class="error text-danger" for="input-Nombre_Insumo">{{$errors->first('Nombre_Insumo') }}</span>
@@ -16,7 +16,7 @@
                   
         </div>
         <div class="form-field col-lg-4">
-          <label for="categoria" class=" is-required" tabindex="4">Tipo Categoría</label>
+          <label for="categoria" class=" is-required" tabindex="4">Tipo Categoría <FONT COLOR="red"> *</FONT></label>
               <select  class="input-text js-input"  name="id_categorias" tabindex="2">
                   <option value="">Categorías</option>
                       @foreach($categorias as $Tcategoria)
@@ -35,20 +35,11 @@
 </div>
 @stop
 @section('css')
-        <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/form.css')}}">
+        <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/formm.css')}}">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 @endsection
 
 @section('js')
-
-    <script> 
-      .is-required:after {
-      content: '*';
-      margin-left: 3px;
-      color: red;
-      font-weight: bold;
-    }
-      console.log('Hi!'); 
-    </script>
+  
 
 @stop

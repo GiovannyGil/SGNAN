@@ -324,7 +324,7 @@
             </script>
             <script>
                 window.addEventListener('DOMContentLoaded', function() {
-                    setInterval(verificarStock, 60000); // Verificar cada 30 segundos (ajusta el intervalo según tus necesidades)
+                    setInterval(verificarStock, 10000); // Verificar cada 30 segundos (ajusta el intervalo según tus necesidades)
                 });
             
                 function verificarStock() {

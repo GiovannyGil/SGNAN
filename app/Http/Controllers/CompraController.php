@@ -73,7 +73,7 @@ class CompraController extends Controller
         }
         $compra->detalleCompra()->createMany($results);
 
-        return redirect('/compras')->with('success', 'Compra registrada exitosamente');
+        return redirect('/compras')->with('crear', 'Compra registrada exitosamente');
     }
 
     /**

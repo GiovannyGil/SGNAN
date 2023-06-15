@@ -21,7 +21,7 @@
         <thead class="bg-primary  text-primary">
         <tr>
         <th scope="col">id</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre de la empresa</th>
                 <th scope="col">Nombre del Asesor</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Dirección</th>
@@ -57,13 +57,6 @@
             <td class=" td-actions text-right" >
                 <a href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-outline-dark btn-sm" ><i class="fas fa-fw fa-user"></i></a>
                 <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
-                <form action="{{ route('proveedores.destroy', $proveedor->id) }}" method="POST" style="display: inline-block;" class="formulario-eliminar">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-outline-dark" type="submit">
-                <i class="fas fa-fw fa-xmark"><h7>X</h7></i>
-                </button> 
-            </form>
             </td>
             </tr>
             @endforeach
@@ -170,17 +163,17 @@
             });
         }
 
-      </script>
-    <script>
-        
+</script>
+
+<script>
     $(document).ready(function() {
     $('#proveedor').DataTable( {
         "language": {
-            "lengthMenu": "Mostrar MENU  registros por página",
+            "lengthMenu": "Mostrar _MENU_  registros por página",
             "zeroRecords": "Busqueda no encontrada - disculpa",
-            "info": "Mostrando la pagina PAGE de PAGES",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(Filtrado de  MAX registros totales)",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(Filtrado de  _MAX_ registros totales)",
             "search": 'Buscar:',
             "paginate": {
                 'next': 'Siguiente',
@@ -190,5 +183,7 @@
     } );
 } );
     </script>
+
+
 
 @stop

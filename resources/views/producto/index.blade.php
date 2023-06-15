@@ -132,26 +132,27 @@
         @endif
 
         <script>
-            $(document).ready(function ()
-            { 
-            $('#productos').DataTable({
-                "order":[[5,'asc']],
-                "language": {
-                "lengthMenu": "Mostrar MENU  registros por página",
-                "zeroRecords": "Busqueda no encontrada - disculpa",
-                "info": "Mostrando la pagina PAGE de PAGES",
-                "infoEmpty": "No records available",
-                "infoFiltered": "(Filtrado de  MAX registros totales)",
-                "search": 'Buscar:',
-                "paginate": {
-                    'next': 'Siguiente',
-                    'previous': 'Anterior'
-                }
+    $(document).ready(function() {
+    $('#productos').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_  registros por página",
+            "zeroRecords": "Busqueda no encontrada - disculpa",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(Filtrado de  _MAX_ registros totales)",
+            "search": 'Buscar:',
+            "paginate": {
+                'next': 'Siguiente',
+                'previous': 'Anterior'
             }
-            });
+        }
+    } );
+} );
+    </script>
 
-            });
 
+        
+<script>
             function cambiarEstado(productoId) {
                 Swal.fire({
                 icon: 'question',

@@ -51,13 +51,6 @@
             <td class=" td-actions text-right">
                 
                 <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
-                <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display: inline-block;"  class="formulario-eliminar">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-outline-dark" type="submit">
-                <i class="fas fa-fw fa-xmark"><h7>X</h7></i>
-                </button> 
-            </form>
             </td>
             </tr>
             @endforeach
@@ -170,16 +163,16 @@
         }
 
       </script>
-    <script>
 
+<script>
     $(document).ready(function() {
     $('#categoria').DataTable( {
         "language": {
-            "lengthMenu": "Mostrar MENU  registros por página",
+            "lengthMenu": "Mostrar _MENU_  registros por página",
             "zeroRecords": "Busqueda no encontrada - disculpa",
-            "info": "Mostrando la pagina PAGE de PAGES",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(Filtrado de  MAX registros totales)",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(Filtrado de  _MAX_ registros totales)",
             "search": 'Buscar:',
             "paginate": {
                 'next': 'Siguiente',
@@ -188,6 +181,6 @@
         }
     } );
 } );
-</script>
+    </script>
 
 @stop

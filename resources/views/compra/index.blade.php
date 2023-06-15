@@ -145,25 +145,25 @@
                 })
             });
         </script>
-        <script> 
-        $(document).ready(function() { 
-            $('#compras').DataTable( {
-                "order":[[4,'asc']],
-                "language": {
-                    "lengthMenu": "Mostrar MENU  registros por página",
-                    "zeroRecords": "Busqueda no encontrada - disculpa",
-                    "info": "Mostrando la pagina PAGE de PAGES",
-                    "infoEmpty": "No records available",
-                    "infoFiltered": "(Filtrado de  MAX registros totales)",
-                    "search": 'Buscar:',
-                    "paginate": {
-                        'next': 'Siguiente',
-                        'previous': 'Anterior'
-                    }
-                }
-            } );
-        } );
-        </script>
+
+<script>
+    $(document).ready(function() {
+    $('#compras').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_  registros por página",
+            "zeroRecords": "Busqueda no encontrada - disculpa",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(Filtrado de  _MAX_ registros totales)",
+            "search": 'Buscar:',
+            "paginate": {
+                'next': 'Siguiente',
+                'previous': 'Anterior'
+            }
+        }
+    } );
+} );
+    </script>
     @endsection
 
 @endsection

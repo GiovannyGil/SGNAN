@@ -8,7 +8,7 @@ use App\Models\Insumo;
 use App\Models\User;
 use App\Models\DetalleProducto;
 use App\Http\Requests\productos\StoreRequest;
-use App\Http\Requests\ProductoRequest;
+use App\Http\Requests\productos\ProductoEditRequest;
 
 
 
@@ -158,7 +158,7 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-        public function update( ProductoRequest $request, $id)
+        public function update( ProductoEditRequest $request, $id)
         {
             $productos = Productos::findOrFail($id);
             $productos->NombreProducto = $request->input('NombreProducto');

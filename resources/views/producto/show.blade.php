@@ -6,7 +6,10 @@
 @stop
 
 @section('content')
+<button id="btnModal">Abrir Modal</button>
 
+<div id="miModal" class="modal">
+    <div class="modal-content">
 <div class="content-wrapper">
     <div class="page-header">
         <h3 class="page-title">Detalles del producto</h3>
@@ -96,4 +99,55 @@
     </div>
 </div>
 
+</div>
+</div>
+
+@section('js')
+<script>
+    // Obtén una referencia al botón o enlace que activa el modal
+const btnModal = document.getElementById('btnModal');
+
+// Obtén una referencia al modal
+const modal = document.getElementById('miModal');
+
+// Agrega un evento de click al botón o enlace para mostrar el modal
+btnModal.addEventListener('click', () => {
+    modal.style.display = 'block';
+});
+
+// Agrega un evento de click al modal para ocultarlo cuando se hace clic fuera del contenido
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+</script>
+@endsection
+@section('css')
+<style>
+    /* Estilos para el modal */
+.modal {
+    display: none; /* Ocultar inicialmente el modal */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+</style>
+@endsection
 @endsection

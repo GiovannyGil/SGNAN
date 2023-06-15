@@ -27,9 +27,8 @@
              
                 <th scope="col">NombreProducto</th>
                 <th scope="col">Observacionesss</th>
-
                 <th scope="col">Insumos</th>
-                <th scope="col">Imagen</th>
+                {{-- <th scope="col">Imagen</th> --}}
                 <th scope="col">Precio</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
@@ -52,13 +51,13 @@
                             @endif
                         @endforeach
                     </td>
-                   
+{{--                    
                     <td>  
                         <div class="col-md-4">
                             <img src="/imagen/{{$producto->imagen}}" alt="producto" class="avatar">
                         </div>
                      
-                    </td>
+                    </td> --}}
 
                     <td>{{$producto->PrecioP}}</td>
                     
@@ -126,9 +125,9 @@
 
         <script>
             $(document).ready(function ()
-            {
+            { 
             $('#productos').DataTable({
-                "order":[[5,'desc']],
+                "order":[[5,'asc']],
                 "language": {
                 "lengthMenu": "Mostrar MENU  registros por página",
                 "zeroRecords": "Busqueda no encontrada - disculpa",

@@ -40,6 +40,7 @@
 @endsection
 
 @section('js')
+
     <script> 
       .is-required:after {
       content: '*';

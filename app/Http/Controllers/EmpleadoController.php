@@ -56,7 +56,7 @@ class EmpleadoController extends Controller
         }
 
         $empleados->save();
-        return redirect('/empleados')->with('Crear', 'Empleado registrado exitosamente');
+        return redirect('/empleados')->with('Crear', 'Empleado registrado exitosamente')->withInput();
     }
 
     public function show($id)//Para visualizar un solo registro a detalle
@@ -117,11 +117,11 @@ class EmpleadoController extends Controller
     {
         if ($empleado->status == 'ACTIVE') {
             $empleado->update(['status' => 'DEACTIVATED']);
-            return redirect('/empleados')->with('Active', 'Se desactivar el empleado');
+            return redirect('/empleados')->with('Desactivar', 'Empleado desactivado exitosamente');
         } 
         else {
             $empleado->update(['status' => 'ACTIVE']);
-            return redirect('/empleados')->with('inhabilitar', 'Se activara el empleado');
+            return redirect('/empleados')->with('activar', 'Empleado activado exitosamente');
         } 
     }
 }

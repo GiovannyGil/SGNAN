@@ -5,7 +5,7 @@
 
     .get-in-touch {
         max-width: 800px;
-        margin: 0;
+        margin: 20px 0 ;
         position: relative;
         
     }
@@ -13,8 +13,8 @@
         text-align: center;
         letter-spacing: 1px;
         font-size: 2.2em;
-        line-height: 33px;
-        padding-bottom: 5px;
+        line-height: 30px;
+        padding-bottom: 9px;
         color: #050505;
         background: #050505;
         background: -moz-linear-gradient(left,#050505  0%,#0066ff 100%) !important;
@@ -26,7 +26,7 @@
 
     .contact-form .form-field {
         position: relative;
-        margin: 0;
+        margin: 10px 0;
         
     }
 
@@ -35,8 +35,8 @@
         width:auto;
         border-radius: 15px;
         background-color: #C0C0C1;
-        padding: 5px;
-        box-shadow: 5px 10px 15px #000000;
+        padding: 0px;
+        box-shadow: 5px 10px 15px #0066ff;
     }
 
     .contact-form .input-text {

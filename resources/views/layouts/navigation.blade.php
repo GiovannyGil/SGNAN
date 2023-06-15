@@ -98,3 +98,40 @@
         </div>
     </div>
 </nav>
+
+@section('js')
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        setInterval(verificarStock, 5000); // Verificar cada 30 segundos (ajusta el intervalo según tus necesidades)
+    });
+
+    function verificarStock() {
+        fetch('{{ route('verificar.stock') }}')
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    mostrarAlerta(data);
+                }
+            })
+            .catch(error => console.error(error));
+    }
+
+    function mostrarAlerta(insumos) {
+        const alertaDiv = document.createElement('div');
+        alertaDiv.classList.add('alert', 'alert-danger', 'fixed-top', 'text-center');
+        alertaDiv.textContent = 'Advertencia, los siguientes insumos se están agotando:';
+        
+        const listaInsumos = document.createElement('ul');
+        insumos.forEach(insumo => {
+            const listItem = document.createElement('li');
+            listItem.textContent = insumo.Nombre_Insumo;
+            listaInsumos.appendChild(listItem);
+        });
+        
+        alertaDiv.appendChild(listaInsumos);
+        
+        document.body.appendChild(alertaDiv);
+    }
+
+</script>
+@endsection

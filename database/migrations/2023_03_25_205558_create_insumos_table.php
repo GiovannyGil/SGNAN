@@ -16,17 +16,16 @@ return new class extends Migration
         Schema::create('insumos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('Nombre_Insumo')->unique();
-            $table->double('Precio');
-            $table->integer('Cantidad');
-            $table->integer('Stock');
+            $table->integer('Cantidad')->default(0)->nullable();
+            $table->integer('Stock')->default(10)->nullable();
             $table->enum('status', ['ACTIVE', 'DEACTIVATED'])->default('ACTIVE');
             $table->timestamps();
 
             $table->foreignId('id_categorias')
-                    ->nullable()
-                    ->constrained('categorias')
-                    ->cascadeOnUpdate()
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('categorias')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
         });
         
     }

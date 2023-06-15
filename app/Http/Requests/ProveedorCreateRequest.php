@@ -28,7 +28,7 @@ class ProveedorCreateRequest extends FormRequest
             'Nombre'     => 'required|min:3|max:20|unique:proveedors',
             'asesor'     => 'required|min:3|max:20',
             'Correo'     => 'required|email||unique:proveedors',
-            'Direccion'  => 'required|min:3|max:11',
+            'Direccion'  => 'required|min:3|max:30|min:10',
             'Telefono'   => 'required|min:10|max:20|unique:proveedors',
         ];
     }

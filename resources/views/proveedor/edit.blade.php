@@ -18,9 +18,7 @@
       <div class="form-field col-lg-4">
         <label for="" class=" is-required">Nombre:<FONT COLOR="red"> *</FONT></label>
             <input type="text" id="Nombre" name="Nombre" class="input-text js-input" tabindex="1" value="{{$proveedor->Nombre}}">
-        <label for="" class=" is-required">Nombre:*</label>
-            <input type="text" id="Nombre" name="Nombre" class="input-text js-input" tabindex="1" value="{{$proveedor->Nombre}}">
-            
+        
             @if ($errors->has('Nombre'))
                     <span class="error text-danger" for="input-Nombre">{{$errors->first('Nombre') }}</span>
                 @endif
@@ -28,9 +26,7 @@
       <div class="form-field col-lg-4">
         <label for="" class=" is-required">Nombre del asesor:<FONT COLOR="red"> *</FONT></label>
             <input type="text" id="asesor" name="asesor" class="input-text js-input" tabindex="2" value="{{$proveedor->asesor}}">
-        <label for="" class=" is-required">Nombre del asesor:*</label>
-            <input type="text" id="asesor" name="asesor" class="input-text js-input" tabindex="2" value="{{$proveedor->asesor}}">
-           
+        
             @if ($errors->has('asesor'))
                     <span class="error text-danger" for="input-asesor">{{$errors->first('asesor') }}</span>
                 @endif
@@ -38,9 +34,7 @@
       <div class="form-field col-lg-4">
         <label for="" class=" is-required">Correo:<FONT COLOR="red"> *</FONT></label>
             <input type="email" id="Correo" name="Correo" class="input-text js-input" tabindex="3" value="{{$proveedor->Correo}}">
-        <label for="" class=" is-required">Correo:*</label>
-            <input type="email" id="Correo" name="Correo" class="input-text js-input" tabindex="3" value="{{$proveedor->Correo}}">
-           
+        
             @if ($errors->has('Correo'))
                     <span class="error text-danger" for="input-Correo">{{$errors->first('Correo') }}</span>
                 @endif
@@ -48,9 +42,7 @@
        <div class="form-field col-lg-4">
         <label for="" class=" is-required">Dirección:<FONT COLOR="red"> *</FONT></label>
             <input type="text" id="Direccion" name="Direccion" class="input-text js-input" tabindex="4" value="{{$proveedor->Direccion}}">
-        <label for="" class=" is-required">Dirección:*</label>
-            <input type="text" id="Direccion" name="Direccion" class="input-text js-input" tabindex="4" value="{{$proveedor->Direccion}}">
-           
+         
             @if ($errors->has('Direccion'))
                     <span class="error text-danger" for="input-Direccion">{{$errors->first('Direccion') }}</span>
                 @endif
@@ -58,17 +50,15 @@
       <div class="form-field col-lg-4">
         <label for="" class=" is-required">Teléfono:<FONT COLOR="red"> *</FONT></label>
             <input type="number" id="Telefono" name="Telefono" class="input-text js-input" tabindex="5" value="{{$proveedor->Telefono}}">
-        <label for="" class=" is-required">Teléfono:</label>
-            <input type="number" id="Telefono" name="Telefono" class="input-text js-input" tabindex="5" value="{{$proveedor->Telefono}}">
-           
+        
             @if ($errors->has('Telefonó'))
                     <span class="error text-danger" for="input-Telefonó">{{$errors->first('Telefonó') }}</span>
                 @endif
       </div>
       <div class="form-field col-lg-12">
-            <a href="/proveedores" class="submit-btn2">Cancelar</a>
+            <a href="/proveedores" class="submit-btn2" tabindex="7">Cancelar</a>
               {{--<input class="submit-btn" type="submit" value="Guardar"> --}}
-            <button class="submit-btn">Guardar</button>
+            <button class="submit-btn" tabindex="6">Guardar</button>
            </div>
 
            </form>

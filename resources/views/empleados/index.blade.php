@@ -39,14 +39,14 @@
 
             @if ($empleado->status == 'ACTIVE')
                 <td>
-                    <a class="jsgrid-button btn btn-success btn-xs" href="{{ route('empleados.change_status', $empleado) }}" title="Desactivar empleado">
+                    <a class="jsgrid-button btn btn-success" href="{{ route('empleados.change_status', $empleado) }}" title="Desactivar empleado">
                     Activo<i class="fas fa-fw fa-check"></i>
                 </a>
                 </td>
                 
             @else
                 <td>
-                    <a class="jsgrid-button btn btn-danger btn-xs" href="{{ route('empleados.change_status', $empleado) }}" title="Activar Empleado" >
+                    <a class="jsgrid-button btn btn-danger" href="{{ route('empleados.change_status', $empleado) }}" title="Activar Empleado" >
                     Desacti<i class="fas fa-fw fa-times"></i>
                 </a>
                 </td>
@@ -54,8 +54,8 @@
 
             @if($empleado->status == 'ACTIVE')
                 <td class=" td-actions text-right">
-                        <a href="{{ route('empleados.show', $empleado) }}" class="btn btn-info  btn-xs" title="Ver informacion detalladamente del empleado"><i class="fas fa-fw fa-user"></i></a>
-                        <a href="{{ route('empleados.edit', $empleado) }}" class="btn btn-warning  btn-xs" title="Editar empleado"><i class="fas fa-fw fa-pen"></i></a>
+                        <a href="{{ route('empleados.show', $empleado) }}" class="btn btn-outline-dark btn-sm" title="Ver informacion detalladamente del empleado"><i class="fas fa-fw fa-user"></i></a>
+                        <a href="{{ route('empleados.edit', $empleado) }}" class="btn btn-outline-dark btn-sm" title="Editar empleado"><i class="fas fa-fw fa-pen"></i></a>
                         
                 </td>
                 </tr>

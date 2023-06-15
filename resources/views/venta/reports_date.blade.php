@@ -83,14 +83,10 @@
                                 @endif
                                 <td>
                                     <div class="form-check form-switch">
-                                        <form action="">
-                                         @csrf
-                                             <a href="{{ route('ventas.show',$venta) }}" class="btn btn-outline-info"
-                                             title="Ver detalles"><i class="far fa-eye"></i></a>
-                                             <a href="{{ route('ventas.pdf',$venta) }}" title="Ver PDF"
-                                             class="jsgrid-button jsgrid-edit-button">
-                                             <i class="far fa-file-pdf"></i></a>
-                                        </form>
+                                        <a href="{{ route('ventas.show', $venta) }}"class="btn btn-outline-dark btn-sm"
+                                        title="Ver detalles"><i class="fas fa-fw fa-eye"></i></a>
+                                        <a href="{{ route('ventas.pdf', $venta) }}" title="Ver PDF"
+                                        class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-file-pdf"></i></i></a>
                                     </div>
                                 </td>
                             </tr>

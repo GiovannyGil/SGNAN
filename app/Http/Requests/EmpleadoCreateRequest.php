@@ -58,7 +58,7 @@ class EmpleadoCreateRequest extends FormRequest
             'Email.required' => 'El campo email es requerido.',
             'Documento.required' => 'El campo documento es requerido.',
             'Documento.numeric' => 'El campo debe ser numérico.',
-            'Documento.min'     => 'El número debe ser mayor o igual a cero.',
+            'Documento.min'     => 'El documento debe ser de 10 numeros.',
             'Documento.regex' => 'El campo no puede contener caracteres especiales.',
             'Genero.required' => 'El campo genero es requerido.',
             'Fecha_Nacimiento' => 'El empleado debe ser mayor de edad.',

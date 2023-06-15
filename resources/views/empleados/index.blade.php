@@ -38,18 +38,22 @@
             <td>{{ $empleado->created_at }}</td>
 
             @if ($empleado->status == 'ACTIVE')
+            <form action="{{ route('empleados.change_status', $empleado) }}" class="desactivar">    
                 <td>
-                    <a class="jsgrid-button btn btn-success" href="{{ route('empleados.change_status', $empleado) }}" title="Desactivar empleado">
-                    Activo<i class="fas fa-fw fa-check"></i>
-                </a>
-                </td>
-                
+                        <button class="jsgrid-button btn btn-success btn-xs" href="{{ route('empleados.change_status', $empleado) }}" title="Desactivar empleado" type="submit">
+                        Activo<i class="fas fa-fw fa-check"></i>
+                    </button>
+                    </td>
+            </form>   
             @else
+            <form action="{{ route('empleados.change_status', $empleado) }}" class="activar">    
                 <td>
-                    <a class="jsgrid-button btn btn-danger" href="{{ route('empleados.change_status', $empleado) }}" title="Activar Empleado" >
+                    <button class="jsgrid-button btn btn-danger btn-xs" href="{{ route('empleados.change_status', $empleado) }}" title="Activar Empleado" type="submit">
+
                     Desacti<i class="fas fa-fw fa-times"></i>
-                </a>
+                </button>
                 </td>
+            </form>
             @endif
 
             @if($empleado->status == 'ACTIVE')
@@ -85,29 +89,79 @@
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
 
-    @if (session('Active') == 'Se desactivar el empleado')
-        <script>
-            Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Empleado desactivado correctamente',
-                showConfirmButton: false,
-                timer: 2000
-            })
-        </script>
-    @endif
+    @if (session('Desactivar') == 'Empleado desactivado exitosamente')
+            <script>
+                Swal.fire(
+                '¡Desactivado!',
+                'Empleado desactivado correctamente.',
+                'success'
+                )
+            </script>
+        @endif
 
-    @if (session('inhabilitar') == 'Se activara el empleado')
-        <script>
+    <script>
+        $('.desactivar').submit(function(e){
+            e.preventDefault();
+
             Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Empleado activado correctamente',
-                showConfirmButton: false,
-                timer: 2000
+            title: '¿Estas seguro?',
+            text: "Este empleado se desactivara definitivamente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, desactivar!',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // Swal.fire(
+                // 'Deleted!',
+                // 'Your file has been deleted.',
+                // 'success'
+                // )
+                this.submit();
+            }
             })
-        </script>
-    @endif
+        });
+        
+    </script>
+
+@if (session('activar') == 'Empleado activado exitosamente')
+            <script>
+                Swal.fire(
+                '¡Activado!',
+                'Empleado activado correctamente.',
+                'success'
+                )
+            </script>
+        @endif
+
+    <script>
+        $('.activar').submit(function(e){
+            e.preventDefault();
+
+            Swal.fire({
+            title: '¿Estas seguro?',
+            text: "Este empleado se activara definitivamente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, activar!',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // Swal.fire(
+                // 'Deleted!',
+                // 'Your file has been deleted.',
+                // 'success'
+                // )
+                this.submit();
+            }
+            })
+        });
+        
+    </script>
 
 
     @if (session('Crear') == 'Empleado registrado exitosamente')

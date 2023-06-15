@@ -94,15 +94,15 @@ class UserController extends Controller
 
     }
 
-    public function change_status(User $user, Role $roles)
+    public function change_status(User $user)
     {
         if ($user->status == 'ACTIVE') {
             $user->update(['status' => 'DEACTIVATED']);
-            return redirect('/users')->with('Active', 'Se desactivar el usuario');
+            return redirect('/users')->with('Desactivar', 'Usuario desactivado exitosamente');
         } 
         else {
             $user->update(['status' => 'ACTIVE']);
-            return redirect('/users')->with('inhabilitar', 'Se activara el usuario');
+            return redirect('/users')->with('activar', 'Usuario activado exitosamente');
         } 
     }
 }

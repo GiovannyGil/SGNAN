@@ -29,16 +29,16 @@
             </div>
 
             <div class="form-field col-lg-6">
+            <label for="password" class="">Contraseña</label>
                     <input autocomplete="off" type="password" id="password" class="input-text js-input" name="password" tabindex="3" placeholder="Ingrese la contraseña solo en caso de modificarla">
-                <label for="password" class="label">Contraseña</label>
                 @if ($errors->has('password'))
                     <span class="error text-danger" for="input-password">{{$errors->first('password') }}</span>
                 @endif
             </div>
 
             <div class="form-field col-lg-6">
+            <label for="password_confirmation" class="">Confirmar Contraseña</label>
                     <input autocomplete="off" type="password" id="password_confirmation" class="input-text js-input" name="password_confirmation" tabindex="4" placeholder="Confirme la contraseña que desea modificar" >
-                <label for="password_confirmation" class="label">Confirmar Contraseña</label>
                 @if ($errors->has('password_confirmation'))
                     <span class="error text-danger" for="input-password_confirmation">{{$errors->first('password_confirmation') }}</span>
                 @endif

@@ -4,12 +4,15 @@
 
 
     @section('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/cards.css')}}">
     @endsection
 
     @section('content')
+
 
 
     <div class="container">
@@ -63,6 +66,7 @@
                     
                         @if ($producto->Estado == 'Activo')
                         <td>
+
                             <a class="jsgrid-button btn btn-success" href="#" title="Activo" onclick="cambiarEstado({{ $producto->id }})">
                                 Activo
                             </a>
@@ -76,6 +80,7 @@
                            </td>
                         @else
                             <td>
+
                                 <a class="jsgrid-button btn btn-danger" href="#" title="Inhactivo" onclick="cambiarEstado({{ $producto->id }})">
                                     Desactivado
                                 </a>

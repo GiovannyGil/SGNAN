@@ -53,7 +53,7 @@
             <div class="form-field col-lg-4">
                 <label for="Genero" class="" tabindex="7">Genero<FONT COLOR="red"> *</FONT></label>
                 <select class="input-text js-input" name="Genero" value="{{ old('Genero') }}">
-                    <option value="">Generos</option>
+                    <option value="" >Generos</option>
                     <option value="Hombre" >Masculino</option>
                     <option value="Mujer" >Femenino</option>
                     <option value="No definido">Otro</option>
@@ -74,9 +74,9 @@
                     <span class="error text-danger" for="input-id_tipoempleados">{{$errors->first('id_tipoempleados') }}</span>
                 @endif
             </div>
-            <div class="form-field col-lg-6">
+            <div class="form-field col-lg-4">
             <label for="Observaciones" class="">Observaciones</label>
-                <input placeholder="Ingrese las observaciones del empleado" type="text" class="input-text js-input" name="Observaciones" tabindex="9" value="{{ old('Observaciones') }}">
+                <textarea name="Observaciones" rows="3" cols="27" tabindex="9" class="" placeholder="Ingrese las observaciones del empleado" >{{ old('Observaciones') }}</textarea>
                 @if ($errors->has('Observaciones'))
                     <span class="error text-danger" for="input-Observaciones">{{$errors->first('Observaciones') }}</span>
                 @endif
@@ -88,8 +88,8 @@
                     <span class="error text-danger" for="input-imagen">{{$errors->first('imagen') }}</span>
                 @endif
             </div>
-            <div class="form-field col-lg-6">
-                <img id="imagenSeleccionada" style="max-height: 200px;">
+            <div class="form-field col-lg-4">
+                <img id="imagenSeleccionada" style="max-height: 130px;" type="file" value="{{ old('imagen') }}">
             </div>
             <div class="form-field col-lg-9">
                 <button type="submit" class="btn btn-primary btn-sm submit-btn" tabindex="11" title="Guardar empleado">Guardar</button>

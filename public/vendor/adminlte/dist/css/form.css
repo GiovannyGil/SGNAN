@@ -1,10 +1,11 @@
     .background{
         background-color: #C0C0C1;
+        /* max-width: 500px; */
     }
 
     .get-in-touch {
         max-width: 800px;
-        margin: 20px auto;
+        margin: 20px 0 ;
         position: relative;
         
     }
@@ -30,7 +31,7 @@
     }
 
     .card{
-        margin: 20px;
+        margin: 10px 0;
         width:auto;
         border-radius: 15px;
         background-color: #C0C0C1;
@@ -59,7 +60,7 @@
     }
     .contact-form .label{
         position: absolute;
-        left: 18px;
+        left: 8px;
         bottom: 15px;
         font-size: 18px;
         line-height: 30px;
@@ -79,7 +80,7 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         font-size: 12px;
-        padding: 8px 14px;
+        padding: 8px 7px;
         border: none;
         width:120px;
         cursor: pointer;
@@ -89,8 +90,8 @@
     }
 
     .form-group{
-        margin-bottom: 20px;
-        margin-left:20px;
+        margin-bottom: 10;
+        margin-left:10;
         width: 40%;
         float:left;
         text-align: left;
@@ -105,11 +106,18 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         font-size: 12px;
-        padding: 8px 14px;
+        padding: 8px 7px;
         border: none;
         width:100px;
         cursor: pointer;
         text-decoration: none;
         text-align: center;
         /* text-align:left */
+        margin: 10px;
     }
+
+
+.obv{
+    width: 460px;
+    height: 100px;
+}

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="table-reponsive">
-        <table id="ventas"  class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+        <table id="ventas" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
             <thead class="bg-primary text-white">
                 <tr>
                     <th scope="col">ID</th>
@@ -20,18 +20,20 @@
             <tbody>
                 @foreach ($ventas as $venta)
                     <tr>
-                        <td scope="row">{{$venta->id}}</td>
+                        <td>{{$venta->id}}</td>
                         {{-- llamar la fecha de la venta --}}
                         <td>{{$venta->created_at}}</td>
                         <td>{{$venta->total}}</td>
                         @if ($venta->Estado == 'Pendiente')
                             <td>
-                                <a class="jsgrid-button btn btn-danger" href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Editar">
+                                <a class="jsgrid-button btn btn-danger"
+                                href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Editar">
                                     Pendiente <i class="fas fa-times"></i></a>
                             </td>
                         @else
                             <td>
-                                <button type="button" disabled class="jsgrid-button btn btn-success" href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Editar">
+                                <button type="button" disabled class="jsgrid-button btn btn-success"
+                                href="{{route('Cambiar.Estado.ventas', $venta)}}" title="Editar">
                                 pagado <i class="fas fa-check"></i></button>
 
                             </td>

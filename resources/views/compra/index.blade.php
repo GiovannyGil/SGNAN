@@ -38,34 +38,28 @@
                 <td>{{$compra->Referencia_compra}}</td>
                 <td>{{$compra->Descripcion_compra}}</td>
                 <td>{{$compra->total}}</td>
-            @if ($compra->status == 'ACTIVE')
-                <td>
-                    <a class="jsgrid-button btn btn-success btn-xs" href="{{ route('compras.change_status', $compra) }}" title="Editar">
-                    Activo<i class="fas fa-fw fa-check"></i>
-                </a>
-                </td>
-                
-            @else
-                <td>
-                    <a class="jsgrid-button btn btn-danger btn-xs" href="{{ route('compras.change_status', $compra) }}" title="Editar" >
-                    Desactivado<i class="fas fa-fw fa-times"></i>
-                </a>
-                </td>
-            @endif
+                @if ($compra->status == 'ACTIVE')
+                    <td>
+                        <a class="jsgrid-button btn btn-success" href="{{ route('compras.change_status', $compra) }}" title="Activo">
+                        Activo<i class="fas fa-fw fa-check"></i>
+                        </a>
+                    </td>
+                    
+                @else
+                    <td>
+                        <p class="jsgrid-button btn btn-danger none"  title="Anulado" @readonly(true) >
+                        Anulado<i class="fas fa-fw fa-times"></i>
+                        </p>
+                    </td>
+                @endif
                     
                     
 
             <td class=" td-actions text-right">
             {{-- {{ route('ventas.show',$venta) }} --}}
-            <a href="{{ route('compras.show', $compra) }}" class="btn btn-outline-info"
+            <a href="{{ route('compras.show', $compra) }}" class="btn btn-outline-dark btn-sm"
             title="Ver detalles"><i class="far fa-eye"></i></a>
-                <form action="{{ route('compras.destroy', $compra->id) }}" method="POST" style="display: inline-block;" class="formulario-eliminar">
-                @csrf
-                 @method('DELETE')
-                <button class="btn btn-danger btn-sm" type="submit">
-                <i class="fas fa-fw fa-xmark"><h7>X</h7></i>
-                </button> 
-            </form>
+                
             </td>
             </tr>
             @endforeach
@@ -78,6 +72,13 @@
     @section('css') 
         <link rel="stylesheet" href="/css/admin_custom.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css">
+
+        <style>
+            .none{
+                cursor: default;
+            }
+        </style>
+
     @stop
 
     @section('js')
@@ -147,6 +148,7 @@
         <script> 
         $(document).ready(function() { 
             $('#compras').DataTable( {
+                "order":[[4,'asc']],
                 "language": {
                     "lengthMenu": "Mostrar MENU  registros por página",
                     "zeroRecords": "Busqueda no encontrada - disculpa",

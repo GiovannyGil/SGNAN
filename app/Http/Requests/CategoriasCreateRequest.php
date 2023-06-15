@@ -29,4 +29,10 @@ class CategoriasCreateRequest extends FormRequest
 
         ];
     }
+    public function messages()
+    {
+        return[
+            'Nombre.required' => 'El campo nombre categoria es requerido.',
+        ];
+    }
 }

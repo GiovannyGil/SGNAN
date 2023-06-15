@@ -4,7 +4,7 @@ namespace App\Http\Requests\productos;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class ProductoEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,12 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
+        $producto = $this->route('producto');
         return [
             'NombreProducto'      => 'required',
             'NombreProducto'      => 'unique:productos,NombreProducto|min:5|max:10',
             'PrecioP'             => 'required|min:3|max:10',
-            'imagen'              =>'required',
+            
       
         ];
     }
@@ -39,7 +40,7 @@ class StoreRequest extends FormRequest
             'NombreProducto.required' => 'El campo producto es requerido',
             'NombreProducto.unique'   => 'El campo producto debe ser unico',
             'PrecioP.required'        => 'El campo precio es requerido',
-            'imagen.required'         =>'El campo imagen es requerido',
+            
         ];
     }
 }

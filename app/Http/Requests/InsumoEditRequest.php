@@ -25,8 +25,9 @@ class InsumoEditRequest extends FormRequest
     {
         return [
             'Nombre_Insumo'   => 'required',
-            'Precio'        => 'required',
-            'cantidad'     => 'required' ,
+            'Stock'        => 'required',
+            'Cantidad'     => 'required' ,
+            'id_categorias' => 'required',
            
         ];
     }

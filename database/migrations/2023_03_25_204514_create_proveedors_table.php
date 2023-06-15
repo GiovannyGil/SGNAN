@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('proveedors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('Nombre')->unique();
-            $table->string('asesor')->unique();
+            $table->string('asesor');
             $table->string('Correo')->unique();
             $table->string('Direccion');
             $table->string('Telefono')->unique();

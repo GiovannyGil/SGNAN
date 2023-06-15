@@ -9,7 +9,7 @@
 
 <div class="content-wrapper">
     <div class="page-header">
-        <h3 class="page-title">Detalles de Venta</h3>
+        {{-- <h3 class="page-title">Detalles de Venta</h3> --}}
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dash" title="Ir al Dashboard">DASHBOARD</a></li>
@@ -46,21 +46,23 @@
                 <br><br>
                 <div class="form-group">
                     <h4 class="card-title">Detalles de Venta</h4>
-                    <div class="table-responsive col-md-12">
+                    <div class="table-responsive col-md-12 scrollable-table">
                         <table class="table" id="detalleVenta">
                             <thead>
                                 <tr>
-                                    <th>Numero de Venta</th>
-                                    <th>Producto</th>
-                                    <th>Precio Venta</th>
-                                    <th>Cantidad</th>
-                                    <th>Subtotal</th>
+                                    <th id="campo">Numero de Venta</th>
+                                    <th id="campo">Producto</th>
+                                    <th id="campo">Precio Venta</th>
+                                    <th id="campo">Cantidad</th>
+                                    <th id="campo">Subtotal</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr title="Precio total de la Venta">
-                                    <th colspan="4"><p aria-label="right">TOTAL</p></th>
-                                    <th colspan="4"><p aria-label="right">s/{{number_format($venta->total,2)}}</p></th>
+                                    <th id="campo" colspan="4"><p aria-label="right">TOTAL</p></th>
+                                    <th id="campo" colspan="4">
+                                        <p aria-label="right">s/{{number_format($venta->total,2)}}</p>
+                                    </th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -78,7 +80,9 @@
                                         {{-- <td>{{$detalle->producto}}</td> --}}
                                         <td title="Precio del Producto">s/{{number_format($detalle->Precio,2)}}</td>
                                         <td title="Cantidad de Productos">{{$detalle->Cantidad}}</td>
-                                        <td title="Precio de la Venta">s/{{number_format($detalle->Cantidad*$detalle->Precio,2)}}</td>
+                                        <td title="Precio de la Venta">
+                                            s/{{number_format($detalle->Cantidad*$detalle->Precio,2)}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -87,11 +91,19 @@
                 </div>
 
                 <div class="card-footer text-muted" title="Volver a las Ventas">
-                    <a href="/ventas" class="btn btn-primary float-right">Cancelar</a>
+                    <a href="/ventas" class="btn btn-primary float-right">Volver</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@endsection
+@section('css')
+<style>
+    .scrollable-table {
+    max-height: 300px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+}
+</style>
 @endsection

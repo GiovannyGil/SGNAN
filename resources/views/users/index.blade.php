@@ -59,8 +59,8 @@
 
             @if($user->status == 'ACTIVE')
                 <td class=" td-actions text-right">
-                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-info btn-sm"><i class="fas fa-fw fa-user" title="Ver información detalladamente del usuario"></i></a>
-                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-fw fa-pen" title="Editar usuario"></i></a>
+                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-user" title="Ver información detalladamente del usuario"></i></a>
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen" title="Editar usuario"></i></a>
                 </td>
                 </tr>
             @else

@@ -41,26 +41,26 @@
             <td>{{$proveedor->Telefono}}</td>
             @if ($proveedor->status == 'ACTIVE')
                 <td>
-                    <a class="jsgrid-button btn btn-success btn-xs" href="{{ route('proveedores.change_status', $proveedor) }}" title="Editar">
-                    Activo<i class="fas fa-fw fa-check"></i>
-                </a>
+                    <button class="jsgrid-button btn btn-success" title="Editar" onclick="cambiarEstadoProveedor({{ $proveedor->id }})">
+                        Activo<i class="fas fa-fw fa-check"></i>
+                    </button>
                 </td>
-                
             @else
                 <td>
-                    <a class="jsgrid-button btn btn-danger btn-xs" href="{{ route('proveedores.change_status', $proveedor) }}" title="Editar" >
-                    Desactivado<i class="fas fa-fw fa-times"></i>
-                </a>
+                    <button class="jsgrid-button btn btn-danger" title="Editar" onclick="cambiarEstadoProveedor({{ $proveedor->id }})">
+                        Desactivado<i class="fas fa-fw fa-times"></i>
+                    </button>
                 </td>
-                @endif
+            @endif
+
 
             <td class=" td-actions text-right" >
-                <a href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-info btn-sm" ><i class="fas fa-fw fa-user"></i></a>
-                <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-fw fa-pen"></i></a>
+                <a href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-outline-dark btn-sm" ><i class="fas fa-fw fa-user"></i></a>
+                <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
                 <form action="{{ route('proveedores.destroy', $proveedor->id) }}" method="POST" style="display: inline-block;" class="formulario-eliminar">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger btn-sm" type="submit">
+                <button class="btn btn-outline-dark" type="submit">
                 <i class="fas fa-fw fa-xmark"><h7>X</h7></i>
                 </button> 
             </form>
@@ -82,6 +82,8 @@
 @section('js')
     <script> console.log('Hi!'); </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
@@ -141,6 +143,33 @@
             }
             })
         });
+        // Función para cambiar el estado del proveedor con confirmación Swal.fire
+        function cambiarEstadoProveedor(proveedorId) {
+            Swal.fire({
+                icon: 'question',
+                title: 'Confirmación',
+                text: '¿Deseas cambiar el estado del proveedor?',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Realizar la solicitud AJAX para cambiar el estado
+                    axios.get(`/proveedores/${proveedorId}/change_status`)
+                        .then(response => {
+                            // Actualizar la vista o realizar cualquier acción adicional si es necesario
+                            // Por ejemplo, recargar la página: location.reload();
+                            // o actualizar el estado del proveedor en la interfaz de usuario
+                            location.reload(); // Ejemplo de recargar la página después del cambio de estado
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            // Manejar errores si es necesario
+                        });
+                }
+            });
+        }
+
       </script>
     <script>
         

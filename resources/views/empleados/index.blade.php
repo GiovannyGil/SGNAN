@@ -49,6 +49,7 @@
             <form action="{{ route('empleados.change_status', $empleado) }}" class="activar">    
                 <td>
                     <button class="jsgrid-button btn btn-danger btn-xs" href="{{ route('empleados.change_status', $empleado) }}" title="Activar Empleado" type="submit">
+
                     Desacti<i class="fas fa-fw fa-times"></i>
                 </button>
                 </td>
@@ -57,8 +58,8 @@
 
             @if($empleado->status == 'ACTIVE')
                 <td class=" td-actions text-right">
-                        <a href="{{ route('empleados.show', $empleado) }}" class="btn btn-info  btn-xs" title="Ver informacion detalladamente del empleado"><i class="fas fa-fw fa-user"></i></a>
-                        <a href="{{ route('empleados.edit', $empleado) }}" class="btn btn-warning  btn-xs" title="Editar empleado"><i class="fas fa-fw fa-pen"></i></a>
+                        <a href="{{ route('empleados.show', $empleado) }}" class="btn btn-outline-dark btn-sm" title="Ver informacion detalladamente del empleado"><i class="fas fa-fw fa-user"></i></a>
+                        <a href="{{ route('empleados.edit', $empleado) }}" class="btn btn-outline-dark btn-sm" title="Editar empleado"><i class="fas fa-fw fa-pen"></i></a>
                         
                 </td>
                 </tr>

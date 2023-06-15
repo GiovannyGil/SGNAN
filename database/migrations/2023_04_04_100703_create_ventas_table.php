@@ -27,7 +27,6 @@ return new class extends Migration
                 ->noActionOnDelete();
             $table->decimal('total');
             $table->enum('Estado', ['Pendiente', 'Pagado'])->default('Pendiente');
-            // $table->enum('Proceso', ['Activo', 'Inactivo'])->default('Activo');
             $table->timestamps();
         });
     }

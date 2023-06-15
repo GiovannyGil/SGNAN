@@ -31,6 +31,27 @@ class DashboardController extends Controller
             ->get();
 
 
+        // grafico para total de ventas por mes
+        $ventasPorMes = Venta::selectRaw('SUM(total) as total, MONTH(created_at) as mes')
+            ->groupBy('mes')
+            ->get();
+
+        $totalesPorMes = $ventasPorMes->pluck('total');
+        $meses = $ventasPorMes->pluck('mes')->map(function ($mes) {
+            return Carbon::create()->month($mes)->locale('es')->monthName;
+        });
+
+        // grafico de total compras por mes
+        $comprasPorMes = Compra::selectRaw('SUM(total) as total, MONTH(created_at) as mes')
+            ->groupBy('mes')
+            ->get();
+
+        $totalesPorMesCompras = $comprasPorMes->pluck('total');
+        $mesesCompras = $comprasPorMes->pluck('mes')->map(function ($mes) {
+            return Carbon::create()->month($mes)->locale('es')->monthName;
+        });
+
+       
         // traer la comparacion de cantidad de ventas y compras por mes
 
         $totalSales = DB::table('ventas')->count();
@@ -44,7 +65,7 @@ class DashboardController extends Controller
 
         // Puedes realizar más operaciones para obtener datos adicionales o estadísticas
         
-        return view('dash.index', 
+        return view('dash.index',
         compact(
         'salesByMonth',
         'totalSales',
@@ -55,10 +76,16 @@ class DashboardController extends Controller
         'purchasesByMonth',
         'SumaVentas',
         'provideersCount',
-        'categoryCount'
+        'categoryCount',
+        'ventasPorMes',
+        'totalesPorMes',
+        'meses',
+        'comprasPorMes',
+        'totalesPorMesCompras',
+        'mesesCompras',
     ));
     
-    } 
+    }
     
 
 }

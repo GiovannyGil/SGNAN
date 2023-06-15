@@ -63,31 +63,30 @@
                     <tbody>
                         @foreach ($ventas as $venta)
                             <tr>
-                                <td scope="row">{{$venta->id}}</td>
+                                <td>{{$venta->id}}</td>
                                 {{-- llamar la fecha de la venta --}}
                                 <td title="Fecha de creacion de la Venta">{{$venta->created_at}}</td>
                                 <td title="Valor de la Venta">{{$venta->total}}</td>
                                 @if ($venta->Estado == 'Pendiente')
                                     <td  title="Estado de la Venta">
-                                        <a class="jsgrid-button btn btn-danger" href="{{route('Cambiar.Estado.ventas', $venta)}}">
+                                        <a class="jsgrid-button btn btn-danger"
+                                        href="{{route('Cambiar.Estado.ventas', $venta)}}">
                                             Pendiente <i class="fas fa-times"></i></a>
                                     </td>
                                 @else
                                     <td  title="Estado de la Venta">
-                                        <button type="button" disabled class="jsgrid-button btn btn-success" href="{{route('Cambiar.Estado.ventas', $venta)}}">
+                                        <button type="button" disabled class="jsgrid-button btn btn-success"
+                                        href="{{route('Cambiar.Estado.ventas', $venta)}}">
                                         pagado <i class="fas fa-check"></i></button>
 
                                     </td>
                                 @endif
                                 <td>
                                     <div class="form-check form-switch">
-                                        <form action="">
-                                         @csrf
-                                             <a href="{{ route('ventas.show',$venta) }}" class="btn btn-outline-info"
-                                             title="Ver detalles"><i class="far fa-eye"></i></a>
-                                             <a href="{{ route('ventas.pdf',$venta) }}" title="Ver PDF" class="jsgrid-button jsgrid-edit-button">
-                                             <i class="far fa-file-pdf"></i></a>
-                                        </form>
+                                        <a href="{{ route('ventas.show', $venta) }}"class="btn btn-outline-dark btn-sm"
+                                        title="Ver detalles"><i class="fas fa-fw fa-eye"></i></a>
+                                        <a href="{{ route('ventas.pdf', $venta) }}" title="Ver PDF"
+                                        class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-file-pdf"></i></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -102,7 +101,8 @@
 
     @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     @endsection
     @section('js')

@@ -15,20 +15,19 @@ return new class extends Migration
     {
         Schema::create('detalle_compras', function (Blueprint $table) {
             $table->bigIncrements('id');
-
             $table->foreignId('compra_id')
                 ->nullable()
                 ->constrained('compras')
                 ->cascadeOnUpdate()
                 ->noActionOnDelete();
-
             $table->foreignId('id_insumos')
                 ->nullable()
                 ->constrained('insumos')
                 ->cascadeOnUpdate()
                 ->noActionOnDelete();
-                
+            $table->integer('Paquetes');
             $table->integer('Cantidad');
+            $table->decimal('Precio_Paquete');
             $table->decimal('Precio');
             
             $table->timestamps();

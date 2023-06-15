@@ -147,6 +147,8 @@
 
         @section('js')
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
             <script>
 
                     function meses(id){
@@ -319,6 +321,46 @@
                         }
                     }
                 });
+            </script>
+            <script>
+                window.addEventListener('DOMContentLoaded', function() {
+                    setInterval(verificarStock, 60000); // Verificar cada 30 segundos (ajusta el intervalo según tus necesidades)
+                });
+            
+                function verificarStock() {
+                    fetch('{{ route('verificar.stock') }}')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.length > 0) {
+                                mostrarAlerta(data);
+                            }
+                        })
+                        .catch(error => console.error(error));
+                }
+            
+                function mostrarAlerta(insumos) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Advertencia',
+                        text: 'Hay insumos agotados, adquiera más',
+                        position: 'top-end',
+                        showConfirmButton: true,
+                        timer: null,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancelar',
+                        confirmButtonText: 'Ir a insumos'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redireccionar a la vista de insumos
+                            window.location.href = '{{ route('insumos.index') }}';
+                        }
+                    });
+                }
+
+
             </script>
         @endsection
     @endsection

@@ -47,29 +47,12 @@ class InsumoController extends Controller
      */
     public function store(InsumoCreateRequest $request)
     {
-        //
-        // $request->validate([
-        //     'Nombre_Insumo' => 'require',
-        //     'Precio' => 'require',
-        //     'cantidad' => 'require',
-        // ]);
-        // $insumos = Insumo::create($request->only(keys: 'Nombre_Insumo','Precio','cantidad')
-        // +[
-
-
-        // ]);
 
         $insumos = new Insumo();
-
         $insumos->Nombre_insumo = $request->get('Nombre_Insumo');
-        $insumos->Precio = $request->get('Precio');
-        $insumos->cantidad = $request->get('cantidad');
+        // $insumos->Cantidad = $request->get('cantidad');
+        // $insumos->Stock = $request->get('Stock');
         $insumos->id_categorias = $request->get('id_categorias');
-        
-        
-       
-        
-
         $insumos->save();
 
         return redirect('/insumos')->with('crear', 'Insumo registrado exitosamente');
@@ -99,7 +82,7 @@ class InsumoController extends Controller
     {
         $categorias = Categoria::all();
         $insumo = Insumo::find($id);
-        return view('insumo.edit', compact('categorias'))->with('insumo', $insumo);
+        return view('insumo.edit', compact('categorias', 'insumo'));
     }
 
     /**
@@ -114,16 +97,11 @@ class InsumoController extends Controller
         //
         $insumo = Insumo::find($id);
 
-        $insumo->Nombre_insumo = $request->get('Nombre_Insumo');
-        $insumo->Precio = $request->get('Precio');
-        $insumo->cantidad = $request->get('cantidad');
+        $insumo->Nombre_Insumo = $request->get('Nombre_Insumo');
+        $insumo->Stock = $request->get('Stock');
+        $insumo->Cantidad = $request->get('Cantidad');
         $insumo->id_categorias = $request->get('id_categorias');
-
-        
-        
-
         $insumo->save();
-
         return redirect('/insumos')->with('editar', 'Insumo actualizado exitosamente');
     }
 
@@ -151,6 +129,13 @@ class InsumoController extends Controller
             $insumo->update(['status' => 'ACTIVE']);
             return redirect()->back();
         }
-
     }
+
+    public function verificarStock()
+    {
+        $insumosAgotados = Insumo::where('Cantidad', '<=', 'Stock')->get();
+        
+        return response()->json($insumosAgotados);
+    }
+
 }

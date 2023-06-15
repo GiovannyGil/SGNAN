@@ -25,8 +25,6 @@ class InsumoCreateRequest extends FormRequest
     {
         return [
             'Nombre_Insumo'   => 'required|min:3|max:20||unique:insumos',
-            'Precio'          => 'required',
-            'cantidad'        => 'required',
             
         ];
     }

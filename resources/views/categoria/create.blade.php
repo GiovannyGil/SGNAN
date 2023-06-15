@@ -17,20 +17,18 @@
       <div class="form-field col-lg-12">
 
         <label for="" class=" is-required">Nombre Categoria:<FONT COLOR="red"> *</FONT></label>
-      <input type="text" id="Nombre" name="Nombre" class="input-text js-input tabindex=6" tabindex="5">
+      <input type="text" id="Nombre" name="Nombre" class="input-text js-input" tabindex="1">
 
-        <label for="" class=" is-required">Nombre:*</label>
-      <input type="text" id="Nombre" name="Nombre" class="input-text js-input tabindex=6" tabindex="5">
-      
+       
 
             @if ($errors->has('Nombre'))
                     <span class="error text-danger" for="input-Nombre">{{$errors->first('Nombre') }}</span>
                 @endif
       </div>
       <div class="form-field col-lg-12">
-            <a href="/categorias" class="submit-btn2">Cancelar</a>
+            <a href="/categorias" class="submit-btn2" tabindex="3">Cancelar</a>
               {{--<input class="submit-btn" type="submit" value="Guardar"> --}}
-            <button class="submit-btn">Guardar</button>
+            <button class="submit-btn" tabindex="2">Guardar</button>
            </div>
 
            </form>

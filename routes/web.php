@@ -99,6 +99,11 @@ Route::post('productos/', 'App\Http\Controllers\ProductoController@store');
 Route::get('/productos/{id}/edit', [App\Http\Controllers\ProductoController::class, 'edit'])->name('productos.edit');
 Route::put('/productos/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('productos.update');
 
+Route::get('/productos/{producto}/change_status', [App\Http\Controllers\ProductoController::class,'change_status'])
+    ->name('productos.change_status');
+
+
+
 //ROLES
 Route::middleware([
     'auth:sanctum',
@@ -122,10 +127,17 @@ Route::get('/roles/{role}/change_status', [App\http\Controllers\RoleController::
 Route::resource('compras', 'App\Http\Controllers\CompraController');
 Route::get('/compras/{compra}/change_status', [App\http\Controllers\CompraController::class,'change_status'])
     ->name('compras.change_status');
+
+
+    
 // insumos 
 Route::resource('insumos', 'App\Http\Controllers\InsumoController');
 Route::get('/insumos/{insumo}/change_status', [App\http\Controllers\InsumoController::class,'change_status'])
     ->name('insumos.change_status');
+
+Route::get('/verificar-stock', 'App\http\Controllers\InsumoController@verificarStock')->name('verificar.stock');
+
+
 // proveedores 
 Route::resource('proveedores', 'App\Http\Controllers\ProveedorController');
 Route::get('/proveedores/{proveedor}/change_status', [App\http\Controllers\ProveedorController::class,'change_status'])

@@ -42,7 +42,7 @@ class VentaController extends Controller
     public function create()
     {  // ir a la vista del formulario crear un registro
         // $productos = producto::all();
-        $empleados = Empleado::all();
+        $empleados = Empleado::where('status','ACTIVE')->get();
         $productos = Productos::where('Estado', 'Activo')->get();
         $users = User::all();
         return view('venta.create', compact('empleados', 'productos', 'users'));

@@ -14,13 +14,13 @@ END;
 
 -- anular una venta
 DELIMITER //
-CREATE TRIGGER `tr_updStockVentaAnular` AFTER INSERT ON `ventas`
+CREATE TRIGGER `tr_updStockCompraAnular` AFTER INSERT ON `compras`
  FOR EACH ROW BEGIN 
- 	UPDATE productos p 
-     JOIN detalle_ventas dv 
-     ON dv.id_producto = p.id
-     AND dv.venta_id = new.id
-     set p.Cantidad = p.Cantidad + dv.Cantidad;
+ 	UPDATE insumos p 
+     JOIN detalle_compras dc 
+     ON dc.id_insumos = i.id
+     AND dc.compra_id = new.id
+     set i.Cantidad = i.Cantidad - dc.Cantidad;
 end;
 //
 DELIMITER ;
@@ -37,4 +37,26 @@ CREATE TRIGGER `tr_updStockCompra` AFTER INSERT ON `detalle_compras`
  SET i.Cantidad = i.Cantidad + NEW.Cantidad;
 END;
 //
+DELIMITER ;
+
+
+-- Anular compra y descontar los insumos agregados en la compra
+DELIMITER //
+CREATE TRIGGER tr_compra_deactivated AFTER UPDATE ON compras
+FOR EACH ROW
+BEGIN
+    IF NEW.status = 'DEACTIVATED' AND OLD.status != 'DEACTIVATED' THEN
+        UPDATE insumos
+        SET Cantidad = Cantidad - (
+            SELECT SUM(Cantidad)*Paquetes
+            FROM detalle_compras
+            WHERE compra_id = NEW.id
+        )
+        WHERE id IN (
+            SELECT id_insumos
+            FROM detalle_compras
+            WHERE compra_id = NEW.id
+        );
+    END IF;
+END//
 DELIMITER ;

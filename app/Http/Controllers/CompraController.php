@@ -15,15 +15,6 @@ use App\Models\DetalleCompra;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-// class Tinsumo
-// {
-//     public $Referencia_compra;
-//     public $Fecha_compra;
-//     public $Cantidad;
-//     public $Precio_unitario;
-//     public $id_insumos;
-//     public $id_proveedores;
-// }
 class CompraController extends Controller
 
 {
@@ -36,7 +27,7 @@ class CompraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {
         //
         $Proveedor = Proveedor::all();
         $compras = Compra::all();
@@ -48,13 +39,11 @@ class CompraController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function create()
     {
-        // $Proveedor = Proveedor::where('status','ACTIVE')->get();
-        // $Insumos = Insumo::where('status','ACTIVE')->get();
-        $Proveedor = Proveedor::all();
-        $Insumos = Insumo::all();
+        $Proveedor = Proveedor::where('status','ACTIVE')->get();
+        $Insumos = Insumo::where('status','ACTIVE')->get();
         $users = User::all();
         return view('compra.create', compact('Insumos', 'Proveedor', 'users'));
     }
@@ -66,8 +55,8 @@ class CompraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request  $request){
-        $compra = Compra::create($request->all()+[ 
-            'user_id' => auth()->user()->id,
+        $compra = Compra::create($request->all()+[
+            'id_user' => auth()->user()->id,
         ]);
 
         // crear nuevo detalle compra recorriendo un foreach de detalles
@@ -76,8 +65,11 @@ class CompraController extends Controller
         foreach ($request->id_insumos as $key => $Insumos){
             $results[] = array(
             "id_insumos" => $request->id_insumos[$key],
-            "Cantidad" => $request->Cantidad[$key], 
-            "Precio" => $request->Precio[$key]);
+            "Cantidad" => $request->Cantidad[$key],
+            "Paquetes" => $request->Paquetes[$key],
+            "Precio_Paquete" => $request->Precio_Paquete[$key],
+            "Precio" => $request->Precio_Paquete[$key] / $request->Cantidad[$key],
+        );
         }
         $compra->detalleCompra()->createMany($results);
 
@@ -92,10 +84,9 @@ class CompraController extends Controller
      */
     public function show(Compra $compra)
     {
-        // 
+        //
         $Insumos = Insumo::all();
         $Proveedor = Proveedor::all();
-        // $compras = Compra::all();
         $subtotal = 0; // variable para almacenar el subtotal
         $detallecompras = $compra->detalleCompra; // detalle de la venta
         foreach ($detallecompras as $detalle){ // recorremos el detalle de la venta
@@ -112,7 +103,7 @@ class CompraController extends Controller
      */
     public function edit($id)
     {
-        // 
+        //
         $compra = Compra::findOrFail($id);
         $TProveedor = Proveedor::all();
         $TInsumos = Insumo::all();
@@ -163,20 +154,22 @@ class CompraController extends Controller
             $compra->status = 'DEACTIVATED';
 
             $compra->save();
-            $detalleCompra = $compra->detalleCompras()->first();
-            $Cantidad = $detalleCompra->Cantidad;
+            // $detalleCompra = $compra->DetalleCompra()->first();
+            // $Cantidad = $detalleCompra->Cantidad;
 
-            $insumos = Insumo::find($detalleCompra->id_insumos);
-            $insumos->Cantidad -= $Cantidad;
-            $insumos->save();
+            // $insumos = Insumo::find($detalleCompra->id_insumos);
+            // $insumos->Cantidad -= $Cantidad;
+            // $insumos->save();
 
             return redirect()->back()->with('success', 'El estado de la compra ha sido cambiada exitosamente.');
-        } 
+        } else {
+            return redirect()->back();
+        }
 
     }
 
 
-}
+
 
     // pdf de todalas las ventas
     function pdfAll(){

@@ -28,9 +28,10 @@ return new class extends Migration
                     ->cascadeOnUpdate()
                     ->noActionOnDelete();
                 $table->string('Referencia_compra')->unique();
-                $table->string('Descripcion_compra');
+                $table->string('Descripcion_compra')->nullable();
                 $table->decimal('total');
                 $table->enum('status', ['ACTIVE', 'DEACTIVATED'])->default('ACTIVE');
+                $table->string('observacionAnular')->nullable();
                 $table->timestamps();
         });
         

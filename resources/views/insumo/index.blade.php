@@ -22,7 +22,7 @@
         <tr>
         <th scope="col">id</th>
         <th scope="col">Nombre del insumo</th>
-        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
         <th scope="col">cantidad</th>
         <th scope="col">Categorias</th>
         <th scoope="col">Estado</th>
@@ -34,31 +34,30 @@
         <tr>
             <td scope="row">{{$insumo->id }}</td>
             <td>{{$insumo->Nombre_Insumo}}</td>
-            <td>{{$insumo->Precio}}</td>
+            <td>{{$insumo->Stock}}</td>
             <td>{{$insumo->Cantidad}}</td>
             <td>{{$insumo->categorias->Nombre}}</td>   
-            @if ($insumo->status == 'ACTIVE')
+            @if($insumo->status == 'ACTIVE')
                 <td>
-                    <a class="jsgrid-button btn btn-success btn-xs" href="{{ route('insumos.change_status', $insumo) }}" title="Editar">
-                    Activo<i class="fas fa-fw fa-check"></i>
-                </a>
+                    <a class="jsgrid-button btn btn-success" href="#" title="Activo" onclick="cambiarEstado({{ $insumo->id }})">
+                        Activo<i class="fas fa-fw fa-check"></i>
+                    </a>
                 </td> 
-                
             @else
                 <td>
-                    <a class="jsgrid-button btn btn-danger btn-xs" href="{{ route('insumos.change_status', $insumo) }}" title="Editar" >
-                    Desactivado<i class="fas fa-fw fa-times"></i>
-                </a>
+                    <a class="jsgrid-button btn btn-danger" href="#" title="Desactivo" onclick="cambiarEstado({{ $insumo->id }})">
+                        Desactivado<i class="fas fa-fw fa-times"></i>
+                    </a>
                 </td>
-                @endif
+            @endif
 
             <td class=" td-actions text-right">
                 
-                <a href="{{ route('insumos.edit', $insumo->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-fw fa-pen"></i></a>
+                <a href="{{ route('insumos.edit', $insumo->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
                 <form action="{{ route('insumos.destroy', $insumo->id) }}" method="POST" style="display: inline-block;" class="formulario-eliminar">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger btn-sm" type="submit">
+                <button class="btn btn-outline-dark btn-sm" type="submit">
                 <i class="fas fa-fw fa-xmark"><h7>X</h7></i>
                 </button> 
             </form>
@@ -80,6 +79,8 @@
 @section('js')
     <script> console.log('Hi!'); </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
@@ -131,15 +132,47 @@
             cancelButtonText: 'Cancelar'
             }).then((result) => {
             if (result.isConfirmed) {
-                // Swal.fire(
-                // 'Deleted!',
-                // 'Your file has been deleted.',
-                // 'success'
-                // )
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
                 this.submit();
             }
             })
         });
+
+        // Agregar el siguiente código JavaScript en tu archivo de scripts o en la sección <script> de tu vista
+
+        // Función para cambiar el estado del insumo con confirmación Swal.fire
+        function cambiarEstado(insumoId) {
+            Swal.fire({
+                icon: 'question',
+                title: 'Confirmación',
+                text: '¿Deseas cambiar el estado del insumo?',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Realizar la solicitud AJAX para cambiar el estado
+                    axios.get(`/insumos/${insumoId}/change_status`)
+                        .then(response => {
+                            // Actualizar la vista o realizar cualquier acción adicional si es necesario
+                            // Por ejemplo, recargar la página: location.reload();
+                            // o actualizar el estado del insumo en la interfaz de usuario
+                            Swal.fire('Éxito', response.data.success, 'success');
+                            location.reload(); // Recarga la página para reflejar el cambio de estado
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            // Manejar errores si es necesario
+                            Swal.fire('Cancelado', 'El cambio de estado ha sido cancelado', 'info');
+                        });
+                }
+            });
+        }
+
       </script>
     <script>
 

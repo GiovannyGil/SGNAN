@@ -16,8 +16,9 @@ class Insumo extends Model
         // llamar los campos de la tabla
         'id',
         'Nombre_Insumo',
-        'Precio',
-        'Cantidad'
+        'Stock',
+        'Cantidad',
+        'status',
 
     ];
 

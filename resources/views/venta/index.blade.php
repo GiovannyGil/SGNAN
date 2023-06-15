@@ -27,7 +27,7 @@
         <div class="table-responsive">
             <table name="ventas" id="ventas" 
             class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
-                <thead class="bg-primary text-white">
+                <thead class="bg-primary text-white" >
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col" title="Fecha de registro de la venta">Fecha_Venta</th>
@@ -70,10 +70,10 @@
                             
                             <td>
                                 <div class="form-check form-switch">
-                                    <a href="{{ route('ventas.show', $venta) }}"class="btn btn-outline-dark"
+                                    <a href="{{ route('ventas.show', $venta) }}"class="btn btn-outline-dark btn-sm"
                                     title="Ver detalles"><i class="fas fa-fw fa-eye"></i></a>
                                     <a href="{{ route('ventas.pdf', $venta) }}" title="Ver PDF"
-                                    class="btn btn-outline-dark"><i class="fas fa-fw fa-file-pdf"></i></i></a>
+                                    class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-file-pdf"></i></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -135,6 +135,7 @@
                                 axios.get(`/Cambiar_Estado/ventas/${ventaId}`)
                                     .then((response) => {
                                         Swal.fire('Éxito', response.data.success, 'success');
+                                        this.submit();
                                         location.reload(); // Recarga la página para reflejar el cambio de estado
                                     })
                                     .catch((error) => {
@@ -150,24 +151,24 @@
             });
         </script>
 
-    <script>
-        $(document).ready(function() {
-            $('#ventas').DataTable( {
-                "order": [[3, "desc"]],
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "Busqueda no encontrada - disculpa",
-                    "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(Filtrado de _MAX_ registros totales)",
-                    "search": 'Buscar:',
-                    "paginate": {
-                        'next': 'Siguiente',
-                        'previous': 'Anterior'
+        <script>
+            $(document).ready(function() {
+                $('#ventas').DataTable( {
+                    "order": [[3, "desc"]],
+                    "language": {
+                        "lengthMenu": "Mostrar _MENU_ registros por página",
+                        "zeroRecords": "Busqueda no encontrada - disculpa",
+                        "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                        "infoEmpty": "No hay registros disponibles",
+                        "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                        "search": 'Buscar:',
+                        "paginate": {
+                            'next': 'Siguiente',
+                            'previous': 'Anterior'
+                        }
                     }
-                }
+                } );
             } );
-        } );
-    </script>
+        </script>
     @endsection
 @endsection

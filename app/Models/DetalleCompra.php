@@ -12,6 +12,8 @@ class DetalleCompra extends Model
         'id',
         'compra_id',
         'id_insumos',
+        'Paquetes',
+        'Precio_Paquete',
         'Cantidad',
         'Precio',
     ];

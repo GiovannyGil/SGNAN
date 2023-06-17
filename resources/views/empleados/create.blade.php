@@ -54,9 +54,9 @@
                 <label for="Genero" class="" tabindex="7">Genero<FONT COLOR="red"> *</FONT></label>
                 <select class="input-text js-input" name="Genero" value="{{ old('Genero') }}">
                     <option value="" >Generos</option>
-                    <option value="Hombre" >Masculino</option>
-                    <option value="Mujer" >Femenino</option>
-                    <option value="No definido">Otro</option>
+                    <option value="Masculino" @if(old('Genero') == 'Masculino') selected @endif>Masculino</option>
+                    <option value="Femenino" @if(old('Genero') == 'Femenino') selected @endif>Femenino</option>
+                    <option value="Otro" @if(old('Genero') == 'Otro') selected @endif>Otro</option>
                 </select>
                 @if ($errors->has('Genero'))
                     <span class="error text-danger" for="input-Genero">{{$errors->first('Genero') }}</span>
@@ -67,7 +67,7 @@
                 <select class="input-text js-input" name="id_tipoempleados" >
                 <option value="">Tipos de empleados</option>
                     @foreach($tipoempleados as $Templeado)
-                    <option value="{{ $Templeado->id}}">{{ $Templeado->descripcion}}</option>
+                    <option value="{{ $Templeado->id}}" @if (old('id_tipoempleados') == $Templeado->id) selected @endif>{{ $Templeado->descripcion}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('id_tipoempleados'))

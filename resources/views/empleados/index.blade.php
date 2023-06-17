@@ -104,14 +104,12 @@
             e.preventDefault();
 
             Swal.fire({
-            title: '¿Estas seguro?',
-            text: "Este empleado se desactivara definitivamente!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Si, desactivar!',
-            cancelButtonText: 'Cancelar'
+                icon: 'question',
+                title: '¿Estas segur@?',
+                text: '¿Deseas cambiar el estado del empleado?',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar', 
             }).then((result) => {
             if (result.isConfirmed) {
                 // Swal.fire(
@@ -141,14 +139,12 @@
             e.preventDefault();
 
             Swal.fire({
-            title: '¿Estas seguro?',
-            text: "Este empleado se activara definitivamente!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Si, activar!',
-            cancelButtonText: 'Cancelar'
+                icon: 'question',
+                title: '¿Estas segur@?',
+                text: '¿Deseas cambiar el estado del empleado?',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar', 
             }).then((result) => {
             if (result.isConfirmed) {
                 // Swal.fire(

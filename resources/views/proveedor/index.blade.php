@@ -41,13 +41,13 @@
             <td>{{$proveedor->Telefono}}</td>
             @if ($proveedor->status == 'ACTIVE')
                 <td>
-                    <button class="jsgrid-button btn btn-success" title="Editar" onclick="cambiarEstadoProveedor({{ $proveedor->id }})">
+                    <button class="jsgrid-button btn btn-success btn-xs" title="Editar" onclick="cambiarEstadoProveedor({{ $proveedor->id }})">
                         Activo<i class="fas fa-fw fa-check"></i>
                     </button>
                 </td>
             @else
                 <td>
-                    <button class="jsgrid-button btn btn-danger" title="Editar" onclick="cambiarEstadoProveedor({{ $proveedor->id }})">
+                    <button class="jsgrid-button btn btn-danger btn-xs" title="Editar" onclick="cambiarEstadoProveedor({{ $proveedor->id }})">
                         Desactivado<i class="fas fa-fw fa-times"></i>
                     </button>
                 </td>

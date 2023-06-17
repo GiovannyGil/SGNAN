@@ -38,7 +38,14 @@
                 @endif
             </td>
             <td>{{ $user->created_at }}</td>
-            @if ($user->status == 'ACTIVE')
+            
+            @if($user->email === 'deliciasnan@gmail.com')
+            <form action="{{ route('users.change_status', $user) }}" class="desactivar">
+                <td>
+
+                </td>
+            </form>
+            @elseif ($user->status == 'ACTIVE')
             <form action="{{ route('users.change_status', $user) }}" class="desactivar">
                 <td>
                         <button class="jsgrid-button btn btn-success btn-xs" href="{{ route('users.change_status', $user) }}" title="Desactivar usuario" type="submit">
@@ -57,7 +64,7 @@
                 </form>
             @endif
 
-            @if($user->status == 'ACTIVE')
+            @if($user->status == 'ACTIVE' and $user->email <> 'deliciasnan@gmail.com')
                 <td class=" td-actions text-right">
                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-user" title="Ver información detalladamente del usuario"></i></a>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen" title="Editar usuario"></i></a>
@@ -103,14 +110,12 @@
             e.preventDefault();
 
             Swal.fire({
-            title: '¿Estas seguro?',
-            text: "Este usuario se desactivara definitivamente!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Si, desactivar!',
-            cancelButtonText: 'Cancelar'
+                icon: 'question',
+                title: '¿Estas segur@?',
+                text: '¿Deseas cambiar el estado del empleado?',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar', 
             }).then((result) => {
             if (result.isConfirmed) {
                 // Swal.fire(
@@ -140,14 +145,12 @@
             e.preventDefault();
 
             Swal.fire({
-            title: '¿Estas seguro?',
-            text: "Este usuario se activara definitivamente!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Si, activar!',
-            cancelButtonText: 'Cancelar'
+                icon: 'question',
+                title: '¿Estas segur@?',
+                text: '¿Deseas cambiar el estado del empleado?',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar', 
             }).then((result) => {
             if (result.isConfirmed) {
                 // Swal.fire(
@@ -185,43 +188,6 @@
             })
         </script>
     @endif
-
-    @if (session('Eliminar') == 'Usuario eliminado exitosamente')
-            <script>
-                Swal.fire(
-                '¡Eliminado!',
-                'Usuario eliminado correctamente.',
-                'success'
-                )
-            </script>
-        @endif
-
-    <script>
-        $('.formulario-eliminar').submit(function(e){
-            e.preventDefault();
-
-            Swal.fire({
-            title: '¿Estas seguro?',
-            text: "Este usuario se eliminara definitivamente!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Si, Eliminar!',
-            cancelButtonText: 'Cancelar'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                // Swal.fire(
-                // 'Deleted!',
-                // 'Your file has been deleted.',
-                // 'success'
-                // )
-                this.submit();
-            }
-            })
-        });
-        
-    </script>
 
 
     <script>

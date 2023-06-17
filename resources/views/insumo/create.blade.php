@@ -14,7 +14,7 @@
                   <span class="error text-danger" for="input-Nombre_Insumo">{{$errors->first('Nombre_Insumo') }}</span>
               @endif
                   
-        </div>
+        </div> 
         <div class="form-field col-lg-4">
           <label for="categoria" class=" is-required" tabindex="4">Tipo Categoría <FONT COLOR="red"> *</FONT></label>
               <select  class="input-text js-input"  name="id_categorias" tabindex="2">
@@ -23,6 +23,16 @@
                           <option value="{{$Tcategoria->id}}">{{$Tcategoria->Nombre}}</option>
                       @endforeach
               </select>
+              @if ($errors->has('id_categorias'))
+                    <span class="error text-danger" for="input-imagen">{{$errors->first('id_categorias') }}</span>
+                @endif
+        </div>
+        <div class="form-field col-lg-4">
+          <label for="" class=" is-required" >Stock mínimo: <FONT COLOR="red"> *</FONT> </label>
+              <input type="number" id="Stock" name="Stock"  class="input-text js-input"  tabindex="1" value="{{ old('Stock') }}" >
+              @if ($errors->has('Stock'))
+                  <span class="error text-danger" for="input-Stock">{{$errors->first('Stock') }}</span>
+              @endif                  
         </div>
           <div class="form-field col-lg-12">
               <a href="/insumos" class="submit-btn2" tabindex="4">Cancelar</a>

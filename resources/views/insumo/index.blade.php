@@ -24,6 +24,7 @@
         <th scope="col">Nombre del insumo</th>
         <th scope="col">Stock</th>
         <th scope="col">cantidad</th>
+        <th scope="col">Precio U</th>
         <th scope="col">Categorias</th>
         <th scoope="col">Estado</th>
         <th scope="col" class="text-right">Acciones</th>
@@ -36,16 +37,17 @@
             <td>{{$insumo->Nombre_Insumo}}</td>
             <td>{{$insumo->Stock}}</td>
             <td>{{$insumo->Cantidad}}</td>
+            <td>{{$insumo->PrecioU}}</td>
             <td>{{$insumo->categorias->Nombre}}</td>   
             @if($insumo->status == 'ACTIVE')
                 <td>
-                    <a class="jsgrid-button btn btn-success" href="#" title="Activo" onclick="cambiarEstado({{ $insumo->id }})">
+                    <a class="jsgrid-button btn btn-success btn-xs" href="#" title="Activo" onclick="cambiarEstado({{ $insumo->id }})">
                         Activo<i class="fas fa-fw fa-check"></i>
                     </a>
                 </td> 
             @else
                 <td>
-                    <a class="jsgrid-button btn btn-danger" href="#" title="Desactivo" onclick="cambiarEstado({{ $insumo->id }})">
+                    <a class="jsgrid-button btn btn-danger btn-xs" href="#" title="Desactivo" onclick="cambiarEstado({{ $insumo->id }})">
                         Desactivado<i class="fas fa-fw fa-times"></i>
                     </a>
                 </td>

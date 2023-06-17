@@ -46,14 +46,14 @@
                             <td title="Total de la Venta">{{ $venta->total }}</td>
                             @if ($venta->Estado == 'Pendiente')
                                 <td>
-                                    <a class="jsgrid-button btn btn-danger cambiar-estado-btn" title="Pendiente"
+                                    <a class="jsgrid-button btn btn-danger cambiar-estado-btn btn-sm" title="Pendiente"
                                     data-estado="Pendiente" href="{{ route('Cambiar.Estado.ventas', $venta) }}">
                                         Pendiente <i class="fas fa-times"></i>
                                     </a>
                                 </td>
                             @else
                                 <td>
-                                    <a class="jsgrid-button btn btn-success cambiar-estado-btn" title="Pago"
+                                    <a class="jsgrid-button btn btn-success cambiar-estado-btn btn-sm" title="Pago"
                                     data-estado="Pagado"  href="{{ route('Cambiar.Estado.ventas', $venta) }}">
                                         Pagado <i class="fas fa-check"></i>
                                     </a>

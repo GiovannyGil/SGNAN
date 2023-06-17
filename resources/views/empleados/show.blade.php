@@ -22,14 +22,14 @@
                 </div>
                 @endif
 
-                <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-9" style="max-width: 750px;">
                 <div class="row g-0">
                 <div class="col-md-4">
-                <img width="200" height="350" src="/imagen/{{$empleado->imagen}}" alt="Empleado" class="avatar" style="border-radius:1%">
+                <img width="270" height="380" src="/imagen/{{$empleado->imagen}}" alt="Empleado" class="avatar" style="border-radius:1%">
                 </div>
                 <div class="col-md-8">
                 <div class="card-body">
-                <h4 class="title mt-4 ">{{ $empleado->Nombre }}</h4>
+                <h4 class="title mt-0">{{ $empleado->Nombre }}</h4>
                     <p class="card-text">
                             <b> Apellido: </b>{{ $empleado->Apellidos }} <br>
                             <b> Email: </b>{{ $empleado->Email }} <br>

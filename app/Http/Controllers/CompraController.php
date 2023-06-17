@@ -161,7 +161,7 @@ class CompraController extends Controller
             // $insumos->Cantidad -= $Cantidad;
             // $insumos->save();
 
-            return redirect()->back()->with('success', 'El estado de la compra ha sido cambiada exitosamente.');
+            return redirect()->back()->with('Desactivar', 'Compra Anulada Exitosamente');
         } else {
             return redirect()->back();
         }

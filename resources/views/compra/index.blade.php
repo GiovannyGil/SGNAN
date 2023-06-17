@@ -39,15 +39,16 @@
                 <td>{{$compra->Descripcion_compra}}</td>
                 <td>{{$compra->total}}</td>
                 @if ($compra->status == 'ACTIVE')
+                <form  action="{{ route('compras.change_status', $compra) }}" class="desactivar">
                     <td>
-                        <a class="jsgrid-button btn btn-success" href="{{ route('compras.change_status', $compra) }}" title="Activo">
+                        <button class="jsgrid-button btn btn-success btn-xs" href="{{ route('compras.change_status', $compra) }}" title="Activo" type="submit">
                         Activo<i class="fas fa-fw fa-check"></i>
-                        </a>
+                        </button>
                     </td>
-                    
+                </form>    
                 @else
                     <td>
-                        <p class="jsgrid-button btn btn-danger none"  title="Anulado" @readonly(true) >
+                        <p class="jsgrid-button btn btn-danger none btn-xs"  title="Anulado" @readonly(true) >
                         Anulado<i class="fas fa-fw fa-times"></i>
                         </p>
                     </td>
@@ -87,6 +88,48 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
+        
+        @if (session('Desactivar') == 'Compra Anulada Exitosamente')
+            <script>
+                Swal.fire(
+                '!ANULADO¡!',
+                'Compra Anulada Exitosamente.',
+                'success'
+                )
+            </script>
+        @endif
+
+    <script>
+        $('.desactivar').submit(function(e){
+            e.preventDefault();
+
+            Swal.fire({
+                icon: 'question',
+                title: '¿Estas segur@?',
+                text: '¿Deseas anular la compra?',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar', 
+        
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // Swal.fire(
+                // 'Deleted!',
+                // 'Your file has been deleted.',
+                // 'success'
+                // )
+                this.submit();
+            }
+            })
+        });
+        
+    </script>
+        
+        
+        
+        
+        
+        
         @if (session('crear') == 'Compra registrada exitosamente')
             <script>
                 Swal.fire({

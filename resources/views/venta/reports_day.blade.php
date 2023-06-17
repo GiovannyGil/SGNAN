@@ -17,22 +17,27 @@
 <div>
     <h2>Reporte de Ventas</h2>
     <div class="row">
-        <div class="col-12 col-md-4 text-center" title="Fecha Actual">
+        <div class="col-12 col-md-3 text-center" title="Fecha Actual">
             <span>Fecha Consulta: <b></b></span>
             <div class="form-group">
                 <strong>{{\Carbon\Carbon::now()->format('d/m/Y')}}</strong>
             </div>
         </div>
-        <div class="col-12 col-md-4 text-center" title="Cantidad de Ventas">
+        <div class="col-12 col-md-3 text-center" title="Cantidad de Ventas">
             <span>Cantidad de Registros: <b></b></span>
             <div class="form-group">
                 <strong>{{$ventas->count()}}</strong>
             </div>
         </div>
-        <div class="col-12 col-md-4 text-center" title="Valor total Ventas">
+        <div class="col-12 col-md-3 text-center" title="Valor total Ventas">
             <span>Total Ingresos: <b></b></span>
             <div class="form-group">
                 <strong>{{$total}}</strong>
+            </div>
+        </div>
+        <div class="col-12 col-md-3  text-center">
+            <div class="form-group">
+                    <a href="/ventas" class="btn btn-primary float-right">Volver</a>
             </div>
         </div>
     </div>
@@ -58,13 +63,13 @@
                             @if ($venta->Estado == 'Pendiente')
                                 <td>
                                     <a class="jsgrid-button btn btn-danger"
-                                    href="{{route('Cambiar.Estado.ventas', $venta)}}">
+                                    href="#">
                                         Pendiente <i class="fas fa-times" title="Estado de la Venta"></i></a>
                                 </td>
                             @else
                                 <td  title="Estado de la Venta">
-                                    <button type="button" disabledclass="jsgrid-button btn btn-success"
-                                    href="{{route('Cambiar.Estado.ventas', $venta)}}"  title="Estado de la Venta">
+                                    <button type="button" disabled class="jsgrid-button btn btn-success"
+                                    href="#"  title="Estado de la Venta">
                                     pagado <i class="fas fa-check"></i></button>
 
                                 </td>

@@ -98,41 +98,146 @@
                 </div>
             </div>
 
+            
+
         <div class="row">
-            <div class="col-lg-6" title="Gráfico de Barras de las ventas por cada mes">
+            <div hidden id="salesCountsData" data-sales-counts="{{ json_encode($salesCounts) }}"></div>
+            <div hidden id="comprasCountsData" data-compras-counts="{{ json_encode($comprasCounts) }}"></div>
+
+            <div class="col-lg-6" title="Gráfico de Barras de las Compras por cada mes">
                 <div class="card">
+                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                        <h3 class="card-title">
+                        <i class="fas fa-th mr-1"></i>
+                        Ventas por Días a la Semana
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <h3>Ventas por Mes</h3>
+                        
+                        <canvas id="ventasChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6" title="Gráfico de Barras de las Compras por cada mes">
+                <div class="card">
+                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                        <h3 class="card-title">
+                        <i class="fas fa-th mr-1"></i>
+                        Compras por Días a la Semana
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        
+                        <canvas id="comprasChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div hidden id="salesByMonthData" data-sales="{{ json_encode($salesByMonth) }}"></div>
+            <div hidden id="purchasesByMonthData" data-purchases="{{ json_encode($purchasesByMonth) }}"></div>
+        
+            <div class="col-lg-6" title="Gráfico de Barras de las Compras por cada mes">
+                <div class="card">
+                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                        <h3 class="card-title">
+                        <i class="fas fa-th mr-1"></i>
+                        Ventas por Mes
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        
                         <canvas id="salesChart"></canvas>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6" title="Gráfico de Barras de las Compras por cada mes">
                 <div class="card">
+                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                        <h3 class="card-title">
+                        <i class="fas fa-th mr-1"></i>
+                        Compras por Mes
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <h3>Compras por Mes</h3>
+                        
                         <canvas id="purchasesChart"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6" title="Gráfico de Barras del total por cada mes">
-                <div class="card">
-                    <div class="card-body">
-                        <h3>Total Ventas por Mes</h3>
-                        <canvas id="graficoVentasPorMes" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6" title="Gráfico de Barras del total por cada mes">
-                <div class="card">
-                    <div class="card-body">
-                        <h3>Total Ventas por Mes</h3>
-                        <canvas id="graficoComprasPorMes" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-            
         </div>
+
+ 
+
+        {{-- <div class="row">
+            <div class="col-lg-6" title="Gráfico del total de ventas por cada mes">
+                <div class="card">
+                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                        <h3 class="card-title">
+                        <i class="fas fa-th mr-1"></i>
+                        Total Ventas por Mes
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        
+                        <canvas id="graficoVentasPorMes"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" title="Gráfico del total compras por cada mes">
+                <div class="card">
+                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                        <h3 class="card-title">
+                        <i class="fas fa-th mr-1"></i>
+                        Total Compras por Mes
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        
+                        <canvas id="graficoComprasPorMes"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
 
 
         @section('css')
@@ -141,6 +246,8 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             {{-- icons --}}
             <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+
         @endsection
 
 
@@ -149,218 +256,33 @@
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-            <script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 
-                    function meses(id){
-                        let nombreSeleccion;
-                        let mesesNombre = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio',
-                        'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-                        for(let i = 0; i < mesesNombre.length; i++) {
-                            if(id == i){
-                                nombreSeleccion = mesesNombre[i-1];
-                            }
-                        }
-
-                        return nombreSeleccion;
-                    }
-
-
-                document.addEventListener('DOMContentLoaded', function () {
-                var salesByMonth = {!! json_encode($salesByMonth) !!};
-                var purchasesByMonth = {!! json_encode($purchasesByMonth) !!};
-                var ventas = [{{ $totalSales }}];
-                var compras = [{{ $totalPurchases }}];
-                var total = [{{$SumaVentas}}]
-
-                var months = [];
-                var monthsOtra = [];
-                var salesCounts = [];
-                var purchaseCounts = [];
-
-
-
-                salesByMonth.forEach(function (item) {
-                    months.push(meses(item.month));
-                    salesCounts.push(item.count);
-                });
-
-                purchasesByMonth.forEach(function (item) {
-                    monthsOtra.push(meses(item.month));
-                    purchaseCounts.push(item.count);
-                });
-
-                // compras y ventas por mes juntas
-                
-
-                var ctx = document.getElementById('salesChart').getContext('2d');
-                var salesChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: months,
-                        datasets: [{
-                            label: 'Ventas',
-                            data: salesCounts,
-                            // data: total,
-                            backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                precision: 0
-                            }
-                        }
-                    }
-                });
-
-                    var ctx2 = document.getElementById('purchasesChart').getContext('2d');
-                    var purchasesChart = new Chart(ctx2, {
-                        type: 'bar',
-                        data: {
-                            labels: monthsOtra,
-                            datasets: [{
-                                label: 'Compras',
-                                data: purchaseCounts,
-                                backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 2
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    precision: 0
-                                }
-                            }
-                        }
-                    });
-
-                    var ctx = document.getElementById('grafico').getContext('2d');
-
-
-
-                });
-            
-            </script>
-            <script>
-                var ctx = document.getElementById('graficoVentasPorMes').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'polarArea',
-                    data: {
-                        labels: {!! json_encode($meses) !!},
-                        datasets: [{
-                            label: 'Total por mes',
-                            data: {!! json_encode($totalesPorMes) !!},
-                            backgroundColor: [
-                                'rgba(153, 102, 255, 0.8)',
-                                'rgba(54, 162, 235, 0.8)',
-                                'rgba(255, 206, 86, 0.8)',
-                                'rgba(75, 192, 192, 0.8)',
-                                'rgba(153, 102, 255, 0.8)',
-                                'rgba(255, 159, 64, 0.8)'
-                            ],
-                            borderColor: [
-                                'rgba(153, 102, 255)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            </script>
-                <script>
-                var ctx = document.getElementById('graficoComprasPorMes').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'polarArea',
-                    data: {
-                        labels: {!! json_encode($mesesCompras) !!},
-                        datasets: [{
-                            label: 'Total de compras por mes',
-                            data: {!! json_encode($totalesPorMesCompras) !!},
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.8)',
-                                'rgba(54, 162, 235, 0.8)',
-                                'rgba(255, 206, 86, 0.8)',
-                                'rgba(75, 192, 192, 0.8)',
-                                'rgba(153, 102, 255, 0.8)',
-                                'rgba(255, 159, 64, 0.8)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            </script>
-            <script>
-                window.addEventListener('DOMContentLoaded', function() {
-                    setInterval(verificarStock, 60000); // Verificar cada 30 segundos (ajusta el intervalo según tus necesidades)
-                });
-            
-                function verificarStock() {
-                    fetch('{{ route('verificar.stock') }}')
+            <script src="{{asset('vendor/adminlte/dist/js/dash/meses.js')}}"></script>
+            <script src="{{asset('vendor/adminlte/dist/js/dash/semanas.js')}}"></script>
+            <script src="{{asset('vendor/adminlte/dist/js/dash/total.js')}}"></script>
+            <script src="{{asset('vendor/adminlte/dist/js/dash/alertaScasos.js')}}"></script>
+            {{-- <script>
+                function verificarInsumosAgotados() {
+                    fetch('/verificar-insumos-agotados')
                         .then(response => response.json())
                         .then(data => {
-                            if (data.length > 0) {
-                                mostrarAlerta(data);
+                            if (data.message === '¡Hay insumos agotados!') {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'warning',
+                                    title: '¡Alerta de insumos agotados!',
+                                    text: 'Hay insumos agotados. Por favor, revisa la Cantidad de los insumos y adquirir más.',
+                                    showConfirmButton: false,
+                                    timer: 3600000 // 1 hora
+                                });
                             }
-                        })
-                        .catch(error => console.error(error));
+                        });
                 }
+
+                setInterval(verificarInsumosAgotados, 5000); // Ejecutar cada 5 segundos
+
             
-                function mostrarAlerta(insumos) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Advertencia',
-                        text: 'Hay insumos agotados, adquiera más',
-                        position: 'top-end',
-                        showConfirmButton: true,
-                        timer: null,
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        allowEnterKey: false,
-                        showCancelButton: true,
-                        cancelButtonText: 'Cancelar',
-                        confirmButtonText: 'Ir a insumos'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Redireccionar a la vista de insumos
-                            window.location.href = '{{ route('insumos.index') }}';
-                        }
-                    });
-                }
-
-
-            </script>
+            </script> --}}
         @endsection
     @endsection

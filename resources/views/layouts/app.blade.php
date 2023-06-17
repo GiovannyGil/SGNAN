@@ -87,36 +87,45 @@
 @section('js')
 <script>
     window.addEventListener('DOMContentLoaded', function() {
-        setInterval(verificarStock, 5000); // Verificar cada 30 segundos (ajusta el intervalo según tus necesidades)
+    setInterval(verificarStock, 5000); // Verificar cada 5 segundos (ajusta el intervalo según tus necesidades)
+});
+
+function verificarStock() {
+    fetch('{{ route('verificar.stock') }}')
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                mostrarAlerta(data);
+            }
+        })
+        .catch(error => console.error(error));
+}
+
+function mostrarAlerta(insumos) {
+    let mensaje = 'Advertencia, los siguientes insumos se están agotando:<br><ul>';
+    insumos.forEach(insumo => {
+        mensaje += '<li>' + insumo.Nombre_Insumo + '</li>';
     });
+    mensaje += '</ul>';
 
-    function verificarStock() {
-        fetch('{{ route('verificar.stock') }}')
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    mostrarAlerta(data);
-                }
-            })
-            .catch(error => console.error(error));
-    }
-
-    function mostrarAlerta(insumos) {
-        const alertaDiv = document.createElement('div');
-        alertaDiv.classList.add('alert', 'alert-danger', 'fixed-top', 'text-center');
-        alertaDiv.textContent = 'Advertencia, los siguientes insumos se están agotando:';
-        
-        const listaInsumos = document.createElement('ul');
-        insumos.forEach(insumo => {
-            const listItem = document.createElement('li');
-            listItem.textContent = insumo.Nombre_Insumo;
-            listaInsumos.appendChild(listItem);
-        });
-        
-        alertaDiv.appendChild(listaInsumos);
-        
-        document.body.appendChild(alertaDiv);
-    }
+    Swal.fire({
+        icon: 'warning',
+        title: 'Insumos agotados',
+        html: mensaje,
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Ir a la vista de insumos',
+        cancelButtonText: 'Cerrar',
+        timer: 5000, // Duración de 5 segundos
+        timerProgressBar: true,
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redireccionar a la vista de insumos
+            window.location.href = '{{ route('insumos.index'); }}';
+        }
+    });
+}
 
 </script>
 @endsection

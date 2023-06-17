@@ -20,36 +20,108 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        $salesByMonth = DB::table('ventas')
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->get();
         
-        $purchasesByMonth = DB::table('compras')
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
-            ->groupBy(DB::raw('MONTH(created_at)'))
+
+
+
+    // Obtener ventas por mes
+    $salesByMonth = DB::table('ventas')
+        ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
+        ->groupBy(DB::raw('MONTH(created_at)'))
+        ->orderBy(DB::raw('MONTH(created_at)'))
+        ->get();
+
+    // Obtener compras por mes
+    $purchasesByMonth = DB::table('compras')
+        ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
+        ->groupBy(DB::raw('MONTH(created_at)'))
+        ->orderBy(DB::raw('MONTH(created_at)'))
+        ->get();
+
+    // Arreglos para almacenar los datos de ventas y compras por mes
+    $salesData = [];
+    $purchasesData = [];
+
+    // Inicializar los arreglos con cero para los 12 meses
+    for ($month = 1; $month <= 12; $month++) {
+        $salesData[$month] = 0;
+        $purchasesData[$month] = 0;
+    }
+
+    // Asignar los valores de ventas por mes al arreglo correspondiente
+    foreach ($salesByMonth as $sale) {
+        $salesData[$sale->month] = $sale->count;
+    }
+
+    // Asignar los valores de compras por mes al arreglo correspondiente
+    foreach ($purchasesByMonth as $purchase) {
+        $purchasesData[$purchase->month] = $purchase->count;
+    }
+
+        // ------
+        // $salesByDayOfWeek = DB::table('ventas')
+        //     ->select(DB::raw('DAYOFWEEK(created_at) as dayOfWeek'), DB::raw('COUNT(*) as count'))
+        //     ->groupBy(DB::raw('DAYOFWEEK(created_at)'))
+        //     ->get();
+
+        $salesByDayOfWeek = DB::table('ventas')
+            ->select(DB::raw('DAYOFWEEK(created_at) as dayOfWeek'), DB::raw('COUNT(*) as count'))
+            ->groupBy(DB::raw('DAYOFWEEK(created_at)'))
             ->get();
 
+        // Construye un arreglo con los resultados de la consulta
+        $salesData = [];
+        foreach ($salesByDayOfWeek as $sale) {
+            $salesData[$sale->dayOfWeek] = $sale->count;
+        }
 
-        // grafico para total de ventas por mes
-        $ventasPorMes = Venta::selectRaw('SUM(total) as total, MONTH(created_at) as mes')
-            ->groupBy('mes')
+        // Rellena los días sin ventas con cero
+        for ($day = 1; $day <= 7; $day++) {
+            if (!isset($salesData[$day])) {
+                $salesData[$day] = 0;
+            }
+        }
+
+        // Ordena los datos según el día de la semana
+        ksort($salesData);
+
+        // Construye el arreglo final para el gráfico
+        $salesCounts = array_values($salesData);
+
+
+        $comprasByDayOfWeek = DB::table('compras')
+            ->select(DB::raw('DAYOFWEEK(created_at) as dayOfWeek'), DB::raw('COUNT(*) as count'))
+            ->groupBy(DB::raw('DAYOFWEEK(created_at)'))
             ->get();
 
-        $totalesPorMes = $ventasPorMes->pluck('total');
-        $meses = $ventasPorMes->pluck('mes')->map(function ($mes) {
-            return Carbon::create()->month($mes)->locale('es')->monthName;
-        });
+        $comprasData = [];
+        foreach ($comprasByDayOfWeek as $compra) {
+            $comprasData[$compra->dayOfWeek] = $compra->count;
+        }
 
-        // grafico de total compras por mes
-        $comprasPorMes = Compra::selectRaw('SUM(total) as total, MONTH(created_at) as mes')
-            ->groupBy('mes')
-            ->get();
+        for ($day = 1; $day <= 7; $day++) {
+            if (!isset($comprasData[$day])) {
+                $comprasData[$day] = 0;
+            }
+        }
 
-        $totalesPorMesCompras = $comprasPorMes->pluck('total');
-        $mesesCompras = $comprasPorMes->pluck('mes')->map(function ($mes) {
-            return Carbon::create()->month($mes)->locale('es')->monthName;
-        });
+        ksort($comprasData);
+
+        $comprasCounts = array_values($comprasData);
+
+        // --------------------
+
+        // // Obtener valores totales de ventas por mes
+        // $ventasPorMes = DB::table('ventas')
+        // ->select(DB::raw('MONTH(created_at) as mes'), DB::raw('SUM(total) as total'))
+        // ->groupBy(DB::raw('MONTH(created_at)'))
+        // ->get();
+
+        // // Obtener valores totales de compras por mes
+        // $comprasPorMes = DB::table('compras')
+        //     ->select(DB::raw('MONTH(created_at) as mes'), DB::raw('SUM(total) as total'))
+        //     ->groupBy(DB::raw('MONTH(created_at)'))
+        //     ->get();
 
        
         // traer la comparacion de cantidad de ventas y compras por mes
@@ -77,12 +149,17 @@ class DashboardController extends Controller
         'SumaVentas',
         'provideersCount',
         'categoryCount',
-        'ventasPorMes',
-        'totalesPorMes',
-        'meses',
-        'comprasPorMes',
-        'totalesPorMesCompras',
-        'mesesCompras',
+        'salesByDayOfWeek',
+        'salesData',
+        'salesCounts',
+        'comprasByDayOfWeek',
+        'comprasCounts',
+        'salesData',
+        'purchasesData',
+        // 'ventasPorMes',
+        // 'comprasPorMes',
+
+
     ));
     
     }

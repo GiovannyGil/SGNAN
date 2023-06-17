@@ -40,7 +40,7 @@
             <div class="col-12 col-md-3  text-center mt-4">
                 <div class="form-group">
                         {{-- <strong>s/{{$total}}</strong> --}}
-                    
+                        <a href="/ventas" class="btn btn-primary float-right">Volver</a>
                 </div>
             </div>
         </div>
@@ -70,13 +70,13 @@
                                 @if ($venta->Estado == 'Pendiente')
                                     <td  title="Estado de la Venta">
                                         <a class="jsgrid-button btn btn-danger"
-                                        href="{{route('Cambiar.Estado.ventas', $venta)}}">
+                                        href="#}">
                                             Pendiente <i class="fas fa-times"></i></a>
                                     </td>
                                 @else
                                     <td  title="Estado de la Venta">
                                         <button type="button" disabled class="jsgrid-button btn btn-success"
-                                        href="{{route('Cambiar.Estado.ventas', $venta)}}">
+                                        href="#">
                                         pagado <i class="fas fa-check"></i></button>
 
                                     </td>

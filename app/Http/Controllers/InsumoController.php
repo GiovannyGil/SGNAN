@@ -131,11 +131,23 @@ class InsumoController extends Controller
         }
     }
 
-    public function verificarStock()
+    public function verificarInsumosAgotados()
     {
-        $insumosAgotados = Insumo::where('Cantidad', '<=', 'Stock')->get();
-        
-        return response()->json($insumosAgotados);
+        $insumosAgotados = Insumo::whereColumn('cantidad', '<=', 'stock')->get();
+        $hayInsumosAgotados = count($insumosAgotados) > 0;
+    
+        return response()->json([
+            'hayInsumosAgotados' => $hayInsumosAgotados,
+            'cantidadInsumosAgotados' => count($insumosAgotados)
+        ]);
     }
+    public function verificarInsumosSuficientes()
+    {
+        $insumosInsuficientes = Insumo::whereColumn('Cantidad', '<=', 'Stock')->exists();
+
+        return response()->json(['insumosSuficientes' => !$insumosInsuficientes]);
+    }
+    
+
 
 }

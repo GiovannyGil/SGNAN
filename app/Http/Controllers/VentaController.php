@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Venta;
-use App\Models\Insumos;
+use App\Models\Insumo;
 use App\Models\Productos;
 use App\Models\Empleado;
 use App\Models\User;
@@ -15,6 +15,7 @@ use App\Http\Requests\Venta\UpdateRequest;
 use Illuminate\Support\Facades\Auth;
 // use Barryyvdh\DomPDF\Facade as PDF;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class VentaController extends Controller
 {
@@ -29,7 +30,7 @@ class VentaController extends Controller
         $ventas =  Venta::orderBy('Estado', 'asc')->get();
 
         $productos = Productos::where('Estado', 'Activo')->get();
-        
+
 
         return view('venta.index', compact('ventas','productos'));
     }
@@ -140,15 +141,16 @@ class VentaController extends Controller
         // sacar el total de todas las ventas
         $total = 0;
         $totalVenta=0;
+        $SumaVentas = DB::table('ventas')->sum('total');
         foreach ($ventas as $venta) {
             $totalVenta += $venta->total;
         }
-        $pdf = \PDF::loadView('venta.pdfAll', compact('ventas', 'productos', 'empleados', 'totalVenta'));
+        $pdf = \PDF::loadView('venta.pdfAll', compact('ventas', 'productos', 'empleados', 'totalVenta','SumaVentas'));
         return $pdf->download('reporte_de_Ventas.pdf');
     }
 
-    // funcion cambiar estado
-    public function Cambiar_Estado(Venta $venta){
+    public function change_status( Venta $venta)
+    {
         if($venta->Estado == 'Pendiente'){
             $venta->update(['Estado' => 'Pagado']);
             return redirect()->back();
@@ -156,9 +158,13 @@ class VentaController extends Controller
             $venta->update(['Estado' => '']);
             return redirect()->back();
         }
-        $venta->save();
-        return redirect('/ventas')->with('success', '!Proceso terminado¡');
+        // $productos->save();
+        // return redirect('/productos')->with('success','Proceso terminado');
+
     }
+
+
+
 
 
 }

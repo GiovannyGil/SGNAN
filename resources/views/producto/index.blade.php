@@ -156,7 +156,7 @@
                 Swal.fire({
                 icon: 'question',
                 title: 'Confirmación',
-                text: '¿Deseas cambiar el estado del insumo?',
+                text: '¿Deseas cambiar el estado del producto?',
                 showCancelButton: true,
                 confirmButtonText: 'Sí',
                 cancelButtonText: 'Cancelar',
@@ -180,5 +180,7 @@
             });
         }
         </script>
+
+        
     @endsection
 @endsection

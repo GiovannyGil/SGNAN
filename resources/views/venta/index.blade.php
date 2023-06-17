@@ -45,20 +45,17 @@
                             <td title="Fecha de registro de la venta">{{ $venta->created_at }}</td>
                             <td title="Total de la Venta">{{ $venta->total }}</td>
                             @if ($venta->Estado == 'Pendiente')
-                                <td>
-                                    <a class="jsgrid-button btn btn-danger cambiar-estado-btn" title="Pendiente"
-                                    data-estado="Pendiente" href="{{ route('Cambiar.Estado.ventas', $venta) }}">
-                                        Pendiente <i class="fas fa-times"></i>
-                                    </a>
-                                </td>
-                            @else
-                                <td>
-                                    <a class="jsgrid-button btn btn-success cambiar-estado-btn" title="Pago"
-                                    data-estado="Pagado"  href="{{ route('Cambiar.Estado.ventas', $venta) }}">
-                                        Pagado <i class="fas fa-check"></i>
-                                    </a>
-                                </td>
-                            @endif
+                                    <td>
+                                        <a class="jsgrid-button btn btn-danger" href="#" title="Pendiente" onclick="cambiarEstado({{ $venta->id }})">
+                                            Pendiente <i class="fas fa-times" ></i></a>
+                                    </td>
+                                @else
+                                    <td>
+                                        <button type="button" disabled class="jsgrid-button btn btn-success" href="#" title="Pago" onclick="cambiarEstado({{ $venta->id }})">
+                                        pagado <i class="fas fa-check" ></i></button>
+
+                                    </td>
+                                @endif
                             {{-- <td title="Tiempo que demoró la venta">{{ $venta->created_at->
                                 diffForHumans($venta->updated_at) }}</td> --}}
                             <td title="Tiempo que demoró la venta">
@@ -97,6 +94,7 @@
         <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        {{-- <script src="{{asset('vendor/adminlte/dist/js/dash/alertaScasos.js')}}"></script> --}}
 
 
         @if (session('Crear') == 'Venta registrada exitosamente')
@@ -112,7 +110,7 @@
         @endif
 
 
-        <script>
+        {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const buttons = document.querySelectorAll('.cambiar-estado-btn');
                 
@@ -149,12 +147,12 @@
                     });
                 });
             });
-        </script>
+        </script> --}}
 
         <script>
             $(document).ready(function() {
                 $('#ventas').DataTable( {
-                    "order": [[3, "desc"]],
+                    "order": [[3, "asc"]],
                     "language": {
                         "lengthMenu": "Mostrar _MENU_ registros por página",
                         "zeroRecords": "Busqueda no encontrada - disculpa",
@@ -169,6 +167,35 @@
                     }
                 } );
             } );
+
+
+            function cambiarEstado(ventaId) {
+                Swal.fire({
+                icon: 'question',
+                title: 'Confirmación',
+                text: '¿Deseas cambiar el estado de la venta?',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realizar la solicitud AJAX para cambiar el estado
+                        axios.get(`/ventas/${ventaId}/change_status`)
+                        .then(response => {
+                                // Actualizar la vista o realizar cualquier acción adicional si es necesario
+                                // Por ejemplo, recargar la página: location.reload();
+                                // o actualizar el estado del insumo en la interfaz de usuario
+                                Swal.fire('Éxito', response.data.success, 'success');
+                                location.reload(); // Recarga la página para reflejar el cambio de estado
+                            })
+                        .catch(error => {
+                            console.error(error);
+                            // Manejar errores si es necesario
+                            Swal.fire('Cancelado', 'No se puede realizar esta acción', 'error');
+                        });
+                }
+            });
+        }
         </script>
     @endsection
 @endsection

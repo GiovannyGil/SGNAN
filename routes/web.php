@@ -90,8 +90,14 @@ Route::middleware([
     Route::resource('ventas', 'App\Http\Controllers\VentaController');
 });
 
-Route::get('Cambiar_Estado/ventas/{venta}','App\Http\Controllers\VentaController@Cambiar_Estado')->
-name('Cambiar.Estado.ventas');
+
+// Route::get('Cambiar_Estado/ventas/{venta}', 'App\Http\Controllers\VentaController@Cambiar_Estado')->
+// name('Cambiar.Estado.ventas');
+Route::get('/ventas/{venta}/change_status', [App\Http\Controllers\VentaController::class,'change_status'])
+    ->name('ventas.change_status');
+Route::get('verificar-insumos-suficientes', 'App\Http\Controllers\InsumoController@verificarInsumosSuficientes');
+
+
 
 //Productos
 Route::resource('productos', 'App\Http\Controllers\ProductoController');
@@ -135,7 +141,8 @@ Route::resource('insumos', 'App\Http\Controllers\InsumoController');
 Route::get('/insumos/{insumo}/change_status', [App\http\Controllers\InsumoController::class,'change_status'])
     ->name('insumos.change_status');
 
-Route::get('/verificar-stock', 'App\http\Controllers\InsumoController@verificarStock')->name('verificar.stock');
+// Route::get('/verificar-stock', 'App\http\Controllers\InsumoController@verificarStock')->name('verificar.stock');
+Route::get('verificar-insumos-agotados', 'App\http\Controllers\InsumoController@verificarInsumosAgotados');
 
 
 // proveedores 

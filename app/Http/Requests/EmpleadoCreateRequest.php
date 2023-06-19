@@ -45,7 +45,7 @@ class EmpleadoCreateRequest extends FormRequest
             ],
             'Celular'          => 'required|min:10|max:10',
             'Observaciones',
-            'imagen'           => 'required|image|mimes:jpg,png,svg|max:1024',
+            'imagen'           => 'required|image|mimes:jpg,png,svg,jpeg,gif|max:2048',
             'id_tipoempleados' => 'required'
         ];
     }

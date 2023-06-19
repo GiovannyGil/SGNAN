@@ -15,7 +15,7 @@
         @csrf
     @method('PUT')
     
-      <div class="form-field col-lg-4">
+      <div class="form-field col-lg-3">
         <label for="" class=" is-required">Nombre:<FONT COLOR="red"> *</FONT></label>
             <input type="text" id="Nombre" name="Nombre" class="input-text js-input" tabindex="1" value="{{$proveedor->Nombre}}">
         
@@ -23,7 +23,7 @@
                     <span class="error text-danger" for="input-Nombre">{{$errors->first('Nombre') }}</span>
                 @endif
       </div>
-      <div class="form-field col-lg-4">
+      <div class="form-field col-lg-3">
         <label for="" class=" is-required">Nombre del asesor:<FONT COLOR="red"> *</FONT></label>
             <input type="text" id="asesor" name="asesor" class="input-text js-input" tabindex="2" value="{{$proveedor->asesor}}">
         
@@ -67,7 +67,7 @@
 @stop
 
 @section('css')
-        <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/form.css')}}">
+        <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/formm.css')}}">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 @endsection
 

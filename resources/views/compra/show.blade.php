@@ -3,13 +3,13 @@
 @section('title', 'Detalle Compra')
 
 @section('content_header')
-    <h1>Detalle compra</h1>
+    
 @stop
 
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-        <h3 class="page-title">Detalles de Venta</h3>
+        <h3 class="page-title">Detalles de Compra</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dash">DASHBOARD</a></li>
@@ -19,7 +19,7 @@
         </nav>
 
     <div class="form-group">
-        <h4 class="card-title">Detalles de Venta</h4>
+        
         <div class="table-responsive col-md-12">
             <table class="table" id="detalleVenta">
                 <thead>
@@ -28,6 +28,7 @@
                         <th>Descripcion</th>
                         <th>Proveedor</th>
                         <th>Insumos</th>
+                        <th>Paquetes</th>
                         <th>Precio unitario</th>
                         <th>Cantidad</th>
                         <th>Subtotal</th>
@@ -58,6 +59,7 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>{{$detalle->Paquetes}}</td>
                             {{-- <td>{{$detalle->producto}}</td> --}}
                             <td>s/{{number_format($detalle->Precio,2)}}</td>
                             <td>{{$detalle->Cantidad}}</td>
@@ -85,4 +87,3 @@
 @stop
 
 @endsection
-

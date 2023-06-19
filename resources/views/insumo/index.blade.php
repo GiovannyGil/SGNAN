@@ -24,6 +24,7 @@
         <th scope="col">Nombre del insumo</th>
         <th scope="col">Stock</th>
         <th scope="col">cantidad</th>
+        <th scope="col">Precio U</th>
         <th scope="col">Categorias</th>
         <th scoope="col">Estado</th>
         <th scope="col" class="text-right">Acciones</th>
@@ -36,16 +37,17 @@
             <td>{{$insumo->Nombre_Insumo}}</td>
             <td>{{$insumo->Stock}}</td>
             <td>{{$insumo->Cantidad}}</td>
+            <td>{{$insumo->PrecioU}}</td>
             <td>{{$insumo->categorias->Nombre}}</td>   
             @if($insumo->status == 'ACTIVE')
                 <td>
-                    <a class="jsgrid-button btn btn-success" href="#" title="Activo" onclick="cambiarEstado({{ $insumo->id }})">
+                    <a class="jsgrid-button btn btn-success btn-xs" href="#" title="Activo" onclick="cambiarEstado({{ $insumo->id }})">
                         Activo<i class="fas fa-fw fa-check"></i>
                     </a>
                 </td> 
             @else
                 <td>
-                    <a class="jsgrid-button btn btn-danger" href="#" title="Desactivo" onclick="cambiarEstado({{ $insumo->id }})">
+                    <a class="jsgrid-button btn btn-danger btn-xs" href="#" title="Desactivo" onclick="cambiarEstado({{ $insumo->id }})">
                         Desactivado<i class="fas fa-fw fa-times"></i>
                     </a>
                 </td>
@@ -54,13 +56,6 @@
             <td class=" td-actions text-right">
                 
                 <a href="{{ route('insumos.edit', $insumo->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
-                <form action="{{ route('insumos.destroy', $insumo->id) }}" method="POST" style="display: inline-block;" class="formulario-eliminar">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-outline-dark btn-sm" type="submit">
-                <i class="fas fa-fw fa-xmark"><h7>X</h7></i>
-                </button> 
-            </form>
             </td>
             </tr>
             @endforeach
@@ -173,17 +168,18 @@
             });
         }
 
-      </script>
-    <script>
+    </script>
 
+
+<script>
     $(document).ready(function() {
     $('#insumo').DataTable( {
         "language": {
-            "lengthMenu": "Mostrar MENU  registros por página",
+            "lengthMenu": "Mostrar _MENU_  registros por página",
             "zeroRecords": "Busqueda no encontrada - disculpa",
-            "info": "Mostrando la pagina PAGE de PAGES",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(Filtrado de  MAX registros totales)",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(Filtrado de  _MAX_ registros totales)",
             "search": 'Buscar:',
             "paginate": {
                 'next': 'Siguiente',
@@ -192,7 +188,7 @@
         }
     } );
 } );
+    </script>
 
-</script>
 
 @stop

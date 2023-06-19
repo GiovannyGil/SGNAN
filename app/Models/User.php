@@ -27,6 +27,25 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected static function boot()
+{
+    parent::boot();
+
+    static::updating(function ($user) {
+        if ($user->isDirty('status') && $user->status == 'DEACTIVATED') {
+            $user->roles()->update(['status' => 'DEACTIVATED']);
+        }
+    });
+
+    static::updating(function ($user) {
+        if ($user->isDirty('status') && $user->status == 'ACTIVE') {
+            $user->roles()->update(['status' => 'ACTIVE']);
+        }
+    });
+}
+
+
     protected $fillable = [
         'name',
         'email',

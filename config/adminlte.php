@@ -193,9 +193,9 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-3',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-white',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -297,7 +297,7 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'Busqueda',
-            'topnav_right' => true,
+            'topnav_right' => null,
         ],
         [
             'type'         => 'fullscreen-widget',

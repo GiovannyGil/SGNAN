@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('insumos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('Nombre_Insumo')->unique();
-            $table->integer('Cantidad')->default(0)->nullable();
+            $table->integer('Cantidad')->unsigned()->nullable();
             $table->integer('Stock')->default(10)->nullable();
+            $table->integer('PrecioU')->default(0);
             $table->enum('status', ['ACTIVE', 'DEACTIVATED'])->default('ACTIVE');
             $table->timestamps();
 

@@ -51,7 +51,7 @@ class InsumoController extends Controller
         $insumos = new Insumo();
         $insumos->Nombre_insumo = $request->get('Nombre_Insumo');
         // $insumos->Cantidad = $request->get('cantidad');
-        // $insumos->Stock = $request->get('Stock');
+        $insumos->Stock = $request->get('Stock');
         $insumos->id_categorias = $request->get('id_categorias');
         $insumos->save();
 

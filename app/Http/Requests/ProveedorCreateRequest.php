@@ -32,4 +32,11 @@ class ProveedorCreateRequest extends FormRequest
             'Telefono'   => 'required|min:10|max:20|unique:proveedors',
         ];
     }
+    public function messages()
+    {
+        return[
+            'Telefono.min' => 'El campo tiene que se minimo 10.',
+        ];
+    }
+    
 }

@@ -73,7 +73,7 @@ class CompraController extends Controller
         }
         $compra->detalleCompra()->createMany($results);
 
-        return redirect('/compras')->with('success', 'Compra registrada exitosamente');
+        return redirect('/compras')->with('crear', 'Compra registrada exitosamente');
     }
 
     /**
@@ -161,7 +161,7 @@ class CompraController extends Controller
             // $insumos->Cantidad -= $Cantidad;
             // $insumos->save();
 
-            return redirect()->back()->with('success', 'El estado de la compra ha sido cambiada exitosamente.');
+            return redirect()->back()->with('Desactivar', 'Compra Anulada Exitosamente');
         } else {
             return redirect()->back();
         }

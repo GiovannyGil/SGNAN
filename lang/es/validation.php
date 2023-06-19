@@ -37,7 +37,7 @@ return [
     'date' => 'El campo :attribute no es una fecha válida.',
     'date_equals' => 'El campo :attribute debe ser una fecha igual a :date.',
     'date_format' => 'El campo :attribute no corresponde con el formato :format.',
-     'decimal' => 'El :attribute debe tener :decimal decimales.',
+    'decimal' => 'El :attribute debe tener :decimal decimales.',
     'declined' => 'El campo :attribute debe marcar como rechazado.',
     'declined_if' => 'El campo :attribute debe marcar como rechazado cuando :other es :value.',
     'different' => 'Los campos :attribute y :other deben ser diferentes.',
@@ -150,11 +150,11 @@ return [
     'ulid' => 'El :attribute debe ser un ULID valido.',
     'uuid' => 'El :attribute debe ser un UUID valido.',
 
-    'password.mixed' => 'El :attribute debe contener al menos una letra mayúscula y una minúscula.',
-    'password.letters' => 'El :attribute debe contener al menos una letra.',
-    'password.symbols' => 'El :attribute debe contener al menos un símbolo.',
-    'password.numbers' => 'El :attribute debe contener al menos un número.',
-    'password.uncompromised' => 'El atributo :attribute  ha aparecido en una fuga de datos. Elija un :attribute diferente.',
+    'password.mixed' => 'La contraseña debe contener al menos una letra mayúscula y una minúscula.',
+    'password.letters' => 'La contraseña debe contener al menos una letra.',
+    'password.symbols' => 'La contraseña debe contener al menos un símbolo.',
+    'password.numbers' => 'La contraseña debe contener al menos un número.',
+    'password.uncompromised' => 'La atributo contraseña  ha aparecido en una fuga de datos. Elija un :attribute diferente.',
     'indisposable' => 'No se permiten direcciones de correo electrónico desechables.',
 
     /*

@@ -34,7 +34,8 @@ CREATE TRIGGER `tr_updStockCompra` AFTER INSERT ON `detalle_compras`
  JOIN detalle_compras dc
  ON i.id = dc.id_insumos
  AND dc.id_insumos = NEW.id_insumos
- SET i.Cantidad = i.Cantidad + NEW.Cantidad;
+ SET i.Cantidad = i.Cantidad + NEW.Cantidad * NEW.Paquetes,
+ i.PrecioU = NEW.Precio;
 END;
 //
 DELIMITER ;

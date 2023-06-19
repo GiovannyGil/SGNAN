@@ -25,7 +25,19 @@ class InsumoCreateRequest extends FormRequest
     {
         return [
             'Nombre_Insumo'   => 'required|min:3|max:20||unique:insumos',
+            'id_categorias'   => 'required',
+            'Stock'           => 'required'
             
         ];
+
     }
-}
+        public function messages()
+        {
+            return[
+                'id_categorias.required' => 'El campo categoria es requerido.',
+                
+    
+            ];
+        }
+
+    }

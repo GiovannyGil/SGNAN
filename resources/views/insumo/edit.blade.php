@@ -2,13 +2,9 @@
 
 @section('title', 'Editar Insumo')
 
-@section('content_header')
-    
-@stop
+
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
         <div class="card">
             <section class="get-in-touch">
         
@@ -61,18 +57,16 @@
                     <button class="submit-btn" tabindex="5">Guardar</button>
                    </div>
         
-                   </form>
+            </form>
              </section>
         </div>
-    </div>
-</div>
 
 @stop
 
 @section('css')
-        <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/form.css')}}">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-@endsection
+    <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/formm.css')}}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+@stop
 
 @section('js')
     <script> console.log('Hi!'); </script>

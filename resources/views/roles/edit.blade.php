@@ -36,7 +36,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/form.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/formm.css')}}">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 @stop

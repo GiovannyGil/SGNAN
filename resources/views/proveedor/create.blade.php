@@ -10,7 +10,7 @@
         <form action="/proveedores" method="POST" class="contact-form row" novalidate>
             @csrf
       
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-5">
             <label for="" class=" is-required">Nombre de la empresa:<FONT COLOR="red"> *</FONT></label>
                 <input type="text" id="Nombre" name="Nombre" class="input-text js-input"  tabindex="1" value="{{ old('Nombre') }}">
                 
@@ -18,7 +18,7 @@
                         <span class="error text-danger" for="input-Nombre">{{$errors->first('Nombre') }}</span>
                     @endif
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-5">
             <label for="" class=" is-required">Nombre del asesor:<FONT COLOR="red"> *</FONT></label>
                 <input type="text" id="asesor" name="asesor" class="input-text js-input"  tabindex="2" value="{{ old('asesor') }}">
               
@@ -26,7 +26,7 @@
                         <span class="error text-danger" for="input-asesor">{{$errors->first('asesor') }}</span>
                     @endif
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-5">
             <label for="" class=" is-required">Correo:<FONT COLOR="red"> *</FONT></label>
                 <input type="email" id="Correo" name="Correo" class="input-text js-input"  tabindex="3" value="{{ old('Correo') }}">
             
@@ -34,7 +34,7 @@
                         <span class="error text-danger" for="input-Correo">{{$errors->first('Correo') }}</span>
                     @endif
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-5">
             <label for="" class=" is-required">Dirección:<FONT COLOR="red"> *</FONT></label>
                 <input type="text" id="Direccion" name="Direccion" class="input-text js-input"  tabindex="4" value="{{ old('Direccion') }}">
                 
@@ -42,7 +42,7 @@
                         <span class="error text-danger" for="input-Direccion">{{$errors->first('Direccion') }}</span>
                     @endif
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-5">
             <label for="" class=" is-required">Teléfono:<FONT COLOR="red"> *</FONT></label> 
                 <input type="number" id="Telefono" name="Telefono" class="input-text js-input"  tabindex="5" value="{{ old('Telefono') }}">
             
@@ -63,18 +63,11 @@
 </div>
 @stop
 @section('css')
-        <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/form.css')}}">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/formm.css')}}">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 @endsection
 
 @section('js')
-    <script> 
-    .is-required:after {
-    content: '*';
-    margin-left: 3px;
-    color: red;
-    font-weight: bold;
-  }
-    console.log('Hi!'); </script>
 
 @stop

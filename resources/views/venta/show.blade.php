@@ -61,7 +61,7 @@
                                 <tr title="Precio total de la Venta">
                                     <th id="campo" colspan="4"><p aria-label="right">TOTAL</p></th>
                                     <th id="campo" colspan="4">
-                                        <p aria-label="right">s/{{number_format($venta->total,2)}}</p>
+                                        <p aria-label="right">{{number_format($venta->total,2)}}</p>
                                     </th>
                                 </tr>
                             </tfoot>
@@ -78,10 +78,10 @@
                                             @endforeach
                                         </td>
                                         {{-- <td>{{$detalle->producto}}</td> --}}
-                                        <td title="Precio del Producto">s/{{number_format($detalle->Precio,2)}}</td>
+                                        <td title="Precio del Producto">{{number_format($detalle->Precio,2)}}</td>
                                         <td title="Cantidad de Productos">{{$detalle->Cantidad}}</td>
                                         <td title="Precio de la Venta">
-                                            s/{{number_format($detalle->Cantidad*$detalle->Precio,2)}}
+                                            {{number_format($detalle->Cantidad*$detalle->Precio,2)}}
                                         </td>
                                     </tr>
                                 @endforeach

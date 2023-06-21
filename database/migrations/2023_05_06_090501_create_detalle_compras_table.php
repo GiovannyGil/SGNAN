@@ -26,7 +26,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->noActionOnDelete();
             $table->integer('Paquetes');
-            $table->integer('Cantidad');
+            $table->integer('Cantidad')->default(0);
             $table->decimal('Precio_Paquete');
             $table->decimal('Precio');
             

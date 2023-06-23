@@ -42,15 +42,20 @@
                         <span class="error text-danger" for="input-Stock">{{$errors->first('Stock') }}</span>
                     @endif
                 </div> 
-               <div class="form-field col-lg-4">
-               <label for="id_categorias" class="is-required" tabindex="4">Tipo Categoría</label>
-                    <select class="input-text js-input tabindex=6" name="id_categorias" tabindex="4">
-                        <option value="{{$insumo->id_categorias}}"></option>
-                            @foreach($categorias as $Tcategoria)
-                                <option value="{{$Tcategoria->id}}">{{$Tcategoria->Nombre}}</option>
-                            @endforeach
-                    </select>
+                <div class="form-field col-lg-4">
+                <label for="Categorias" class="is-required" tabindex="4">Tipo categoria<FONT COLOR="red"> *</FONT></label>
+                <select class="input-text js-input" name="id_categorias" >
+                <option value="">Tipos de categoria</option>
+                    @foreach($categorias as $Tcategoria)
+                        @if ($Tcategoria->id == $insumo->id_categorias ) 
+                            <option selected value="{{ $Tcategoria->id}}">{{ $Tcategoria->Nombre}}</option>
+                        @else
+                            <option value="{{ $Tcategoria->id}}">{{ $Tcategoria->Nombre}}</option>
+                        @endif
+                    @endforeach
+                </select>
                 </div>
+
                 <div class="form-field col-lg-12">
                     <a href="/insumos" class="submit-btn2" tabindex="6">Cancelar</a>
                       {{--<input class="submit-btn" type="submit" value="Guardar"> --}}

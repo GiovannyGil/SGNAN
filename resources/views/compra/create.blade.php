@@ -158,8 +158,8 @@
     @endsection
 
 
-    @section('js')
-
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
         $(document).ready(function() {
         $("#agregar").click(function() {
@@ -176,15 +176,19 @@
         $("#guardar").hide();
 
         function agregar(){
-        id_insumos = $("#id_insumos").val();
+        id_insumos = $("#id_insumos option:selected").val();  
+        referencia_compra = $("#Referencia_compra").val();
+        
+        id_proveedores = $("#id_proveedores option:selected").val();
         insumos = $("#id_insumos option:selected").text();
         Paquetes = $("#Paquetes").val();
-        Cantidad=$("#Cantidad").val();
+        Cantidad= $("#Cantidad").val();
         Precio_Paquete = $("#Precio_Paquete").val();
         // precioU = $("#resultado").val();
         
-
-        if (id_insumos != "" && parseInt(Paquetes) != "" && parseInt(Paquetes) > 0 && parseFloat(Precio_Paquete) != "") {
+        
+        if (referencia_compra != "" && id_proveedores != ""  &&  id_insumos != "" && parseInt(Paquetes) != "" && parseInt(Paquetes) > 0 && parseInt(Cantidad) != "" && parseInt(Cantidad) > 0 && parseFloat(Precio_Paquete) != "") {
+            
             subtotal[cont] = (parseInt(Paquetes) * parseFloat(Precio_Paquete));
             total = total + subtotal[cont];
             // precioU = parseInt(Cantidad) / parseInt(precio);
@@ -221,11 +225,11 @@
             limpiar();
             totales();
             evaluar();
-            } else {
+        } else {
                     Swal.fire({
                     position: 'top-center',
                     icon: 'error',
-                    title: 'Error al ingresar el detalle de la venta, revise los datos del producto',
+                    title: 'Error al ingresar el detalle de la compra, revise los datos del Insumo',
                     showConfirmButton: false,
                     timer: 2000
                 });
@@ -266,17 +270,7 @@
             totales();
             evaluar();
         }
-
-        // function PrecioUnitario(){
-        //     // precioU = parseInt(Cantidad) / parseInt(precio);
-        //     var Cantidadni = document.getElementById("Cantidad").value;
-        //     var Precio = document.getElementById("precio").value;
-
-        //     var resultado = parseInt(Cantidadni) / parseInt(Precio);
-
-        //     document.getElementById("precioU").value=resultado;
-        // }
-
+       
         </script>
 
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

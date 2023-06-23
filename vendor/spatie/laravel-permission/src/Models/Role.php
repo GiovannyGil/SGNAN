@@ -25,25 +25,6 @@ class Role extends Model implements RoleContract
     use HasPermissions;
     use RefreshesPermissionCache;
 
-
-
-    protected static function boot()
-{
-    parent::boot();
-
-    static::updating(function ($role) {
-        if ($role->isDirty('status') && $role->status == 'DEACTIVATED') {
-            $role->users()->update(['status' => 'DEACTIVATED']);
-        }
-    });
-}
-
-    protected $fillable = [
-        'name',
-        'guard_name',
-        'status'
-    ];
-
     protected $guarded = [];
 
     public function __construct(array $attributes = [])

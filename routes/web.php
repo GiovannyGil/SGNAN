@@ -116,7 +116,7 @@ Route::middleware([
     config('jetstream.auth_session'),
         'verified'
 ])->group(function () {
-Route::resource('roles', 'App\http\Controllers\RoleController');
+    Route::resource('roles', 'App\http\Controllers\RoleController');
 });
 
 Route::get('/empleados/{empleado}/change_status', [App\http\Controllers\EmpleadoController::class,'change_status'])

@@ -45,9 +45,8 @@
           <div class="form-group col-md-5">
             <label for="" class=" is-required">Teléfono:<FONT COLOR="red"> *</FONT></label> 
                 <input type="number" id="Telefono" name="Telefono" class="input-text js-input"  tabindex="5" value="{{ old('Telefono') }}">
-            
                 @if ($errors->has('Telefono'))
-                        <span class="error text-danger" for="input-Telefonó">{{$errors->first('Telefonó') }}</span>
+                        <span class="error text-danger" for="input-Telefonó">{{$errors->first('Telefono') }}</span>
                     @endif
           </div>
           <div class="form-field col-lg-12">

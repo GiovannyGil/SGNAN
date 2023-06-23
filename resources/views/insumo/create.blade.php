@@ -20,7 +20,7 @@
               <select  class="input-text js-input"  name="id_categorias" tabindex="2">
                   <option value="">Categorías</option>
                       @foreach($categorias as $Tcategoria)
-                          <option value="{{$Tcategoria->id}}">{{$Tcategoria->Nombre}}</option>
+                          <option value="{{ $Tcategoria->id}}" @if (old('id_categorias') == $Tcategoria->id) selected @endif>{{ $Tcategoria->Nombre}}</option>
                       @endforeach
               </select>
               @if ($errors->has('id_categorias'))

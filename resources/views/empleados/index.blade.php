@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container ">
         <center> <h2>Empleados</h2></center>
     <div class="d-grid gap-2 d-md-block">
         <a href="{{ route('empleados.create') }}" class="btn btn-sm btn-primary text-left" title="Anadir un empleado">Añadir empleado</a>

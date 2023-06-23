@@ -1,14 +1,19 @@
 @extends('adminlte::page')
 
+@php
+    use Collective\Html\FormFacade as Form;
+@endphp
+
 @section('title', 'Editar Roles')
 
 @section('content')
 <div class="card">
 <section class="get-in-touch">
     <center><h2 class="title">Editar Roles</h2></center>
-{!! Form::model($role, array('class' => 'contact-form row'), 'novalidate', ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}    
+    <form action="{{ route('roles.update', $role->id) }}" method="POST" class="contact-form row" novalidate>
             @csrf
             @method('PUT')
+
             <div class="form-group">
             <label for="name">Nombre</label>
                 <input type="text" id="name" class="input-text js-input" placeholder="Ingrese el nombre" name="name"  tabindex="1" value="{{ old('name', $role->name)}}">

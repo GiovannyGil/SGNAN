@@ -59,11 +59,9 @@
                             <td>{{$venta->id}}</td>
                             {{-- llamar la fecha de la venta --}}
                             <td title="Fecha de la Venta">{{$venta->created_at}}</td>
-<<<<<<< Updated upstream
-                            <td title="Valor de la Venta">{{$venta->total}}</td>
-=======
+
                             <td title="Valor de la Venta">{{number_format($venta->total) }}</td>
->>>>>>> Stashed changes
+
                             @if ($venta->Estado == 'Pendiente')
                                 <td>
                                     <a class="jsgrid-button btn btn-danger"

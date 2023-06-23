@@ -61,7 +61,7 @@
                         </div>
                     </td> --}}
 
-                    <td>{{$producto->PrecioP}}</td>
+                    <td>{{number_format($producto->PrecioP)}}</td>
                     
                         @if ($producto->Estado == 'Activo')
                         <td>

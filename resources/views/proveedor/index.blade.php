@@ -15,19 +15,19 @@
     <div class="container"><br>
     <center><h2>Añadir Proveedor</h2></center>
     <div class="d-grid gap-2 d-md-block">
-    <a href="{{ route('proveedores.create') }}" class="btn btn-sm btn-primary text-left" >Añadir Proveedor</a> <br></div><br>
+    <a href="{{ route('proveedores.create') }}" class="btn btn-sm btn-primary text-left" title="Añadir Proveedor" >Añadir Proveedor</a> <br></div><br>
 <div class="table-reponsive">
     <table id="proveedor" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%"> 
         <thead class="bg-primary  text-primary">
         <tr>
-        <th scope="col">id</th>
-                <th scope="col">Nombre de la empresa</th>
-                <th scope="col">Nombre del Asesor</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Dirección</th>
-                <th scope="col">Teléfono</th>
-                <th scoope="col">Estado</th>
-        <th scope="col" class="text-right">Acciones</th>
+        <th  title="ID"  scope="col">id</th>
+                <th title="Nombre de la empresa" scope="col">Nombre de la empresa</th>
+                <th title="Nombre del Asesor" scope="col">Nombre del Asesor</th>
+                <th title="Correo"  scope="col">Correo</th>
+                <th title="Dirección"  scope="col">Dirección</th>
+                <th title="Teléfono"  scope="col">Teléfono</th>
+                <th  title="Estado"  scoope="col">Estado</th>
+        <th scope="col"  title="Acciones" class="text-right">Acciones</th>
         </tr>
         </thead>
     <tbody> 
@@ -55,8 +55,8 @@
 
 
             <td class=" td-actions text-right" >
-                <a href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-outline-dark btn-sm" ><i class="fas fa-fw fa-user"></i></a>
-                <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
+                <a  title="Detalle"  href="{{ route('proveedores.show', $proveedor->id) }}" class="btn btn-outline-dark btn-sm" ><i class="fas fa-fw fa-user"></i></a>
+                <a  title="Editar"  href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
             </td>
             </tr>
             @endforeach

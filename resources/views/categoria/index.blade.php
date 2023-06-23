@@ -15,15 +15,15 @@
     <div class="container"><br>
     <center><h2>Añadir Categorias</h2></center>
     <div class="d-grid gap-2 d-md-block">
-    <a href="{{ route('categorias.create') }}" class="btn btn-sm btn-primary text-left">Añadir Categoria</a> <br></div><br>
+    <a href="{{ route('categorias.create') }}" class="btn btn-sm btn-primary text-left" title="Añadir Categoria">Añadir Categoria</a> <br></div><br>
 <div class="table-reponsive">
     <table id="categoria" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%"> 
         <thead class="bg-primary  text-primary">
         <tr>
-        <th scope="col" >Id</th>
-        <th scope="col" >Nombre</th>
-        <th scoope="col">Estado</th>
-        <th scope="col" class="text-right">Acciones</th>
+        <th title="ID" scope="col" >Id</th>
+        <th title="Nombre" scope="col" >Nombre</th>
+        <th title="Estado" scoope="col">Estado</th>
+        <th title="Acciones" scope="col" class="text-right">Acciones</th>
         </tr>
         </thead>
     <tbody>
@@ -50,7 +50,7 @@
 
             <td class=" td-actions text-right">
                 
-                <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
+                <a title="Editar" href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
             </td>
             </tr>
             @endforeach

@@ -81,7 +81,9 @@
                                         <td title="Precio del Producto">{{number_format($detalle->Precio,2)}}</td>
                                         <td title="Cantidad de Productos">{{$detalle->Cantidad}}</td>
                                         <td title="Precio de la Venta">
-                                            {{number_format($detalle->Cantidad*$detalle->Precio,2)}}
+
+                                            {{number_format($detalle->Cantidad*$detalle->Precio)}}
+
                                         </td>
                                     </tr>
                                 @endforeach

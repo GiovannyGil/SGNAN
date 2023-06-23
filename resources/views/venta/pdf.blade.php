@@ -160,7 +160,7 @@ section {
                         <p>TOTAL PAGAR:</p>
                     </th>
                     <td>
-                        <p>s/ {{number_format($venta->total,2)}}</p>
+                        <p>s/ {{number_format($venta->total)}}</p>
                     </td>
                 </tr>
 

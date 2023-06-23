@@ -66,7 +66,9 @@
                                 <td>{{$venta->id}}</td>
                                 {{-- llamar la fecha de la venta --}}
                                 <td title="Fecha de creacion de la Venta">{{$venta->created_at}}</td>
-                                <td title="Valor de la Venta">{{number_format($venta->total,2) }}</td>
+
+                                <td title="Valor de la Venta">{{number_format($venta->total) }}</td>
+
                                 @if ($venta->Estado == 'Pendiente')
                                     <td  title="Estado de la Venta">
                                         <a class="jsgrid-button btn btn-danger"

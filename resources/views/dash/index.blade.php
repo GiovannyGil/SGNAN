@@ -28,7 +28,7 @@
                     <div class="col-lg-2">
                         <div class="small-box bg-warning" title="Total Ventas">
                             <div class="inner">
-                                <h4 id="totalVentas">{{$SumaVentas}}</h4>
+                                <h4 id="totalVentas">{{number_format($SumaVentas)}}</h4>
                                 <p>Total Ventas</p>
                             </div>
                             <div class="icon">
@@ -193,52 +193,6 @@
                 </div>
             </div>
         </div>
-
- 
-
-        {{-- <div class="row">
-            <div class="col-lg-6" title="Gráfico del total de ventas por cada mes">
-                <div class="card">
-                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
-                        <h3 class="card-title">
-                        <i class="fas fa-th mr-1"></i>
-                        Total Ventas por Mes
-                        </h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        
-                        <canvas id="graficoVentasPorMes"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6" title="Gráfico del total compras por cada mes">
-                <div class="card">
-                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
-                        <h3 class="card-title">
-                        <i class="fas fa-th mr-1"></i>
-                        Total Compras por Mes
-                        </h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        
-                        <canvas id="graficoComprasPorMes"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
 
         @section('css')
             <link rel="stylesheet" href="/css/admin_custom.css">

@@ -9,6 +9,26 @@
     <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('vendor/adminlte/dist/css/cards.css')}}">
+
+    <style>
+        .custom-modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow:scroll;
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+      
+        .custom-modal-content {
+          
+          margin:5% auto;
+          padding: 0px;
+          width: 100%;
+          max-width: 650px;
+        }
+      </style>
     @endsection
 
     @section('content')
@@ -72,7 +92,7 @@
                         <td>
                             <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
                 
-                            <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-dark btn-sm" title="Ver detalles"><i class="far fa-eye"> </i></a>
+                            <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-dark btn-sm show-modal" title="Ver detalles"><i class="far fa-eye"> </i></a>
 
                     
                         </td>
@@ -84,7 +104,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-dark btn-sm" title="Ver detalles"><i class="far fa-eye"> </i></a>
+                                <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-dark btn-sm show-modal" title="Ver detalles"><i class="far fa-eye"> </i></a>
                              </td>
                         @endif
                       
@@ -116,6 +136,33 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+              $('.show-modal').on('click', function(e) {
+                e.preventDefault();
+          
+                var url = $(this).attr('href');
+          
+                $.get(url, function(data) {
+                  var modal = $('<div class="custom-modal"></div>');
+                  var modalContent = $('<div class="custom-modal-content"></div>');
+          
+                  modalContent.html(data);
+                  modal.append(modalContent);
+                  $('body').append(modal);
+          
+                  modal.fadeIn('fast');
+                });
+              });
+          
+              $(document).on('click', '.custom-modal', function() {
+                $(this).fadeOut('fast', function() {
+                  $(this).remove();
+                });
+              });
+            });
+          </script>
 
         @if (session('crear') == 'Producto registrado exitosamente')
             <script>

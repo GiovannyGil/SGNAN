@@ -48,21 +48,21 @@
         <thead class="bg-primary text-while">
             <tr>
             
-                <th scope="col">NombreProducto</th>
-                <th scope="col">Observaciones</th>
-                <th scope="col">Insumos</th>
+                <th scope="col" title="Nombre producto" >NombreProducto</th>
+                <th scope="col" title="Descripción producto">Observaciones</th>
+                <th scope="col" title="Nombre insumos">Insumos</th>
                 {{-- <th scope="col">Imagen</th> --}}
-                <th scope="col">Precio</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
+                <th scope="col" title="Precio producto">Precio</th>
+                <th scope="col" title="Estado producto">Estado</th>
+                <th scope="col" title="Acciones">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($productos as $producto)
                 <tr>
-                    <td>{{$producto->NombreProducto}}</td>
-                    <td>{{$producto->DescripcionProducto}}</td>
-                    <td>
+                    <td title="Nombre producto" >{{$producto->NombreProducto}}</td>
+                    <td title="Descripción producto">{{$producto->DescripcionProducto}}</td>
+                    <td title="Cantidad , Nombre insumos">
                         @foreach ($detalleProducto as $detalle)
                             @if($producto->id == $detalle->productos_id)
                                 {{$detalle->Cantidad}}
@@ -81,16 +81,16 @@
                         </div>
                     </td> --}}
 
-                    <td>{{number_format($producto->PrecioP)}}</td>
+                    <td title="Precio producto">{{number_format($producto->PrecioP)}}</td>
                     
                         @if ($producto->Estado == 'Activo')
                         <td>
-                        <a class="jsgrid-button btn btn-success btn-sm" href="#" title="Activo" onclick="cambiarEstado({{ $producto->id }})">
+                        <a class="jsgrid-button btn btn-success btn-sm" href="#" title="Estado Activo" onclick="cambiarEstado({{ $producto->id }})">
                         Activo<i class="fas fa-fw fa-check"></i>
                     </a>
                     </td>
                         <td>
-                            <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
+                            <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-outline-dark btn-sm" title="Editar producto"><i class="fas fa-fw fa-pen"></i></a>
                 
                             <a href="{{ route('productos.show', $producto) }}" class="btn btn-outline-dark btn-sm show-modal" title="Ver detalles"><i class="far fa-eye"> </i></a>
 
@@ -99,7 +99,7 @@
                         @else
                             <td>
 
-                                <a class="jsgrid-button btn btn-danger btn-sm" href="#" title="Inhactivo" onclick="cambiarEstado({{ $producto->id }})">
+                                <a class="jsgrid-button btn btn-danger btn-sm" href="#" title="Estado Inhactivo" onclick="cambiarEstado({{ $producto->id }})">
                                     Desactivado<i class="fas fa-fw fa-times"></i>
                                 </a>
                             </td>

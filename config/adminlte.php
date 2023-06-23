@@ -387,6 +387,13 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'can'  => 'users.index',
         ],
+
+        [
+            'text' => 'Manuales',
+            'url'  => 'manuales',
+            'icon' => 'fas fa-fw fa-user',
+            'can'  => 'manuales.index',
+        ],
     ],
 
     /*

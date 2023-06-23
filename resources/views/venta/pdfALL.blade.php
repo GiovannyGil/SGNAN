@@ -114,7 +114,7 @@ section {
                             <br>
                             Reporte: <b>Todas la ventas existente</b>
                         </p>
-                          <p><b>TOTAL: s/ {{number_format($SumaVentas,2)}}</b></p>
+                          <p><b>TOTAL: s/ {{number_format($SumaVentas)}}</b></p>
                     
                     </th>
                     

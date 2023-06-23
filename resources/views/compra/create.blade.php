@@ -158,7 +158,7 @@
     @endsection
 
 
-@section('js')
+    @section('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
         $(document).ready(function() {
@@ -276,4 +276,4 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     @endsection
-@endsection
+    @endsection

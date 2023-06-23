@@ -37,7 +37,7 @@
                 <tfoot>
                     <tr>
                         <th colspan="4"><p aria-label="right">TOTAL</p></th>
-                        <th colspan="4"><p aria-label="right">s/{{number_format($compra->total,2)}}</p></th>
+                        <th colspan="4"><p aria-label="right">{{number_format($compra->total,2)}}</p></th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -61,9 +61,9 @@
                             </td>
                             <td>{{$detalle->Paquetes}}</td>
                             {{-- <td>{{$detalle->producto}}</td> --}}
-                            <td>s/{{number_format($detalle->Precio,2)}}</td>
+                            <td>{{number_format($detalle->Precio,2)}}</td>
                             <td>{{$detalle->Cantidad}}</td>
-                            <td>s/{{number_format($detalle->Cantidad*$detalle->Precio,2)}}</td>
+                            <td>{{number_format($detalle->Cantidad*$detalle->Precio,2)}}</td>
                         </tr>
                     @endforeach
                 </tbody>

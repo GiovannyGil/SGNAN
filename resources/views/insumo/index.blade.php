@@ -15,19 +15,19 @@
     <div class="container"><br>
     <center><h2>Añadir Insumos</h2></center>
     <div class="d-grid gap-2 d-md-block">
-    <a href="{{ route('insumos.create') }}" class="btn btn-sm btn-primary text-left">Añadir Insumos</a> <br></div><br>
+    <a href="{{ route('insumos.create') }}" class="btn btn-sm btn-primary text-left" title="Añadir Insumos">Añadir Insumos</a> <br></div><br>
 <div class="table-reponsive">
     <table id="insumo" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%""> 
         <thead class="bg-primary  text-primary">
         <tr>
-        <th scope="col">id</th>
-        <th scope="col">Nombre del insumo</th>
-        <th scope="col">Stock</th>
-        <th scope="col">cantidad</th>
-        <th scope="col">Precio U</th>
-        <th scope="col">Categorias</th>
-        <th scoope="col">Estado</th>
-        <th scope="col" class="text-right">Acciones</th>
+        <th title="ID" scope="col">id</th>
+        <th title="Nombre del insumo" scope="col">Nombre del insumo</th>
+        <th title="Añadir Insumos" scope="col">Stock mínimo</th>
+        <th title="Stock mínimo" scope="col">cantidad</th>
+        <th title="Precio U" scope="col">Precio U</th>
+        <th title="Categorias" scope="col">Categorias</th>
+        <th title="Estado" scoope="col">Estado</th>
+        <th stitle="Acciones" scoope="col" class="text-right">Acciones</th>
         </tr>
         </thead>
     <tbody>
@@ -37,7 +37,7 @@
             <td>{{$insumo->Nombre_Insumo}}</td>
             <td>{{$insumo->Stock}}</td>
             <td>{{$insumo->Cantidad}}</td>
-            <td>{{$insumo->PrecioU}}</td>
+                <td>{{number_format($insumo->PrecioU)}}</td> 
             <td>{{$insumo->categorias->Nombre}}</td>   
             @if($insumo->status == 'ACTIVE')
                 <td>
@@ -55,7 +55,7 @@
 
             <td class=" td-actions text-right">
                 
-                <a href="{{ route('insumos.edit', $insumo->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
+                <a title="Editar" href="{{ route('insumos.edit', $insumo->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-fw fa-pen"></i></a>
             </td>
             </tr>
             @endforeach

@@ -11,9 +11,9 @@
 </div>
 @endif  
     <div class="container"><br>
-    <center><h2>Añadir Compras</h2></center>
+    <center><h2  >Añadir Compras</h2></center>
     <div class="d-grid gap-2 d-md-block">
-    <a href="{{ route('compras.create') }}" class="btn btn-sm btn-primary text-left">Añadir Compra</a>
+    <a href="{{ route('compras.create') }}" class="btn btn-sm btn-primary text-left" title="Añadir compra">Añadir Compra</a>
     <a href="{{ route('compras.pdfAll') }}" title="Reporte"  class="btn btn-sm btn-warning">Ver Reporte <i class="far fa-file-pdf"></i></a>
 
     </div><br>
@@ -21,25 +21,26 @@
     <table id="compras" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%"> 
         <thead class="bg-primary  text-primary">
         <tr>
-        <th scope="col" >Id</th>
+        <th scope="col" title="Id"  >Id</th>
         {{-- <th scope="col" >ID proveedor</th> --}}
-        <th scope="col" >Referencia compra</th>
-        <th scope="col" >Descripción compra</th>
-        <th scope="col" >total</td>
-        <th scope="col" >Estado</th>
-        <th scope="col" class="text-right">Acciones</th>
+        <th scope="col" title="Referencia">Referencia compra</th>
+        <th scope="col" title="Descripción">Descripción compra</th>
+        <th scope="col" title="Total" >Total</td>
+        <th scope="col" title="Estado">Estado</th>
+        <th scope="col" title="Acciones" class="text-right">Acciones</th>
         </tr>
         </thead>
     <tbody>
         @foreach ($compras as $compra)
         <tr>
-        <td scope="row">{{ $compra->id }}</td>
+        <td scope="row" title="Registro">{{ $compra->id }}</td>
                 {{-- <td>{{$compra->TProveedor->Nombre}}</td> --}}
-                <td>{{$compra->Referencia_compra}}</td>
-                <td>{{$compra->Descripcion_compra}}</td>
-                <td>{{$compra->total}}</td>
+                <td title="Registro">{{$compra->Referencia_compra}}</td>
+                <td title="Registro">{{$compra->Descripcion_compra}}</td>
+                <td title="Registro">{{number_format($compra->total)}}</td>
+
                 @if ($compra->status == 'ACTIVE')
-                <form  action="{{ route('compras.change_status', $compra) }}" class="desactivar">
+                <form  action="{{ route('compras.change_status', $compra) }}" class="desactivar" title="Registro">
                     <td>
                         <button class="jsgrid-button btn btn-success btn-xs" href="{{ route('compras.change_status', $compra) }}" title="Activo" type="submit">
                         Activo<i class="fas fa-fw fa-check"></i>

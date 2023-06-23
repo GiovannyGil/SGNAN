@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\DetalleProducto;
 use App\Http\Requests\productos\StoreRequest;
 use App\Http\Requests\productos\ProductoEditRequest;
-
+use Illuminate\Validation\Rule;
 
 
 
@@ -158,9 +158,19 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-        public function update( ProductoEditRequest $request, $id)
+        public function update( Request $request, $id)
         {
             $productos = Productos::findOrFail($id);
+
+            
+            $request->validate([
+                'NombreProducto' => [
+                    'required:productos,NombreProducto|min:5|max:30',
+                    Rule::unique('productos')->ignore($productos->id),
+                ],
+                'Descripcion' => 'nullable',
+                'PrecioP'     => 'required|min:3|max:10',
+            ]);
             $productos->NombreProducto = $request->input('NombreProducto');
             $productos->DescripcionProducto = $request->input('Descripcion');
             $productos->PrecioP = $request->input('PrecioP');
@@ -205,25 +215,28 @@ class ProductoController extends Controller
                     $detalle->save();
                 }
             }
+            
         
             return redirect('/productos')->with('mensaje', 'El producto se ha actualizado con éxito');
         }
-    
+
+        public function messages()
+    {
+        return [
+            // mensajes de validaciones para el formulario de crear producto
+            'NombreProducto.required' => 'El campo producto es requerido',
+            // 'NombreProducto.unique'   => 'El campo producto debe ser unico',
+            'PrecioP.required'        => 'El campo precio es requerido',
+            
+        ];
+    }
    
-
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $producto = Productos::find($id);
-        $producto->delete();
-        return redirect('/productos');
-    }
     public function change_status( Productos $producto)
     {
         if($producto->Estado == 'Activo'){

@@ -143,6 +143,9 @@
             display: table;
             clear: both;
         }
+        .inp{
+            width: 40px;
+        }
     </style>
     @endsection
     
@@ -186,7 +189,7 @@
                     filaExistente.find("td:eq(4)").text(productos_insumos[id_insumos].subtotal.toFixed(2));
                 } else {
                     // Agregar el nuevo insumo al objeto de productos_insumos
-                    var fila = '<tr class="selected" id="fila' + cont + '"><td><button type="button" class="btn btn-danger btn-sm btn-remove" onclick="eliminar(' + cont + ');">X</button></td><td><input class="form-control" type="hidden" name="id_insumos[]" value="' + id_insumos + '">' + insumos + '</td><td><input type="number" class="form-control" name="Cantidad[]" value="' + cantidad + '"></td><td>' + precio.toFixed(2) + '</td><td>' + subtotal.toFixed(2) + '</td></tr>';
+                    var fila = '<tr class="selected" id="fila' + cont + '"><td><button type="button" class="btn btn-danger btn-sm btn-remove" onclick="eliminar(' + cont + ');">X</button></td><td><input class="form-control" type="hidden" name="id_insumos[]" value="' + id_insumos + '">' + insumos + '</td><td><input type="number" class="inp" name="Cantidad[]" value="' + cantidad + '"></td><td>' + precio.toFixed(2) + '</td><td>' + subtotal.toFixed(2) + '</td></tr>';
                     var nuevaFila = $(fila);
                     productos_insumos[id_insumos] = {
                         fila: nuevaFila,

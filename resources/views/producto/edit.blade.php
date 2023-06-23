@@ -18,7 +18,7 @@
                 <div class="card" title="Productos">
                     <div class="get-in-touch">
                         <h1 class="title">Productos</h1>
-                        <div class="table-responsive scrollable-table">
+                        <div class="table-responsive scrollable-tablee">
                             <div class="form-row">
                             <div class="form-field col-md-6 ">
                                 <label for="" class="input-text js-input" required >Nombre Producto:<FONT COLOR="red"> *</FONT>  </label>
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-field col-lg-6">
-                                <label class="">Subir Imagen<FONT COLOR="red"> *</FONT></label>
+                                <label class="">Subir Imagen</label>
                                 <input class="input-text js-input" type="file" id="imagen" name="imagen" tabindex="10" value="{{ old('imagen', $productos->imagen)}}" onchange="mostrarImagenSeleccionada(this)">
                                 @if ($errors->has('imagen'))
                                     <span class="error text-danger" for="input-imagen">{{$errors->first('imagen') }}</span>
@@ -158,10 +158,11 @@
         max-height: 300px;
         overflow-y: auto;
     }
-        .scrollable-table{
-            max-height: 450px;
-            overflow-y: auto;
-        }
+    .scrollable-tablee{
+        max-height: 450px;
+        overflow-y: auto;
+    }
+
         .form-field.col-md-6,
         .form-field.col-md-12 {
             margin-bottom: 30px;
@@ -170,6 +171,9 @@
             content: "";
             display: table;
             clear: both;
+        }
+        .inp{
+            width: 40px;
         }
     
 </style>
@@ -180,76 +184,39 @@
 @section('js')
 <script>
 
-    $(document).ready(function() {
-        $('#agregar').click(function() {
+$(document).ready(function(){
+        $('#agregar').click(function(){
             agregar();
-        });
-
-        $('#guardar').click(function() {
-            guardar();
         });
     });
 
-    var cont = {{ $detalleProductos->count() }};
+    var cont = {{ count($detalleProductos) }};
+    total = 0;
 
-    function agregar() {
-        var insumo = $('#id_insumos').val();
-        var cantidad = $('#Cantidad').val();
+    function agregar(){
+        id_insumos = $("#id_insumos").val();
+        insumos = $("#id_insumos option:selected").text();
+        cantidad = $("#Cantidad").val();
 
-        if (insumo != '' && cantidad != '') {
-            // Verificar si el insumo ya existe en la tabla
-            var insumoExistente = false;
-            $('#detalles tr.selected').each(function() {
-                var insumoId = $(this).find('td:eq(1)').text();
-                if (insumoId == $('#id_insumos option:selected').text()) {
-                    insumoExistente = true;
-                    var cantidadExistente = parseInt($(this).find('input[name="cantidad[]"]').val());
-                    var nuevaCantidad = cantidadExistente + parseInt(cantidad);
-                    $(this).find('input[name="cantidad[]"]').val(nuevaCantidad);
-                }
-            });
+        if(id_insumos != "" && parseInt(cantidad) != "" && parseInt(cantidad) > 0){
+            var fila = '<tr class="selected" id="fila' + cont + '"><td><button type="button" class="btn btn-danger btn-sm btn-remove" onclick="eliminar(' + cont + ');">X</button></td><td><input type="hidden" name="nuevos_detalles[' + cont + '][id_insumos]" class="inp" value="' + id_insumos + '">' + insumos + '</td><td><input type="number" name="nuevos_detalles[' + cont + '][Cantidad]" class="inp" value="' + cantidad + '"></td></tr>';
+            $('#detalles').append(fila);
+            cont++;
 
-            if (!insumoExistente) {
-                var fila =
-                    '<tr class="selected  id="fila' + cont + '">' +
-                    '<td><button type="button" class="btn btn-danger btn-sm btn-remove" onclick="eliminar(' + cont + ');">X</button></td>' +
-                    '<td>' + $('#id_insumos option:selected').text() + '</td>' +
-                    '<td><input type="number" name="cantidad[]" value="' + cantidad + '"></td>' +
-                    '</tr>';
-                cont++;
-                limpiar();
-                $('#detalles').append(fila);
-            }
+            limpiar();
         } else {
-            alert("Error: Debe seleccionar un insumo y especificar una cantidad");
+            alert("Error al ingresar el detalle del insumo, revise los datos.");
         }
     }
 
-    function limpiar() {
-        $('#Cantidad').val('');
+    function limpiar(){
+        $("#Cantidad").val("");
+        $("#id_insumos").val("");
     }
 
-    function eliminar(index) {
-        $('#fila' + index).remove();
-    }
-
-    function guardar() {
-        // Actualizar los detalles existentes con las cantidades modificadas
-        $("input[name='detalle_ids[]']").each(function(index) {
-            var detalleId = $(this).val();
-            var cantidad = $("input[name='cantidad[]']").eq(index).val();
-            $.ajax({
-                type: 'PUT',
-                url: '/productos/' + detalleId,
-                data: { cantidad: cantidad },
-                success: function(response) {
-                    console.log('Cantidad actualizada');
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
+    function eliminar(index){
+        var fila = $("#fila" + index);
+        fila.remove();
     }
 
 

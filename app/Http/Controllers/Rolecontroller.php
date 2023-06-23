@@ -65,8 +65,8 @@ class RoleController extends Controller
         ]);
     
         $role = Role::findOrFail($id);
-        // $role->update($request->all());
-        // $role->permissions()->sync($request->permissions);
+        $role->update($request->all());
+        $role->permissions()->sync($request->permissions);
 
         $role->name = $request->input('name');
         $role->syncPermissions($request->input('permission'));

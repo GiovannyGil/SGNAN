@@ -61,6 +61,7 @@ Route::middleware([
 
 Route::get('/dash', 'App\Http\Controllers\DashboardController@index')->name('dash');
 
+
 //USUARIOS
 Route::middleware([
     'auth:sanctum',
@@ -78,6 +79,17 @@ Route::middleware([
         'verified'
 ])->group(function () {
 Route::resource('empleados', 'App\http\Controllers\EmpleadoController');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/manuales', function () {
+        
+        return view('manuales.index');
+    })->name('manuales');
 });
 
 // VENTAS

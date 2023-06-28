@@ -71,6 +71,10 @@ modal.addEventListener('click', (event) => {
 @endsection
 @section('css')
 <style>
+    .scrollable-table{
+        max-height: 200px;
+        overflow-y: auto;
+    }
 .modal {
     display: none; /* Ocultar inicialmente el modal */
     position: fixed;

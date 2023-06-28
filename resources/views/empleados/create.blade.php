@@ -82,7 +82,7 @@
                 @endif
             </div>
             <div class="form-field col-lg-4">
-                <label class="">Subir Imagen<FONT COLOR="red"> *</FONT></label>
+                <label class="">Subir Imagen</label>
                 <input class="input-text js-input" type="file" id="imagen" name="imagen" tabindex="10" value="{{ old('imagen') }}">
                 @if ($errors->has('imagen'))
                     <span class="error text-danger" for="input-imagen">{{$errors->first('imagen') }}</span>

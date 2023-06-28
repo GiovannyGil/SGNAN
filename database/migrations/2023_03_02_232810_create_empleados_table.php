@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('Genero');
             $table->date('Fecha_Nacimiento');
             $table->string('Celular', 11);
-            $table->string('Observaciones');
-            $table->string('imagen');
+            $table->string('Observaciones')->nullable();
+            $table->string('imagen')->nullable();
             $table->enum('status', ['ACTIVE', 'DEACTIVATED'])->default('ACTIVE');
             $table->timestamps();
 

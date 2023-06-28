@@ -28,7 +28,16 @@ class ComprasCreateRequest extends FormRequest
             'Fecha_compra'          =>'required|after:today',
             'Cantidad'              =>'required',
             'Precio_unitario'       =>'required',
-           
+
+
+        ];
+        
+    }
+    public function messages()
+    {
+        return[
+            'Referencia_compra.unique' => 'El campo refrencia debe ser unico.',
+         
 
 
         ];

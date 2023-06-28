@@ -25,9 +25,9 @@ class StoreRequest extends FormRequest
     {
         return [
             'NombreProducto'      => 'required',
-            'NombreProducto'      => 'unique:productos,NombreProducto|min:5|max:10',
+            'NombreProducto'      => 'unique:productos,NombreProducto|min:5|max:30',
             'PrecioP'             => 'required|min:3|max:10',
-            'imagen'              =>'required',
+            
       
         ];
     }
@@ -39,7 +39,7 @@ class StoreRequest extends FormRequest
             'NombreProducto.required' => 'El campo producto es requerido',
             'NombreProducto.unique'   => 'El campo producto debe ser unico',
             'PrecioP.required'        => 'El campo precio es requerido',
-            'imagen.required'         =>'El campo imagen es requerido',
+            
         ];
     }
 }

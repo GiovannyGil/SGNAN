@@ -22,7 +22,8 @@
                 <h3 class="title mt-3">Manual de usuario</h3>
                 <img width="80" height="80" src="{{ asset('vendor/adminlte/dist/img/MANUALES-DE-USUARIO.png') }}" alt="image" class="avatar">
                     <p class="card-text">Este material tendra las intrucciones de como utilizar la aplicación web y te ayudara con cualquier tipo de problema.</p>
-                    <a href="/Users/Santiago/Downloads/Manual_de_Usuario-SGNAN-V.1.pdf" class="btn btn-primary">Ingresar al manual</a>
+                    <a href='vendor/adminlte/dist/PDF/Manual_de_Usuario-SGNAN-V.1-Completo.pdf' target="_blank">Enlace al archivo PDF</a>
+
                 </div>
                 </div>
             </div>
@@ -32,7 +33,7 @@
                 <h3 class="title mt-3">Manual de instalación</h3>
                 <img width="80" height="80" src="{{ asset('vendor/adminlte/dist/img/manual-de-instalacion.png') }}" alt="image" class="avatar">
                     <p class="card-text">Este material te ayudara a instalar la aplicación en tu dispositivo.</p>
-                    <a href="" class="btn btn-primary">Ingresar al manual</a>
+                    <a href='vendor/adminlte/dist/PDF/Manual Instalacion-Completo.pdf' target="_blank">Enlace al archivo PDF</a>
                 </div>
                 </div>
             </div>
